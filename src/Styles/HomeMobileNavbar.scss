@@ -1,0 +1,43 @@
+.home-mobile-navbar{
+    display: none;
+}
+
+@media (max-width:900px){
+    .home-mobile-navbar{
+        display: block;
+        border-bottom: 1px solid var(--download-8-silver, #CCC);
+        background: #FFF;
+        padding: 5px;
+        font-family: Poppins;
+        display: flex;
+        justify-content: space-between;
+
+        .home-mobile-heading{
+            h1{
+                span{
+                    color: #FF6C3D;
+                }
+            }
+        }
+
+        .home-mobile-options{
+            display: flex;
+            align-items: center;
+            width: 20%;
+            justify-content: space-around;
+
+            .mobile-options-notification{
+                color: #FF6C3D;
+                
+            }
+
+        }
+        img{
+            height: 40px;
+            border-radius: 50%;
+
+        }
+    }
+}
+
+// @media (min-width:7)

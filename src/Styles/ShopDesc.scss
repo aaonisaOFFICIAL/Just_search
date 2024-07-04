@@ -1,0 +1,46 @@
+.image-section{
+    
+    width: 100%;
+    display: flex;
+    gap: 10px;
+
+    img{
+        width: 20%;
+    }
+}
+.shop-details{
+    width: 50%;
+    margin-left: 50px;
+}
+
+// style={{ display: "flex", flexDirection: "row", alignItems: "center"}}
+// style={{ height: '400px',width:"100%", marginTop: "20px", zIndex: "000" }}
+
+.map-style{
+    height: 400px;
+    width: 70%;
+    margin-top: 20px;
+    z-index: 000;
+}
+
+.shop-indexing{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+}
+
+@media (max-width: 900px){
+    .shop-indexing{
+        flex-direction: column;
+    }
+    .shop-details{
+        width: 100%;
+        margin-left: 20px;
+    }
+    .map-style{
+        width: 100%;
+    }
+}
+
+

@@ -1,0 +1,28 @@
+.filter-option{
+    border: 1px solid #000;
+    height: 50px;
+    display: flex;
+    
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        gap: 10px;
+        // margin: auto;
+        font-family: Poppins;
+        overflow-x: scroll;
+
+        p{
+            border: 1px solid #ff6c3d;
+            padding: 5px 15px;
+            border-radius: 5px;
+            background-color: #ff6c3d;
+            color: #fff;
+        }
+    }
+}
+
+.filter-option::-webkit-scrollbar{
+    display: none;
+}

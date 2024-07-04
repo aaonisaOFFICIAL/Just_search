@@ -1,0 +1,92 @@
+.deals-footer{
+    display: none;
+}
+
+@media (min-width:600px) and (max-width:900px){
+    .deals-footer{
+        display: block;
+        width: 100%;
+        // border: 1px solid #000;
+        border-radius: 10px 10px 0px 0px;
+        box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.25);
+        // height: 100px;
+        background-color: #fff;
+        display: flex;
+        padding: 10px;
+        margin-top: 50px;
+
+        div{
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            margin: auto;
+            align-items: center;
+            position: relative;
+            font-family: Poppins;
+            .icon-deals{
+                font-size: 25px;
+            }
+            .sell{
+                height: 70px;
+                width: 70px;
+                border-radius: 50%;border: 1px solid linear-gradient(180deg, #FF6C3D 0%, #FFAE34 100%);
+                position: absolute;
+                top: -60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 25px;
+                background:linear-gradient(180deg, #FF6C3D 0%, #FFAE34 100%);
+                color: #fff;
+                
+            }
+        }
+    }
+}
+
+@media (max-width:600px){
+    .deals-footer{
+        display: block;
+        width: 100%;
+        // border: 1px solid #000;
+        
+        border-radius: 10px 10px 0px 0px;
+        box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.25);
+        // height: 100px;
+        background-color: #fff;
+        display: flex;
+        padding: 10px;
+        margin-top: 50px;
+
+        div{
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            margin: auto;
+            align-items: center;
+            position: relative;
+            font-family: Poppins;
+
+            p{
+                font-size: 10px;
+            }
+            .icon-deals{
+                font-size: 25px;
+            }
+            .sell{
+                height: 70px;
+                width: 70px;
+                border-radius: 50%;border: 1px solid linear-gradient(180deg, #FF6C3D 0%, #FFAE34 100%);
+                position: absolute;
+                top: -60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 25px;
+                background:linear-gradient(180deg, #FF6C3D 0%, #FFAE34 100%);
+                color: #fff;
+                
+            }
+        }
+    }
+}

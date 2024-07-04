@@ -1,0 +1,58 @@
+.create-offer{
+    font-family: Poppins;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+
+    h1{
+        font-weight: 500;
+    }
+}
+.date-category{
+    display: flex;
+    justify-content: space-around;
+    margin: 15px;
+
+    input, select{
+        padding: 7px 15px;
+        width: 30%;
+    }
+    
+}
+.create-offer-submit{
+    padding: 5px 20px;
+    margin-top: 20px;
+    background-color: #FF6C3D;
+    border: 1px solid #FF6C3D;
+    color: #fff;
+    cursor: pointer;
+    
+}
+.product-box{
+
+    input{
+        
+        margin-top: 5px;
+    }
+}
+.preview-image{
+    height: 150px;
+}
+
+@media (max-width:900px){
+    .create-offer{
+        width: 100%;
+    }
+    .product-images{
+        
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        input{
+            width: 80%;
+            padding: 5px 10px;
+        }
+    }
+ 
+}

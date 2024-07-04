@@ -1,0 +1,194 @@
+//auth navbar scc
+
+.auth-navbar{
+    height: 50px;
+    background: #FFF;
+    box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    font-family: Poppins;
+    
+    div{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 95%;
+        margin: auto;
+        h2{
+            font-weight: 600;
+            span{
+                color: #FF6C3D;
+            }
+        }
+
+        h4{
+            display: flex;
+            align-items: center;
+            color: #FF6C3D;
+            
+            span{
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+
+//login page css
+.login-page{
+    width: 100%;
+    display: flex;
+    height: 80vh;
+    
+}
+
+//svg css
+.login-svg{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+//login form css
+.login-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Poppins;
+    width: 50%;
+
+    //heading
+    div{
+        width: 70%;
+        // border: 1px solid black;
+        display: flex;
+        justify-content: space-around;
+        h3{
+            display: flex;
+            align-items: center;
+            font-weight: 800;
+            span{
+                color: #FF6C3D;
+                margin-left: 5px;
+            }
+        }
+        
+        div{
+            display: flex;
+            flex-direction: column;
+
+            p{
+                font-size: 14px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    //form
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 65%;
+        gap: 15px;
+        margin-top: 30px;
+        // border: 1px solid black;
+
+    }
+    .login-btn{
+      width: 40%;
+    //   border: 1px solid #000; 
+      display: flex;
+      justify-content: left;
+      margin-top: 20px;
+
+      button{
+        width: 45%;
+        padding: 10px 0px;
+        border-radius: 10px;
+        margin-left: 30px;
+        margin-top: 30px;
+        border: none;
+        outline: none;
+        background-color: #FF6C3D;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+
+}
+
+//otp page
+.otp-page{
+    width: 100%;
+    display: flex;
+    height: 80vh;
+}
+
+//otp form
+.otp-form{
+    display: flex;
+    flex-direction: column;
+
+    div{
+        margin-top: 5px;
+
+        h3{
+            margin-top: 15px;
+            display: flex;
+            width: 40%;
+            justify-content: space-around;
+        }
+        p{
+            color: #FF6C3D;
+        }
+    }
+
+    div{
+        .otp-box{
+            display: flex;
+            flex-direction: row;
+            
+            width: 100%;
+            input{
+            outline: none;
+            border: none;
+            height: 40px;
+            width:40px;
+            border-bottom: 1px solid black;
+            }
+        }
+    }
+
+    .not-recived{
+        width: 100%;
+        
+        
+        div{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            margin-top: 10px;
+            h4{
+                font-size: 14px;
+            }
+        }
+    }
+
+    .otp-btn{
+        width: 25%;
+        padding: 10px 0px;
+        border-radius: 10px;
+        margin-left: 30px;
+        margin-top: 30px;
+        border: none;
+        outline: none;
+        background-color: #FF6C3D;
+        color: #fff;
+    }
+  
+}
+

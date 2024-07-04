@@ -1,0 +1,218 @@
+.product-page {
+  width: 90%;
+  margin: auto;
+  margin-top: 30px;
+  display: flex;
+  gap: 2%;
+  font-family: Poppins;
+
+  .page-user {
+    width: 30%;
+    
+    .page-product__desc {
+      border-radius: 2.5px;
+      border: 1px solid var(--download-8-silver, #CCC);
+      background: #FFF;
+        width: 95%;
+        margin: auto;
+        padding: 10px;
+        position: relative;
+
+      h2 {
+        font-weight: 500;
+        width: 90%;
+        margin: auto;
+      }
+      p {
+        color: var(--download-8-regent-gray, #7a8c98);
+        width: 90%;
+        margin: auto;
+        font-size: 14px;
+        margin-top: 20px;
+      }
+      .fav-icon{
+        position: absolute;
+        top: 10px;
+        right:20px;
+        font-size: 20px;
+        cursor: pointer;
+        color: rgb(197, 12, 12);
+      }
+    }
+    .page-product__seller {
+      border-radius: 2.5px;
+      border: 1px solid var(--download-8-silver, #ccc);
+      background: #fff;
+      margin-top: 20px;
+
+      div {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        img {
+          height: 50px;
+          border-radius: 50%;
+        }
+        h2 {
+          font-weight: 500;
+        }
+      }
+      .contact-seller__btn{
+          width: 80%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: auto;
+          margin-top: 20px;
+          font-family: Poppins;
+          button {
+            width: 100%;
+            padding: 7px 10px;
+            color: #fff;
+            border: 1px solid #FF6C3D;
+            font-size: 17px;
+            border-radius: 2.5px;
+            background: #FF6C3D;
+            margin-bottom: 20px;
+            }
+        }
+    }
+
+    .page-product__details{
+        border-radius: 2.5px;
+        border: 1px solid var(--download-8-silver, #CCC);
+        background: #FFF;
+        width: 95%;
+        margin: auto;
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+
+        div{
+          width: 95%;
+          margin: auto;
+          display: flex;
+          align-items: center;
+
+          img{
+            width: 90%;
+            margin: auto;
+            height: 43px;
+            width: 43px;
+          }
+          div{
+            display: flex;
+            flex-direction: column;
+            h2{
+              font-weight: 500;
+            }
+            p{
+              color: var(--download-8-regent-gray, #7A8C98);
+              font-family: Poppins;
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: normal;
+            }
+          }
+          .whatsapp-icon{
+            font-size: 25px;
+            align-items: center;
+            transform: translate(0%, -20%);
+            color: #1FAF38;
+            cursor: pointer;
+          }
+        }
+
+        button{
+          width: 80%;
+          margin: auto;
+          margin-top: 20px;
+          padding: 7px;
+          background-color: #FF6C3D;
+          color: #fff;
+          border: 1px solid #FF6C3D;
+          margin-bottom: 20px;
+          font-size: 17px;
+          font-family: Poppins;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+    }
+
+    .page-product__brand{
+      width: 95%;
+      margin: auto;
+      margin-top: 20px;
+      border-radius: 2.5px;
+      border: 1px solid var(--download-8-silver, #CCC);
+      background: #FFF;
+
+      div{
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        margin-left:15px;
+        padding: 10px;
+        p{
+          color: var(--download-8-regent-gray, #7A8C98);
+          font-family: Poppins;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+      }
+    }
+  }
+
+  .page-images {
+    width: 50%;
+    // height: 100px;
+    // border: 1px solid #000;
+    
+    img{
+      object-fit: contain;
+      width: 100%;
+      height: 500px;
+    }
+  }
+}
+
+@media (max-width:700px){
+ .product-page{
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+
+  
+  .page-user {
+    width: 100%;
+    
+    .page-product__details{
+      div{
+        img{
+          width: 60%;
+          margin: auto;
+          height: 40px;
+          width: 40px;
+        }
+      }
+      button{
+        font-size: 14px;
+      }
+    }
+  }
+  .page-images {
+    width: 95%;
+    margin: auto;
+    // height: 100px;
+    // border: 1px solid #000;
+
+    img{
+      object-fit: contain;
+      width: 100%;
+    }
+  }
+ }
+}
