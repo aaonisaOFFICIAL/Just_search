@@ -19,11 +19,11 @@ const HomePage = () => {
     <Language />
     <AddOne />
       <Categories />
-    <AddOne />
-    <AddOne />
-    <MapComponent />
+    {/* <AddOne />
+    <AddOne /> */}
+    {/* <MapComponent /> */}
     {/* <CarouselComponent /> */}
-    <AddFive/>
+    {/* <AddFive/> */}
     <Footer />
     <div className="home-page-mobilenav">
     <MobileFooter />

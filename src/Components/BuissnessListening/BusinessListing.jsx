@@ -5,7 +5,8 @@ import { db, storage } from "../../Config";
 import { MdCloudUpload } from "react-icons/md";
 import MultipleSelectCheckmarks from "./Checkbox";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-
+import stateDistrictData from '../../../state_district.json';
+import Swal from "sweetalert2";
 const BuissnessForm2 = () => {
   //for days
   const [days, setDays] = useState([]);
@@ -118,6 +119,7 @@ const BuissnessForm2 = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
+
     try {
       const imageUrls = [];
       // Upload images
@@ -182,7 +184,16 @@ const BuissnessForm2 = () => {
         longitude: formData.longitude,
         latitude: formData.latitude,
       });
-      console.log("shop-location added");
+      Swal.fire({
+        icon: "success",
+        title: "Posted Successfully!",
+        showConfirmButton: false,
+        timer: 20000, // Automatically close after 2 seconds
+        timerProgressBar: true, // Show progress bar
+        toast: true, // Display as toast (notification)
+        position: "top-end", // Position of the toast
+        showCloseButton: true, // Show close button
+      });
      window.location.reload();
     } catch (err) {
       console.error(err);
@@ -257,36 +268,44 @@ const BuissnessForm2 = () => {
   //   }
   // };
 
+  // useEffect(() => {
+  //   const fetchDistricts = async () => {
+  //     try {
+  //       // Fetch state data
+  //       const response = await fetch(
+  //         "https://good-jay-robe.cyclic.app/get-state"
+  //       );
+  //       const result = await response.json();
+  //       const cityArray = result.message;
+  //       setState(cityArray);
+
+  //       if (selectedState) {
+  //         // Fetch district data based on the selected state
+  //         const responseDistrict = await fetch(
+  //           `https://good-jay-robe.cyclic.app/get-district/${selectedState}`
+  //         );
+  //         const resultDistrict = await responseDistrict.json();
+  //         const districts = resultDistrict.message.district
+  //           .split(",")
+  //           .map((district) => district.trim());
+  //         setDistrict(districts);
+  //       }
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+
+  //   fetchDistricts();
+  // }, [selectedState]);
   useEffect(() => {
-    const fetchDistricts = async () => {
-      try {
-        // Fetch state data
-        const response = await fetch(
-          "https://good-jay-robe.cyclic.app/get-state"
-        );
-        const result = await response.json();
-        const cityArray = result.message;
-        setState(cityArray);
 
-        if (selectedState) {
-          // Fetch district data based on the selected state
-          const responseDistrict = await fetch(
-            `https://good-jay-robe.cyclic.app/get-district/${selectedState}`
-          );
-          const resultDistrict = await responseDistrict.json();
-          const districts = resultDistrict.message.district
-            .split(",")
-            .map((district) => district.trim());
-          setDistrict(districts);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchDistricts();
-  }, [selectedState]);
-
+setState(Object.keys(stateDistrictData));
+}, []);
+const fetchDistricts = (state) => {
+// Fetch districts based on selected state from JSON data
+const districts = stateDistrictData[state];
+setDistrict(districts);
+}
   useEffect(() => {
     getCategories();
     // getLocationHandler();
@@ -498,7 +517,9 @@ const BuissnessForm2 = () => {
 
             
             <div className="city">
-              <select onChange={(e) => setSelectedState(e.target.value)}>
+              <select value={selectedState}  onChange={(e) => {setSelectedState(e.target.value)
+                fetchDistricts(e.target.value)}
+              }>
                 <option value="">Select State</option>
                 {state.map((data, index) => (
                   <option value={data} key={index}>
@@ -508,7 +529,7 @@ const BuissnessForm2 = () => {
               </select>
 
 
-              <select onChange={(e) => setSelectedDistrict(e.target.value)}>
+              <select value={selectedDistrict}  onChange={(e) => setSelectedDistrict(e.target.value)}>
                 <option value="">Select City</option>
                 {district.map((data, index) => (
                   <option value={data} key={index}>
