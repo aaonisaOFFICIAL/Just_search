@@ -5,6 +5,7 @@
   import { IoMdClose } from 'react-icons/io';
   import { auth } from '../../Config';
   import { RecaptchaVerifier, signInWithPhoneNumber, signOut } from 'firebase/auth';
+  import './DealsNavbar.css';
 
 
   const DealsNavbar = ({ selectedState, onStateChange, city, onCityChange, onCategoryChange, onSubCategoryChange }) => {
@@ -105,7 +106,7 @@
           </div>
 
           <div className="nav-search">
-          <select onChange={(e) => handleStateChange(e.target.value)} value={selectedState}>
+          {/* <select onChange={(e) => handleStateChange(e.target.value)} value={selectedState}>
             <option value='selected'>Select State</option>
             {states.map((data, index) => (
               <option value={data} key={index}>{data}</option>
@@ -117,11 +118,13 @@
             {district.map((city, index) => (
               <option value={city} key={index}>{city}</option>
             ))}
-          </select>
+          </select> */}
         </div>
 
-
+        <p style={{color:"#000",cursor:'pointer'}}onClick={()=>navigate('/')}>  <span style={{color:"#FF6C3D"}}>Home</span> </p>
           <div className="nav-sell__btn">
+          
+         
             <button onClick={navigateToPostAd}>Sell Something</button>
           </div>
 
@@ -163,7 +166,15 @@
           </div>
       </div>
       )}  
-        
+      
+        <div className="coming-soon-container">
+          
+          <div className="coming-soon-content">
+            
+            <h1 className="coming-soon-title">COMING SOON...</h1>
+            <p className="coming-soon-subtitle">STAY TUNED FOR UPDATES!</p>
+          </div>
+        </div>
       </>
     );
   };

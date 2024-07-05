@@ -122,7 +122,8 @@ const HomeNavbar = () => {
         <div className="home-nav-options">
             <p onClick={navigateToHome}>Home</p>
             <p onClick={navigateToFav}>Favorite</p>
-            <p style={{color:"#000"}} onClick={navigateToJS}>J<span style={{color:"#FF6C3D"}}>D</span></p>
+            <p style={{color:"#000"}} onClick={navigateToJS}>
+                <span style={{color:"#FF6C3D"}}>Hire</span></p>
             <p onClick={navigateToOffer}>Offer</p>
             <p onClick={navigateToListing}>Listing</p>
             <button onClick={loginModal}>{currentUser ? currentUser.phoneNumber : "Login / Sign Up"}</button>

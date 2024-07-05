@@ -54,9 +54,9 @@ const ProductScreen = () => {
           onCityChange={handleCityChange}
         />
         <DealsMobileNavbar />
-        <DealsCategorieNavbar state={selectedState} city={city} handleData={handleGetData} />
+        {/* <DealsCategorieNavbar state={selectedState} city={city} handleData={handleGetData} /> */}
       </div>
-      <div className='product-screen'>
+      {/* <div className='product-screen'>
         <h1>Fresh Recommendation</h1>
 
         <div className='product-cards--container'>
@@ -74,7 +74,7 @@ const ProductScreen = () => {
             />
           ))}
         </div>
-      </div>
+      </div> */}
       <div className='product-screen-footer'>
         <DealsFooter />
       </div>
