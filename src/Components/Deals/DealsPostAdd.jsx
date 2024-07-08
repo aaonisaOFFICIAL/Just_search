@@ -137,7 +137,16 @@ const DealsPostAdd = () => {
  
   return (
     <>
-    <div className="deals-post-add">
+
+<div className="coming-soon-container">
+          
+          <div className="coming-soon-content">
+            
+            <h1 className="coming-soon-title">COMING SOON...</h1>
+            <p className="coming-soon-subtitle">STAY TUNED FOR UPDATES!</p>
+          </div>
+        </div>
+    {/* <div className="deals-post-add">
       <h1>POST YOUR AD</h1>
       {currentStep === 1 && (
         <div className="post-step__one">
@@ -285,7 +294,7 @@ const DealsPostAdd = () => {
       )}
 
       
-    </div>
+    </div> */}
       {/* <div className="product-screen-footer">
     <DealsFooter />
     </div> */}
