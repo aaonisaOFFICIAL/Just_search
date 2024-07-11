@@ -12,7 +12,7 @@ const Language = () => {
   const [selectedCategoire, setSelectedCategorie] = useState('');
   const [district, setDistrict] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState('');
-
+console.log(selectedDistrict,'================')
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,36 +26,34 @@ const Language = () => {
     setDistrict(districts);
   };
 
-  const getCategorie = async () => {
-    try {
-      const categorie = collection(db, 'categories');
-      const data = await getDocs(categorie);
 
-      const categorieInRange = data.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setCategorie(categorieInRange);
-    } catch (err) {
-      console.error(err);
+  const getCategorie = async() => {
+    try{
+      const categorie = collection(db, 'categories')
+      const data = await getDocs(categorie)
+
+      const categorieInRange = data.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() };
+      });
+      setCategorie(categorieInRange)
     }
-  };
-
+    catch(err){
+      console.error(err)
+    }
+  }
   useEffect(() => {
     getCategorie();
   }, []);
 
+  
   const handleClick = () => {
     const userChoice = {
       selectedStateOption,
+      selectedDistrict,
       selectedCategoire
-    };
-    navigate(`/query/${selectedStateOption}/${selectedDistrict}/${selectedCategoire}`, {
-      state: {
-        userChoice
-      }
-    });
-  };
+    }
+    navigate(`/query/${selectedStateOption}/${selectedDistrict}/${selectedCategoire}`, { state:{ userChoice }})
+  }
 
   return (
     <div className="language">
@@ -77,7 +75,7 @@ const Language = () => {
       </select>
 
       <select onChange={(e) => setSelectedCategorie(e.target.value)}>
-        <option value="">Categorie</option>
+        <option value="">Category</option>
         {categorie.map((data, index) => (
           <option value={data.categorie} key={index}>{data.categorie}</option>
         ))}

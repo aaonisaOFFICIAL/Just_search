@@ -111,11 +111,12 @@ const ShopCard = ({id,pincode,specialist, name, area, building, city, landmark, 
     console.log(latitude);
     console.log(longitude);
     console.log(name);
-
+    console.log(city,"bolona");
     const shopDetails = {
+
       pincode,id ,name, area,specialist, building, city, landmark, state, street, days, categorie, opensat, closesat, mobile, subcategorie, imageone, imagetwo, imagethree, imagefour, homeDelivery,openam,closeam,longitude,latitude,email
     };
-  
+    debugger
     navigate(`/shop/${categorie}/${name}`, { state: { shopDetails }});
   };
 

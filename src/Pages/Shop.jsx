@@ -15,7 +15,7 @@ const Shop = () => {
   const [selectedSubCategory, setSelectedSubCategory] = useState(null)
   const [filteredData, setFilteredData] = useState([])
 
-  console.log(category)
+  console.log(category,'testing')
   // function for fetching the registered shops
   const fetchShop = async() => {
     try {

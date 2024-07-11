@@ -167,7 +167,7 @@ const HomeNavbar = () => {
     </div>
     )}  
 
-    {notification &&(
+    {!notification &&(
         <div className="home-nav-notification-dropdown">
             <p>Currently No Notification</p>
         </div>
