@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../Config'
 
+
 const UserSearch = () => {
     const [queryData, setQueryData] = useState([]);
     const [demo, setDemo] = useState([]);
