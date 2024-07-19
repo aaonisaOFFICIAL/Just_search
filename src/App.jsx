@@ -81,6 +81,7 @@ const App = () => {
     <Route path='/only/for/admin' element={<BuisnessListeningPageTwo />} />
     <Route path="/edit/:id" element={<BusinessEditForm />} />
     <Route path='/images/:id' element={<ShopImages />} />
+    <Route path='/payment' element={<ShopImages />} />
    </Routes>
    {/* <HomeMobileNavbar /> */}
    {/* <DealsMobileNavbar /> */}
