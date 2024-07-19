@@ -102,8 +102,9 @@ const HomeNavbar = () => {
       }
     }
   };
-
   
+
+
   const handleLogout = () => {
     signOut(auth).then(() => {
       setOpenModal(false);
