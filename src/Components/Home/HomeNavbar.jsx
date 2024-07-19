@@ -98,7 +98,7 @@ const HomeNavbar = () => {
           navigate(`/edit/${doc.id}`);
         });
       } else {
-        navigate("/business-listing");
+        navigate("/business-listening");
       }
     }
   };
@@ -118,6 +118,13 @@ const HomeNavbar = () => {
       navigate("/offer");
     }
   };
+  const navigateToPayment = () => {
+    if (!currentUser) {
+      loginModal();
+    } else {
+      navigate("/payment");
+    }
+  };
 
   return (
     <>
@@ -133,6 +140,7 @@ const HomeNavbar = () => {
             <span style={{ color: "#FF6C3D" }}>Hire</span>
           </p>
           <p onClick={navigateToOffer}>Offer</p>
+          <p onClick={navigateToPayment}>Pricing</p>
           <p onClick={navigateToListing}>Listing</p>
           <button onClick={loginModal}>{currentUser ? currentUser.phoneNumber : "Login / Sign Up"}</button>
           <p onClick={toggleNotifications}><IoMdNotifications className='home-nav-notification' /></p>
