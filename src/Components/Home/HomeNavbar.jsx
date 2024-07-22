@@ -1,6 +1,13 @@
 import React, { useContext, useState } from "react";
-import { IoMdNotifications, IoMdClose } from "react-icons/io";
-
+import { IoMdNotifications, IoMdClose, IoMdPerson } from "react-icons/io";
+import Drawer from "@mui/material/Drawer";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
+import ListItemButton from "@mui/material/ListItemButton";
 import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
@@ -115,8 +122,6 @@ const HomeNavbar = () => {
       }
     }
   };
-  
-
 
   const handleLogout = () => {
     signOut(auth)
@@ -143,6 +148,59 @@ const HomeNavbar = () => {
     }
   };
 
+  // profile
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+  const DrawerList = (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <Box sx={{ padding: 2 }} role="presentation">
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="h6" style={{margin:"0"}}>Deep</Typography>
+          <Avatar src="https://via.placeholder.com/150" alt="Profile Image" />
+        </Box>
+        <Typography variant="body2" color="textSecondary">
+          Click to view profile
+        </Typography>
+      </Box>
+
+      <List>
+        {[
+          "User Details",
+          "Edit Business Profile",
+          "Get Premium",
+          "Help and Support",
+          "Feedback",
+          "Policy",
+          "Notifications",
+          "Favourite",
+          "Customer Service",
+          "Logout",
+        ].map((text) => (
+          <React.Fragment key={text}>
+            <ListItemButton>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </React.Fragment>
+        ))}
+      </List>
+    </Box>
+  );
+  // end
+
   return (
     <>
       <div className="home-navbar">
@@ -167,6 +225,12 @@ const HomeNavbar = () => {
           <p onClick={toggleNotifications}>
             <IoMdNotifications className="home-nav-notification" />
           </p>
+          <p onClick={toggleDrawer(true)}>
+            <IoMdPerson className="home-nav-notification" />
+          </p>
+          <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+            {DrawerList}
+          </Drawer>
         </div>
       </div>
       <div id="recaptcha"></div>
@@ -224,80 +288,77 @@ const HomeNavbar = () => {
       )}
 
       {notificationsVisible && (
-        
-
-          <div className="notification-panel home-nav-notification-dropdown">
-            <div className="notification-item">
-              <div className="avatar">
-                <img src="src/Assests/icon.png" alt="User avatar" />
-                <span className="status-indicator"></span>
-              </div>
-              <div className="notification-content">
-                <p>
-                  <strong>Dominador Manuel</strong> and{" "}
-                  <strong>100 other people</strong> reacted to your comment
-                  "Tell your partner that...
-                </p>
-                <span className="time">Aug 20 08:55am</span>
-              </div>
-            </div>
-            <div className="notification-item">
-              <div className="avatar">
+        <div className="notification-panel home-nav-notification-dropdown">
+          <div className="notification-item">
+            <div className="avatar">
               <img src="src/Assests/icon.png" alt="User avatar" />
-                <span className="status-indicator"></span>
-              </div>
-              <div className="notification-content">
-                <p>
-                  <strong>Angela Ighot</strong> tagged you and{" "}
-                  <strong>9 others</strong> in a post.
-                </p>
-                <span className="time">Aug 18 10:30am</span>
-              </div>
+              <span className="status-indicator"></span>
             </div>
-            <div className="notification-item">
-              <div className="avatar">
-                <div className="initial">A</div>
-              </div>
-              <div className="notification-content">
-                <p>
-                  New listings were added that match your search alert{" "}
-                  <strong>house for rent</strong>
-                </p>
-                <span className="time">Aug 15 08:10pm</span>
-              </div>
+            <div className="notification-content">
+              <p>
+                <strong>Dominador Manuel</strong> and{" "}
+                <strong>100 other people</strong> reacted to your comment "Tell
+                your partner that...
+              </p>
+              <span className="time">Aug 20 08:55am</span>
             </div>
-            <div className="notification-item">
-              <div className="avatar">
+          </div>
+          <div className="notification-item">
+            <div className="avatar">
               <img src="src/Assests/icon.png" alt="User avatar" />
-                <span className="status-indicator"></span>
-              </div>
-              <div className="notification-content">
-                <p>
-                  Reminder: <strong>Jerry Cuares</strong> invited you to like{" "}
-                  <strong>Cuares Surveying Services</strong>.{" "}
-                  <a href="#">Accept</a> or <a href="#">Decline</a>
-                </p>
-                <span className="time">Aug 14 11:50pm</span>
-              </div>
+              <span className="status-indicator"></span>
             </div>
-            <div className="notification-item">
-              <div className="avatar">
+            <div className="notification-content">
+              <p>
+                <strong>Angela Ighot</strong> tagged you and{" "}
+                <strong>9 others</strong> in a post.
+              </p>
+              <span className="time">Aug 18 10:30am</span>
+            </div>
+          </div>
+          <div className="notification-item">
+            <div className="avatar">
+              <div className="initial">A</div>
+            </div>
+            <div className="notification-content">
+              <p>
+                New listings were added that match your search alert{" "}
+                <strong>house for rent</strong>
+              </p>
+              <span className="time">Aug 15 08:10pm</span>
+            </div>
+          </div>
+          <div className="notification-item">
+            <div className="avatar">
               <img src="src/Assests/icon.png" alt="User avatar" />
-                <span className="status-indicator"></span>
-              </div>
-              <div className="notification-content">
-                <p>
-                  <strong>Dyanne Aceron</strong> reacted to your post{" "}
-                  <strong>King of the Bed</strong>
-                </p>
-                <span className="time">Aug 10 05:30am</span>
-              </div>
+              <span className="status-indicator"></span>
             </div>
-            {/* <div className="show-all-notifications">
+            <div className="notification-content">
+              <p>
+                Reminder: <strong>Jerry Cuares</strong> invited you to like{" "}
+                <strong>Cuares Surveying Services</strong>.{" "}
+                <a href="#">Accept</a> or <a href="#">Decline</a>
+              </p>
+              <span className="time">Aug 14 11:50pm</span>
+            </div>
+          </div>
+          <div className="notification-item">
+            <div className="avatar">
+              <img src="src/Assests/icon.png" alt="User avatar" />
+              <span className="status-indicator"></span>
+            </div>
+            <div className="notification-content">
+              <p>
+                <strong>Dyanne Aceron</strong> reacted to your post{" "}
+                <strong>King of the Bed</strong>
+              </p>
+              <span className="time">Aug 10 05:30am</span>
+            </div>
+          </div>
+          {/* <div className="show-all-notifications">
               <a href="#">Show all Notifications</a>
             </div> */}
-          </div>
-        
+        </div>
       )}
     </>
   );

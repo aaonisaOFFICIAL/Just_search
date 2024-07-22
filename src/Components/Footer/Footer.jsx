@@ -13,7 +13,7 @@ const Footer = () => {
         </div>
         <div className="data-row">
           <h4>Quick Links </h4>
-          <p>About us</p>
+          <a href="/Aboutus">About us</a>
           <p>Investor Relation</p>
           <p>We’re Hiring</p>
           <p>Customer Care</p>

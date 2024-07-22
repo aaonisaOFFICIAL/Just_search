@@ -98,3 +98,65 @@
 }
 
 /* end */
+
+.AboutusHeader {
+  background-color: #a7330e;
+  text-align: center;
+  padding: 30px 0;
+  color: #fff;
+  font-size: 25px;
+}
+
+.Aboutus_content {
+  padding-top: 30px;
+}
+
+.Aboutus_content h4 {
+  font-size: 25px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.Aboutus_content p {
+  font-size: 18px;
+  color: #7c7c7c;
+  margin-bottom: 10px;
+}
+
+.Aboutus_content .Aboutus_img {
+  width: 100%;
+  height: 400px;
+  /* object-fit: contain; */
+  border-radius: 20px;
+}
+
+.Our_Team {
+  text-align: center;
+}
+
+.Our_Team h3 {
+  margin-top: 30px;
+  font-size: 35px;
+  color: #FF6C3D;
+}
+
+.Our_Team_member .card-team {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e2e2e2;
+  transition: box-shadow 0.3s ease;
+}
+
+.Our_Team_member .card-team:hover {
+  box-shadow: 0 0 10px #e3e3e3;
+}
+
+.Our_Team_member .card-team img {
+  width: 100%;
+  height: 300px;
+}
+
+.Our_Team_member .CardContent {
+  padding: 10px 20px;
+
+}

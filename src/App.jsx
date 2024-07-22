@@ -55,6 +55,7 @@ import "./Styles/OfferNavbar.scss"
 import BuisnessListeningPageTwo from './Pages/BusinessListingPageTwo'
 import BusinessEditForm from './Components/BuissnessListening/BusinessEditForm'
 import ShopImages from './Components/ShopDesc/ShowImages'
+import Aboutus from './Pages/Aboutus'
 
 const App = () => {
   const getState = () => {
@@ -82,6 +83,7 @@ const App = () => {
     <Route path="/edit/:id" element={<BusinessEditForm />} />
     <Route path='/images/:id' element={<ShopImages />} />
     <Route path='/payment' element={<ShopImages />} />
+    <Route path='/Aboutus' element={<Aboutus />} />
    </Routes>
    {/* <HomeMobileNavbar /> */}
    {/* <DealsMobileNavbar /> */}
