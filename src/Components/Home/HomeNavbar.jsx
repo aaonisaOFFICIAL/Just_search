@@ -8,6 +8,20 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from '@mui/material/ListItemIcon';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import PersonIcon from '@mui/icons-material/Person';
+import BusinessIcon from '@mui/icons-material/Business';
+import StarIcon from '@mui/icons-material/Star';
+import HelpIcon from '@mui/icons-material/Help';
+import FeedbackIcon from '@mui/icons-material/Feedback';
+import PolicyIcon from '@mui/icons-material/Policy';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
@@ -103,6 +117,7 @@ const HomeNavbar = () => {
   const navigateToListing = async () => {
     if (!currentUser) {
       loginModal();
+      // navigate("/business-listening");
     } else {
       const phoneNumber = currentUser.phoneNumber;
       const res = phoneNumber.replace("+91", "");
@@ -155,44 +170,31 @@ const HomeNavbar = () => {
     setOpen(newOpen);
   };
   const DrawerList = (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
-      <Box sx={{ padding: 2 }} role="presentation">
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography variant="h6" style={{margin:"0"}}>Deep</Typography>
-          <Avatar src="https://via.placeholder.com/150" alt="Profile Image" />
-        </Box>
-        <Typography variant="body2" color="textSecondary">
-          Click to view profile
-        </Typography>
+    <Box sx={{ width: 300, padding: 2 }} role="presentation">
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Typography variant="h6">DEEP</Typography>
+        <Avatar src="https://via.placeholder.com/150" alt="Profile Image" />
       </Box>
-
+      <Typography variant="body2" color="textSecondary">
+        Click to view profile
+      </Typography>
       <List>
         {[
-          "User Details",
-          "Edit Business Profile",
-          "Get Premium",
-          "Help and Support",
-          "Feedback",
-          "Policy",
-          "Notifications",
-          "Favourite",
-          "Customer Service",
-          "Logout",
-        ].map((text) => (
-          <React.Fragment key={text}>
+          { text: "User Details", icon: <PersonIcon /> },
+          { text: "Edit Business Profile", icon: <BusinessIcon /> },
+          { text: "Get Premium", icon: <StarIcon /> },
+          { text: "Help and Support", icon: <HelpIcon /> },
+          { text: "Feedback", icon: <FeedbackIcon /> },
+          { text: "Policy", icon: <PolicyIcon /> },
+          { text: "Notifications", icon: <NotificationsIcon /> },
+          { text: "Favourite", icon: <FavoriteIcon /> },
+          { text: "Customer Service", icon: <SupportAgentIcon /> },
+          { text: "Logout", icon: <LogoutIcon /> },
+        ].map((item) => (
+          <React.Fragment key={item.text}>
             <ListItemButton>
-              <ListItemText primary={text} />
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
             </ListItemButton>
           </React.Fragment>
         ))}

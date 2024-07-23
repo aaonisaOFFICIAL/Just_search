@@ -1,16 +1,16 @@
 .listening-page {
   display: flex;
   width: 100%;
-  height: 80vh;
+  // height: 80vh;
   // border: 1px solid black;
-  align-items: center;
+  align-items: start;
   justify-content: center;
 }
 .listening-svg {
   width: 50%;
   display: flex;
   justify-content: center;
-  align-self: center;
+  align-self: start;
 
   img {
     height: 70vh;
@@ -21,13 +21,13 @@
   font-family: Poppins;
   // border: 1px solid #000;
 
-  select{
+  select {
     width: 80%;
     height: 40px;
   }
 
   .form-one {
-    width: 50%;
+    width: 70%;
     margin-top: 100px;
 
     h2 {
@@ -36,13 +36,13 @@
     }
 
     .uploader {
-      margin-top: 20px;
-        margin-bottom: 20px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 5px;
-      // border: 1px solid #000;
-      width: 50%;
+      // margin-top: 20px;
+      // margin-bottom: 20px;
+      // display: grid;
+      // grid-template-columns: repeat(2, 1fr);
+      // gap: 5px;
+
+      // width: 50%;
     }
 
     .form-four {
@@ -54,9 +54,7 @@
       }
     }
 
-
     .form-five {
-    
       .progress-bar {
         border: 1px solid #ff6c3d;
         width: 80%;
@@ -68,7 +66,7 @@
           border-radius: 10px 0px 0px 10px;
         }
       }
-  
+
       h2 {
         font-weight: 500;
       }
@@ -78,8 +76,7 @@
         font-size: 14px;
         margin-top: 10px;
       }
-  
-  
+
       div {
         display: flex;
         flex-direction: column;
@@ -111,30 +108,33 @@
       div {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         select {
           width: 39%;
           padding: 10px;
         }
       }
       button {
-        width: 80%;
+        width: 47%;
         padding: 10px;
         background-color: #ff6c3d;
         color: #fff;
         border: 1px solid #ff6c3d;
         outline: none;
         cursor: pointer;
+        // margin-right: 10px;
+        margin-bottom: 10px;
       }
     }
   }
-.timing{
-  display: flex;
-  align-items: center;
+  .timing {
+    display: flex;
+    align-items: center;
 
-  select{
-    padding: 3px 10px;
+    select {
+      padding: 3px 10px;
+    }
   }
-}
   .form-two {
     .progress-bar {
       border: 1px solid #ff6c3d;
@@ -176,7 +176,7 @@
       }
 
       button {
-        width: 100%;
+        width: 50%;
         padding: 10px;
         background-color: #ff6c3d;
         color: #fff;
@@ -189,7 +189,6 @@
 
   .form-three {
     width: 100%;
-
 
     .progress-bar {
       border: 1px solid #ff6c3d;
@@ -225,6 +224,7 @@
         .active {
           background-color: #ff6c3d;
           color: #fff;
+          border: 1px solid #ff6c3d;
         }
 
         button {
@@ -235,9 +235,10 @@
           width: 50px;
           height: 50px;
           margin-top: 10px;
-          border: 1px solid #ff6c3d;
+        
           // background-color: #ff6c3d;
-          // color: #fff;
+          color: #fff;
+          border: 1px solid #0056b3;
         }
       }
 
@@ -316,7 +317,6 @@
   }
 
   .form-five {
-    
     .progress-bar {
       border: 1px solid #ff6c3d;
       width: 80%;
@@ -338,7 +338,6 @@
       font-size: 14px;
       margin-top: 10px;
     }
-
 
     div {
       display: flex;
@@ -389,7 +388,7 @@
       // gap: 10px;
       button {
         margin-top: 10px;
-        width: 60%;
+        width: 48%;
         padding: 10px;
         background-color: #ff6c3d;
         color: #fff;
@@ -400,61 +399,31 @@
     }
   }
 }
-   
-.select-subcategory{
-  width: 310px;
-  height: 40px;
+
+.select-subcategory {
+  width: 200px;
+  height: 50px;
 }
 
-.form-seven{
+.form-seven {
   h2 {
     font-weight: 500;
     margin-bottom: 10px;
     margin-top: 10px;
   }
-
-  .home-delivery{
+ 
+  .home-delivery {
     display: flex;
     // border: 1px solid #000;
     width: 60%;
-    justify-content: space-between ;
+    justify-content: space-between;
     margin-bottom: 10px;
-    div{
+    div {
       display: flex;
       gap: 10px;
-      button{
-        padding: 5px 15px;
-      
-      }
-    }
-      
-    
-  }
-}
-.specialist-input{
-  padding: 10px;
-  width: 60%;
-  
-}
-.image-box{
-  height: 80px;
-  width: 80px;
-  border: 1px solid #000;
-}
-.image-boxes{
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  margin-top: 10px;
-}
-.control-btns{
-  display: flex;
-      flex-direction: column;
-      margin-top: 20px;
-      // gap: 10px;
       button {
-        margin-top: 10px;
-        width: 60%;
+        padding: 5px 15px;
+        width: 48%;
         padding: 10px;
         background-color: #ff6c3d;
         color: #fff;
@@ -462,8 +431,55 @@
         outline: none;
         cursor: pointer;
       }
+    }
+  }
+  div{
+    
+    button {
+      margin-top: 10px;
+      width: 47%;
+      padding: 10px;
+      background-color: #ff6c3d;
+      color: #fff;
+      border: 1px solid #ff6c3d;
+      outline: none;
+      cursor: pointer;
+    }
+  }
 }
-.active{
+.specialist-input {
+  padding: 10px;
+  width: 60%;
+}
+.image-box {
+  height: 80px;
+  width: 80px;
+  border: 1px solid #d3d3d3;
+    border-radius: 10px;
+}
+.image-boxes {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+.control-btns {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  // gap: 10px;
+  button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6c3d;
+    color: #fff;
+    border: 1px solid #ff6c3d;
+    outline: none;
+    cursor: pointer;
+  }
+}
+.active {
   background-color: #ff6c3d;
   border: 1px solid #ff6c3d;
   color: #fff;
@@ -487,9 +503,9 @@
   .listening-form {
     width: 100%;
 
-    select{
+    select {
       display: flex;
-    margin: auto;
+      margin: auto;
     }
 
     .form-one {
@@ -510,7 +526,6 @@
         // border: 1px solid #000;
         width: 100%;
       }
-      
 
       div {
         display: flex;
@@ -553,24 +568,24 @@
           margin-left: 0;
         }
       }
-  
+
       h2 {
         margin-top: 10px;
         font-weight: 500;
       }
-  
+
       div {
         width: 97%;
         margin: auto;
         display: flex;
         flex-direction: column;
         gap: 15px;
-  
+
         input {
           padding: 10px;
           margin-top: 10px;
         }
-  
+
         button {
           width: 100%;
           padding: 10px;
@@ -584,8 +599,6 @@
     }
 
     .form-four {
-      
-      
       .progress-bar {
         border: 1px solid #ff6c3d;
         width: 80%;
@@ -598,14 +611,14 @@
           border-radius: 10px 0px 0px 10px;
         }
       }
-   
+
       select {
         padding: 15px;
-        width:97%;
+        width: 97%;
         margin: auto;
         margin-top: 10px;
       }
-  
+
       div {
         display: flex;
         flex-direction: column;
@@ -637,24 +650,21 @@
           border-radius: 10px 0px 0px 10px;
         }
       }
-  
-     
+
       p {
-        
         width: 100%;
         font-size: 14px;
-        
       }
-   
-  .select-subcategory{
-    width: 90%;
-    margin: auto;
-  }
+
+      .select-subcategory {
+        width: 90%;
+        margin: auto;
+      }
       div {
         display: flex;
         flex-direction: column;
         // gap: 10px;
-        
+
         button {
           width: 97%;
           margin: auto;
@@ -667,7 +677,6 @@
           cursor: pointer;
         }
       }
-
     }
     .form-six {
       .progress-bar {
@@ -688,7 +697,7 @@
         // border: 1px solid #000;
         width: 80%;
       }
-      
+
       .form-six-buttons {
         display: flex;
         flex-direction: column;
@@ -709,45 +718,73 @@
       }
     }
   }
-  .form-seven{
+  .form-seven {
     width: 90%;
     margin: auto;
 
-    .home-delivery{
+    .home-delivery {
       width: 100%;
-
     }
   }
-  .specialist-input{
+  .specialist-input {
     padding: 10px;
     width: 80%;
-  
   }
-  .image-boxes{
+  .image-boxes {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     margin-top: 10px;
   }
-  .image-box{
+  .image-box {
     height: 60px;
     width: 60px;
-    border: 1px solid #000;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
   }
-  .control-btns{
+  button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6c3d;
+    color: #fff;
+    border: 1px solid #ff6c3d;
+    outline: none;
+    cursor: pointer;
+  }
+  .control-btns {
     display: flex;
-        flex-direction: column;
-        margin-top: 20px;
-        // gap: 10px;
-        button {
-          margin-top: 10px;
-          width: 100%;
-          padding: 10px;
-          background-color: #ff6c3d;
-          color: #fff;
-          border: 1px solid #ff6c3d;
-          outline: none;
-          cursor: pointer;
+    flex-direction: column;
+    margin-top: 20px;
+    // gap: 10px;
+    button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      background-color: #ff6c3d;
+      color: #fff;
+      border: 1px solid #ff6c3d;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.file_upload {
+  .uploader {
+    justify-content: space-between;
+    form {
+      label {
+        margin: auto;
+        text-align: center;
+        svg {
+          color: #ff6d3d98;
         }
+        p {
+          color: #707070;
+          font-size: 12px;
+        }
+      }
+    }
   }
 }
