@@ -1,5 +1,5 @@
 import React from 'react'
-import listening from "../../Assests/register.png"
+import listening from "../../Assests/BDetail_side_Img.svg"
 const BuissnessSvg = () => {
   return (
      <div className="listening-svg">

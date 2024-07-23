@@ -3,9 +3,10 @@
   width: 100%;
   // height: 80vh;
   // border: 1px solid black;
-  align-items: start;
+  align-items: center;
   justify-content: center;
 }
+
 .listening-svg {
   width: 50%;
   display: flex;
@@ -16,6 +17,7 @@
     height: 70vh;
   }
 }
+
 .listening-form {
   width: 50%;
   font-family: Poppins;
@@ -29,6 +31,12 @@
   .form-one {
     width: 70%;
     margin-top: 100px;
+
+    .MuiGrid-item {
+      div {
+        width: 100%;
+      }
+    }
 
     h2 {
       font-family: Poppins;
@@ -47,6 +55,7 @@
 
     .form-four {
       width: 100%;
+
       select {
         margin-top: 10px;
         padding: 15px;
@@ -59,6 +68,7 @@
         border: 1px solid #ff6c3d;
         width: 80%;
         border-radius: 10px;
+
         div {
           width: 80%;
           padding: 7px;
@@ -70,6 +80,7 @@
       h2 {
         font-weight: 500;
       }
+
       p {
         font-weight: 400;
         width: 70%;
@@ -80,6 +91,7 @@
       div {
         display: flex;
         flex-direction: column;
+
         // gap: 10px;
         button {
           margin-top: 10px;
@@ -109,11 +121,13 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+
         select {
           width: 39%;
           padding: 10px;
         }
       }
+
       button {
         width: 47%;
         padding: 10px;
@@ -127,6 +141,7 @@
       }
     }
   }
+
   .timing {
     display: flex;
     align-items: center;
@@ -135,12 +150,14 @@
       padding: 3px 10px;
     }
   }
+
   .form-two {
     .progress-bar {
       border: 1px solid #ff6c3d;
       width: 60%;
       border-radius: 10px;
       margin: 0;
+
       div {
         width: 20%;
         padding: 7px;
@@ -153,6 +170,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
+
       select {
         width: 100%;
         padding: 10px;
@@ -194,6 +212,7 @@
       border: 1px solid #ff6c3d;
       width: 80%;
       border-radius: 10px;
+
       div {
         width: 40%;
         padding: 7px;
@@ -206,6 +225,7 @@
     h2 {
       font-weight: 500;
     }
+
     p {
       font-weight: 400;
       font-size: 14px;
@@ -215,6 +235,7 @@
       p {
         margin-top: 20px;
       }
+
       div {
         display: flex;
 
@@ -235,7 +256,7 @@
           width: 50px;
           height: 50px;
           margin-top: 10px;
-        
+
           // background-color: #ff6c3d;
           color: #fff;
           border: 1px solid #0056b3;
@@ -281,6 +302,7 @@
       border: 1px solid #ff6c3d;
       width: 80%;
       border-radius: 10px;
+
       div {
         width: 80%;
         padding: 7px;
@@ -302,6 +324,7 @@
     div {
       display: flex;
       flex-direction: column;
+
       // gap: 10px;
       button {
         margin-top: 10px;
@@ -321,6 +344,7 @@
       border: 1px solid #ff6c3d;
       width: 80%;
       border-radius: 10px;
+
       div {
         width: 80%;
         padding: 7px;
@@ -332,6 +356,7 @@
     h2 {
       font-weight: 500;
     }
+
     p {
       font-weight: 400;
       width: 70%;
@@ -342,6 +367,7 @@
     div {
       display: flex;
       flex-direction: column;
+
       // gap: 10px;
       button {
         margin-top: 10px;
@@ -361,6 +387,7 @@
       border: 1px solid #ff6c3d;
       width: 60%;
       border-radius: 10px;
+
       div {
         width: 100%;
         padding: 7px;
@@ -368,11 +395,13 @@
         border-radius: 10px;
       }
     }
+
     h2 {
       font-weight: 500;
       margin-bottom: 10px;
       margin-top: 10px;
     }
+
     .uploader {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -385,6 +414,7 @@
       display: flex;
       flex-direction: column;
       margin-top: 20px;
+
       // gap: 10px;
       button {
         margin-top: 10px;
@@ -411,16 +441,18 @@
     margin-bottom: 10px;
     margin-top: 10px;
   }
- 
+
   .home-delivery {
     display: flex;
     // border: 1px solid #000;
     width: 60%;
     justify-content: space-between;
     margin-bottom: 10px;
+
     div {
       display: flex;
       gap: 10px;
+
       button {
         padding: 5px 15px;
         width: 48%;
@@ -433,8 +465,9 @@
       }
     }
   }
-  div{
-    
+
+  div {
+
     button {
       margin-top: 10px;
       width: 47%;
@@ -447,26 +480,31 @@
     }
   }
 }
+
 .specialist-input {
   padding: 10px;
   width: 60%;
 }
+
 .image-box {
   height: 80px;
   width: 80px;
   border: 1px solid #d3d3d3;
-    border-radius: 10px;
+  border-radius: 10px;
 }
+
 .image-boxes {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
   margin-top: 10px;
 }
+
 .control-btns {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+
   // gap: 10px;
   button {
     margin-top: 10px;
@@ -479,11 +517,13 @@
     cursor: pointer;
   }
 }
+
 .active {
   background-color: #ff6c3d;
   border: 1px solid #ff6c3d;
   color: #fff;
 }
+
 @media (min-width: 768px) and (max-width: 1300px) {
   .listening-svg {
     img {
@@ -496,10 +536,12 @@
   .listening-svg {
     display: none;
   }
+
   .listening-page {
     width: 100%;
     // border: 1px solid #000;
   }
+
   .listening-form {
     width: 100%;
 
@@ -542,17 +584,20 @@
         div {
           width: 97%;
           margin: auto;
+
           select {
             width: 50%;
             margin: auto;
           }
         }
+
         button {
           width: 97%;
           margin: auto;
         }
       }
     }
+
     .form-two {
       width: 100%;
 
@@ -560,6 +605,7 @@
         border: 1px solid #ff6c3d;
         width: 80%;
         border-radius: 10px;
+
         div {
           width: 20%;
           padding: 7px;
@@ -622,6 +668,7 @@
       div {
         display: flex;
         flex-direction: column;
+
         // gap: 10px;
         button {
           margin: auto;
@@ -636,13 +683,16 @@
         }
       }
     }
+
     .form-five {
       width: 100%;
+
       // border: 1px solid #000;
       .progress-bar {
         border: 1px solid #ff6c3d;
         width: 80%;
         border-radius: 10px;
+
         div {
           width: 80%;
           padding: 7px;
@@ -660,6 +710,7 @@
         width: 90%;
         margin: auto;
       }
+
       div {
         display: flex;
         flex-direction: column;
@@ -678,11 +729,13 @@
         }
       }
     }
+
     .form-six {
       .progress-bar {
         border: 1px solid #ff6c3d;
         width: 80%;
         border-radius: 10px;
+
         div {
           width: 100%;
           padding: 7px;
@@ -690,6 +743,7 @@
           border-radius: 10px;
         }
       }
+
       .uploader {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -718,6 +772,7 @@
       }
     }
   }
+
   .form-seven {
     width: 90%;
     margin: auto;
@@ -726,22 +781,26 @@
       width: 100%;
     }
   }
+
   .specialist-input {
     padding: 10px;
     width: 80%;
   }
+
   .image-boxes {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     margin-top: 10px;
   }
+
   .image-box {
     height: 60px;
     width: 60px;
     border: 1px solid #d3d3d3;
     border-radius: 10px;
   }
+
   button {
     margin-top: 10px;
     width: 100%;
@@ -752,10 +811,12 @@
     outline: none;
     cursor: pointer;
   }
+
   .control-btns {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
+
     // gap: 10px;
     button {
       margin-top: 10px;
@@ -773,13 +834,16 @@
 .file_upload {
   .uploader {
     justify-content: space-between;
+
     form {
       label {
         margin: auto;
         text-align: center;
+
         svg {
           color: #ff6d3d98;
         }
+
         p {
           color: #707070;
           font-size: 12px;

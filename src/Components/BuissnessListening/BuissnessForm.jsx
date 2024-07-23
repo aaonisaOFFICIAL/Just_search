@@ -334,20 +334,20 @@ const BuissnessForm = () => {
               maxLength={40}
               type="text"
               placeholder="Refer Code"
-              className="specialist-input"
+              className="specialist-input w-100"
               name="refercode"
               value={formData.refercode}
               onChange={handleChange}
             />
           </div>
           <div className="control-btns">
-            <button style={{width:"60%"}} onClick={nextStep}>Next</button>
+            <button className="w-100" onClick={nextStep}>Next</button>
           </div>
         </div>
       )}
 
       {currentStep === 2 && (
-        <div className="form-one" style={{ marginTop: "30px" }}>
+        <div className="form-one w-100" style={{ marginTop: "30px" }}>
           <div className="field">
             <h3>Enter Your Business Details</h3>
             <Grid container spacing={2}>
@@ -441,8 +441,7 @@ const BuissnessForm = () => {
                       {images[index] ? (
                         <img
                           src={images[index].objectURL}
-                          width={50}
-                          height={50}
+                          width={100}
                           alt={images[index].file.name}
                         />
                       ) : (
@@ -480,7 +479,7 @@ const BuissnessForm = () => {
 
           <h2>Add Contact Details</h2>
 
-          <div>
+          <div className="w-100">
             <input
               type="text"
               name="blockBuilding"

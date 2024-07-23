@@ -13,7 +13,7 @@ const AuthNavbar = () => {
         <h2 onClick={navigateHandler} style={{cursor:"pointer"}}>
           Just <span>Search</span>
         </h2>
-        <p style={{color:"#000",cursor:'pointer' }}onClick={()=>navigate('/')}>  <span style={{color:"#FF6C3D"}}>Home</span> </p>
+        {/* <p style={{color:"#000",cursor:'pointer' }}onClick={()=>navigate('/')}>  <span style={{color:"#FF6C3D"}}>Home</span> </p> */}
         <h4>
           <svg
             xmlns="http://www.w3.org/2000/svg"

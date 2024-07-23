@@ -116,8 +116,8 @@ const HomeNavbar = () => {
 
   const navigateToListing = async () => {
     if (!currentUser) {
-      loginModal();
-      // navigate("/business-listening");
+      // loginModal();
+      navigate("/business-listening");
     } else {
       const phoneNumber = currentUser.phoneNumber;
       const res = phoneNumber.replace("+91", "");
