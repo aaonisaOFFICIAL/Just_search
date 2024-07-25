@@ -8,7 +8,6 @@
   gap: 20px 10px;
   font-family: Poppins;
 
-
   .categorie-box {
     border-radius: 10px;
     border: 1px solid var(--download-8-silver, #ccc);
@@ -35,18 +34,70 @@
   }
 }
 
-@media (max-width: 700px) {
+.categorie-box-button {
+  border-radius: 10px;
+  background-image: linear-gradient(to right, #dd9a84, #ff6c3d);
+  border: none;
+  color: black;
+  padding: 10px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 80px;
+  font-size: 12px;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 1024px) {
   .categorie {
-    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 900px) {
+  .categorie {
     grid-template-columns: repeat(5, 1fr);
     width: 90%;
-    gap: 0px;
+    margin-bottom: 5rem;
     .categorie-box {
       padding: 5px;
-      width: 50px;
+      width: 100%;
+      height: 120px;
+      img {
+        object-fit: contain;
+        width: 90%;
+        height: 100px;
+        margin: auto;
+      }
     }
-    p {
-      font-size: 10px;
+  }
+  .categorie-box-button {
+    width: 100%;
+    height: 120px;
+    margin: 0;
+  }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 576px) {
+  .categorie {
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 5rem;
+    .categorie-box {
+      padding: 5px;
+      width: 100%;
+      height: 120px;
+      img {
+        object-fit: contain;
+        width: 90%;
+        height: 100px;
+        margin: auto;
+      }
     }
+  }
+  .categorie-box-button {
+    width: 100%;
+    height: 120px;
+    margin: 0;
   }
 }

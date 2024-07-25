@@ -427,7 +427,7 @@ const BuissnessForm = () => {
             <div className="file_upload">
               <div className="uploader">
                 {[...Array(6)].map((_, index) => (
-                  <form key={index}>
+                  <form key={index} className={index === 0 ? 'full-width' : ''}>
                     <label htmlFor={`fileInput${index}`}>
                       <input
                         type="file"

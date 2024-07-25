@@ -1,25 +1,26 @@
 .listening-page {
   display: flex;
   width: 100%;
-  // height: 80vh;
-  // border: 1px solid black;
   align-items: center;
   justify-content: center;
+  margin-top: 2rem;
 }
 
 .listening-svg {
-  width: 50%;
+  width: 40%;
   display: flex;
   justify-content: center;
   align-self: start;
 
   img {
-    height: 70vh;
+    // height: 70vh;
+    width: 100%;
+    height: 350px;
   }
 }
 
 .listening-form {
-  width: 50%;
+  width: 60%;
   font-family: Poppins;
   // border: 1px solid #000;
 
@@ -467,7 +468,6 @@
   }
 
   div {
-
     button {
       margin-top: 10px;
       width: 47%;

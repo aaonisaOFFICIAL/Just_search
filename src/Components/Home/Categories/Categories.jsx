@@ -66,15 +66,8 @@ const Categories = () => {
             {renderCategories()}
             {categories.length > 8 && (
                 <button 
-                style={{
-                    borderRadius: "10px", 
-                    backgroundImage: "linear-gradient(to right, #d3bcb5, rgb(255, 108, 61))" /* Gradient from #FF6C3D to #FFD700 */,
-                    border: "none", /* Remove border */
-                    color: "black", /* Set text color */
-                    padding: "10px 20px", /* Adjust padding */
-                    cursor: "pointer", /* Change cursor to pointer on hover */
-                    transition: "background-color 0.3s", /* Smooth transition */
-                }} 
+                className='categorie-box-button'
+               
                 onClick={handleShowMoreClick}
             >
                 {showAllCategories ? "Show Less" : "Show More"}

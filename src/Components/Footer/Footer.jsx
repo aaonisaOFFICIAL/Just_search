@@ -14,15 +14,15 @@ const Footer = () => {
         <div className="data-row">
           <h4>Quick Links </h4>
           <a href="/Aboutus">About us</a>
-          <p>Investor Relation</p>
-          <p>We’re Hiring</p>
-          <p>Customer Care</p>
+          <a href="/">Investor Relation</a>
+          <a href="/">We’re Hiring</a>
+          <a href="/">Customer Care</a>
         </div>
         <div className="data-row">
           <h4>Legal Policy</h4>
-          <p>Terms Of Service</p>
-          <p>Refund Policy</p>
-          <p>Privacy Policy</p>
+          <a href="/Aboutus">Terms Of Service</a>
+          <a href="/">Refund Policy</a>
+          <a href="/">Privacy Policy</a>
         </div>
         <div className="data-row">
           <h4>Contact Us</h4>

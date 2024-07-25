@@ -15,17 +15,17 @@
 
   .footer-data {
     display: flex;
-    
+
     justify-content: space-around;
     width: 100%;
     margin: auto;
 
     .data-row {
       display: flex;
-    
+
       flex-direction: column;
       gap: 5px;
-     
+
       h4 {
         color: #ff6c3d;
         margin-bottom: 10px;
@@ -48,6 +48,8 @@
       }
 
       h1 {
+        font-size: 2rem;
+        font-weight: 900;
         span {
           color: #ff6c3d;
         }
@@ -58,7 +60,7 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .footer {
     display: none;
   }

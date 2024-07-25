@@ -11,7 +11,7 @@ const BuisnessListeningPageTwo = () => {
   return (
     <>
     <AuthNavbar />
-    <div className="listening-page">
+    <div className="listening-page mt-5 row">
         <BuissnessSvg />
         <BuissnessForm2 />
     </div>

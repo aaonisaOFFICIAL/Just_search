@@ -1,129 +1,151 @@
-.home-page-mobile{
-    height: 100vh;
-    overflow-y: scroll;
+.home-page-mobile {
+  height: 100vh;
+  overflow-y: scroll;
 }
-.language{
-    width: 90%;
-    margin: auto;
-    // border: 1px solid #000;
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap:7px;
-
-    select{
-        width: 30%;
-        padding: 5px;
-        font-family: Poppins;
-        font-size: 17px;
-    }
-    button{
-        padding: 5px 20px;
-        font-size: 17px;
-        font-family: Poppins;
-        background-color: #FF6C3D;
-        color: #fff;
-        border: 1px solid #FF6C3D;
-        cursor: pointer;
-        border-radius: 3px;
-    }
+.language_select {
+  margin-top: -100px;
+  z-index: 99;
+  display: block;
+  position: relative;
 }
 
-.mobile{
-    display: none;
+.language {
+  background-color: #ffffffb0;
+  width: 85%;
+  margin: auto;
+  padding: 20px 0;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 4px 4px #bbb8b847;
+  margin-bottom: 50px;
+  select {
+    // width: 30%;
+    padding: 5px;
+    font-family: Poppins;
+    font-size: 17px;
+  }
+  button {
+    padding: 5px 20px;
+    font-size: 17px;
+    font-family: Poppins;
+    background-color: #ff6c3d;
+    color: #fff;
+    border: 1px solid #ff6c3d;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+}
+
+.mobile {
+  display: none;
 }
 //for adds
-.add-one{
-    width: 90%;
-    // height: 500px;
-    margin: auto;
-    margin-top: 20px;
+.add-one {
+  width: 90%;
+  // height: 500px;
+  margin: auto;
+  margin-top: 20px;
 
-    img{
-        // border: 1px solid #000;
-        object-fit: contain;
-        width: 100%;
-        height: 500px;
-        // height: 100px;
-    }
-}
-
-.add-five{
-    width: 90%;
-    margin: auto;
+  img {
     // border: 1px solid #000;
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    object-fit: contain;
+    width: 100%;
+    height: 500px;
+    // height: 100px;
+  }
 }
-.add-five-box{
+
+.add-five {
+  width: 90%;
+  margin: auto;
+  // border: 1px solid #000;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+.add-five-box {
+  // border: 1px solid #000;
+  width: 24%;
+  img {
+    object-fit: contain;
+    width: 100%;
+  }
+}
+@media (max-width: 900px) {
+  .home-page-mobilenav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .add-one {
+    height: auto;
     // border: 1px solid #000;
-    width: 24%;
-    img{
-        object-fit: contain;
-        width: 100%;
-        
-    }
-}
-@media (max-width:900px){
 
-    .home-page-mobilenav{
-        position: fixed;
-        bottom: 0;
-        width: 100%;
+    img {
+      height: 100%;
     }
-    .add-one{
-        height: auto;
-        // border: 1px solid #000;
-
-        img{
-            height: 100%;
-        }
-    }
-    .add-five{
-        margin-bottom: 80px;
-    }
-   
+  }
+  .add-five {
+    margin-bottom: 80px;
+  }
+  .language_select {
+    margin-top: 0px;
+    z-index: 99;
+    display: block;
+    position: relative;
+  }
+  .language {
+    background-color: #ffffffb0;
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+  }
 }
 
-
-@media (max-width:700px){
-    .language{
-        width: 90%;
-        // border: ;
-        select{
-            // width: 48%;
-            // width: 30%;
-        padding: 5px;
-        font-family: Poppins;
-            font-size: 14px;
-        }
-
-        button{
-        padding: 5px 10px;
-        font-size: 14px;
-        font-family: Poppins;
-        background-color: #FF6C3D;
-        color: #fff;
-        border: 1px solid #FF6C3D;
-        }
+@media (max-width: 700px) {
+  .language_select {
+    margin-top: 0px;
+    z-index: 0;
+    display: block;
+    position: relative;
+  }
+  .language {
+    background-color: #ffffffb0;
+    width: 85%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 4px 4px #bbb8b847;
+    margin-bottom: 10px;
+    select {
+      padding: 5px;
+      font-family: Poppins;
+      font-size: 14px;
     }
 
-    .add-one{
-        img{
-            height: 100%;
-
-        }
+    button {
+      padding: 5px 10px;
+      font-size: 14px;
+      font-family: Poppins;
+      background-color: #ff6c3d;
+      color: #fff;
+      border: 1px solid #ff6c3d;
     }
+  }
 
-    .add-five{
-        .add-five-box{
-            width: 100%;
-            img{
-                width: 100%;
-
-            }
-        }
+  .add-one {
+    img {
+      height: 100%;
     }
+  }
+
+  .add-five {
+    .add-five-box {
+      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+  }
 }

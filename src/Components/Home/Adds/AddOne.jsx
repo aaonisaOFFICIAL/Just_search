@@ -4,20 +4,21 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const images = [
-  "https://akam.cdn.jdmagicbox.com/images/icontent/newwap/web2022/banner_interiordesigners_2024.webp",
-  "https://www.shutterstock.com/image-vector/promo-banner-bookstore-bookshop-library-260nw-1976145590.jpg",
-  "https://akam.cdn.jdmagicbox.com/images/icontent/newwap/web2022/banner_cctv_2024.webp",
+  "https://mobisoftinfotech.com/resources/wp-content/uploads/2018/10/apps.png",
+  "https://media.licdn.com/dms/image/D4D12AQFAypnL8ogIzQ/article-cover_image-shrink_600_2000/0/1689750574581?e=2147483647&v=beta&t=HoecVMbnmkVPgY-MedQkPe0wQhrbCX1nOywx2frs0Z0",
+  "https://images.squarespace-cdn.com/content/v1/5e7275120157e10f58ad3274/a85f6bc5-0992-44f9-b2b2-1d2d5a17fbd8/Back+To+School+Sale+Round-Up+%282%29.jpg",
 ];
 const AddOne = () => {
   return (
     <div>
-      <Box sx={{ width: "90%", margin: "auto", marginTop: "40px" }}>
+      <Box sx={{ width: "100%", margin: "auto",}}>
         <Carousel autoPlay infiniteLoop>
           {images.map((image, index) => (
             <Box
               key={index}
               component="img"
-              sx={{ width: "100%", height: "500px" }}
+             
+            className="Carousel_img_box"
               src={image}
               alt={`Slide ${index + 1}`}
             />

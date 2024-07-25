@@ -56,10 +56,13 @@ const handleLogout = () => {
      </div>
 
      <div className="home-mobile-options">
-        <IoMdNotifications className='mobile-options-notification' />
-        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" onClick={loginModal}/>
+      <div className='icon-bg'>
+        <IoMdNotifications  className='mobile-options-notification' />
+      </div>
+        <img  src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" onClick={loginModal}/>
      </div>
      {opneModal  && (
+        <div className="modal-overlay">
         <div className="home-modal">
             <div className="home-modal-heading">
                 <h1>Just <span>Search</span></h1>
@@ -78,6 +81,7 @@ const handleLogout = () => {
             <div className="home-modal-close">
                 <IoMdClose onClick={closeLoginModal}/>
             </div>
+        </div>
         </div>
     )}
 

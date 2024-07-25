@@ -221,23 +221,27 @@ const HomeNavbar = () => {
         </div>
 
         <div className="home-nav-options">
-          <p onClick={navigateToHome}>Home</p>
-          <p onClick={navigateToFav}>Favorite</p>
-          <p style={{ color: "#000" }} onClick={navigateToJS}>
-            <span style={{ color: "#FF6C3D" }}>Hire</span>
-          </p>
-          <p onClick={navigateToOffer}>Offer</p>
+          <a className="active" onClick={navigateToHome}>
+            Home
+          </a>
+          <a onClick={navigateToFav}>Favorite</a>
+          <a onClick={navigateToJS}>
+            <span>Hire</span>
+          </a>
+          <a onClick={navigateToOffer}>Offer</a>
           {/* <p onClick={navigateToPayment}>Pricing</p> */}
-          <p onClick={navigateToListing}>Listing</p>
+          <a onClick={navigateToListing}>Listing</a>
           <button onClick={loginModal}>
             {currentUser ? currentUser.phoneNumber : "Login / Sign Up"}
           </button>
-          <p onClick={toggleNotifications}>
+
+          <a className="icon-bg" onClick={toggleNotifications}>
             <IoMdNotifications className="home-nav-notification" />
-          </p>
-          <p onClick={toggleDrawer(true)}>
+          </a>
+
+          <a className="icon-bg" onClick={toggleDrawer(true)}>
             <IoMdPerson className="home-nav-notification" />
-          </p>
+          </a>
           <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
             {DrawerList}
           </Drawer>
@@ -246,6 +250,7 @@ const HomeNavbar = () => {
       <div id="recaptcha"></div>
 
       {openModal && (
+         <div className="modal-overlay">
         <div className="home-modal">
           <div className="home-modal-heading">
             <h1>
@@ -275,24 +280,29 @@ const HomeNavbar = () => {
             <IoMdClose onClick={closeLoginModal} />
           </div>
         </div>
+         </div>
       )}
 
       {currentUser && openModal && (
-        <div className="home-modal">
-          <div className="home-modal-heading">
-            <h1>
-              Just <span>Search</span>
-            </h1>
-          </div>
-          <div className="modal-avatar">
-            <img
-              src="https://www.w3schools.com/howto/img_avatar.png"
-              alt="Avatar"
-            />
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-          <div className="home-modal-close">
-            <IoMdClose onClick={closeLoginModal} />
+        <div>
+          <div className="modal-overlay">
+            <div className="home-modal">
+              <div className="home-modal-heading">
+                <h1>
+                  Just <span>Search</span>
+                </h1>
+              </div>
+              <div className="modal-avatar">
+                <img
+                  src="https://www.w3schools.com/howto/img_avatar.png"
+                  alt="Avatar"
+                />
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+              <div className="home-modal-close">
+                <IoMdClose onClick={closeLoginModal} />
+              </div>
+            </div>
           </div>
         </div>
       )}
