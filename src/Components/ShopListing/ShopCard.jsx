@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { MdOutlineLocalPhone } from "react-icons/md";
 
 //make changes after authenticating user
-const ShopCard = ({id,pincode,specialist, name, area, building, city, landmark, state, street, days, categorie, opensat, closesat, mobile, subcategorie, imageone, imagetwo, imagethree, imagefour, homeDelivery,openam,closeam,latitude, email,longitude }) => {
+const ShopCard = ({id,pincode,specialist, locationLink,name, area, building, city, landmark, state, street, days, categorie, opensat, closesat, mobile, subcategorie, imageone, imagetwo, imagethree, imagefour, homeDelivery,openam,closeam,latitude, email,longitude }) => {
 
   //context api for auth
   const { currentUser } = useContext(AuthContext)
@@ -106,7 +106,7 @@ const ShopCard = ({id,pincode,specialist, name, area, building, city, landmark, 
   const navigate = useNavigate()
 
   const navigateToShopPage = () => {
-
+     
 
     console.log(latitude);
     console.log(longitude);
@@ -114,10 +114,14 @@ const ShopCard = ({id,pincode,specialist, name, area, building, city, landmark, 
     console.log(city,"bolona");
     const shopDetails = {
 
-      pincode,id ,name, area,specialist, building, city, landmark, state, street, days, categorie, opensat, closesat, mobile, subcategorie, imageone, imagetwo, imagethree, imagefour, homeDelivery,openam,closeam,longitude,latitude,email
+      locationLink, pincode,id ,name, area,specialist, building, city, landmark, state, street, days, categorie, opensat, closesat, mobile, subcategorie, imageone, imagetwo, imagethree, imagefour, homeDelivery,openam,closeam,longitude,latitude,email
     };
     
     navigate(`/shop/${categorie}/${name}`, { state: { shopDetails }});
+
+
+    console.log(shopDetails)
+        navigate(`/shop/${categorie}/${name}`, { state: { shopDetails: JSON.stringify(shopDetails) }});
   };
 
   //for images 
