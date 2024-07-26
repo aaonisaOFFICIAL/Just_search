@@ -116,7 +116,7 @@ const ShopCard = ({id,pincode,specialist, name, area, building, city, landmark, 
 
       pincode,id ,name, area,specialist, building, city, landmark, state, street, days, categorie, opensat, closesat, mobile, subcategorie, imageone, imagetwo, imagethree, imagefour, homeDelivery,openam,closeam,longitude,latitude,email
     };
-    debugger
+    
     navigate(`/shop/${categorie}/${name}`, { state: { shopDetails }});
   };
 

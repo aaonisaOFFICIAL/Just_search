@@ -21,7 +21,9 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import LogoutIcon from "@mui/icons-material/Logout";
-
+import { MuiOtpInput } from "mui-one-time-password-input";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
@@ -172,6 +174,7 @@ const HomeNavbar = () => {
   const DrawerList = (
     <Box sx={{ width: 300, py: 2, px: 0 }} role="presentation">
       <Box sx={{ py: 0, px: 2 }}>
+        <CloseIcon className="CloseIcon mb-2" onClose={toggleDrawer(false)} />
         <Box
           sx={{
             display: "flex",
@@ -179,12 +182,14 @@ const HomeNavbar = () => {
             justifyContent: "space-between",
           }}
         >
-          <Typography variant="h6">DEEP</Typography>
-          <Avatar src="https://via.placeholder.com/150" alt="Profile Image" />
+          <Typography variant="h6" className="fw-bold">
+            JS-6393
+          </Typography>
+          <Avatar
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="Profile Image"
+          />
         </Box>
-        <Typography variant="body2" color="textSecondary">
-          Click to view profile
-        </Typography>
       </Box>
       <List>
         {[
@@ -200,7 +205,17 @@ const HomeNavbar = () => {
           { text: "Logout", icon: <LogoutIcon /> },
         ].map((item) => (
           <React.Fragment key={item.text}>
-            <ListItemButton>
+            <ListItemButton
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#ff6c3d1c",
+                  color: "#ff6c3d",
+                  "& .MuiListItemIcon-root": {
+                    color: "#ff6c3d",
+                  },
+                },
+              }}
+            >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>
@@ -250,37 +265,58 @@ const HomeNavbar = () => {
       <div id="recaptcha"></div>
 
       {openModal && (
-         <div className="modal-overlay">
-        <div className="home-modal">
-          <div className="home-modal-heading">
-            <h1>
-              Just <span>Search</span>
-            </h1>
-          </div>
-          <div className="home-modal-body">
-            <div>
-              <input
-                type="text"
-                placeholder="Your Mobile Number"
-                onChange={(e) => setMobile(e.target.value)}
-                maxLength={10}
-              />
-              <button onClick={sendOtp}>Send OTP</button>
+        <div className="modal-overlay">
+          <div className="home-modal">
+            <div className="home-modal-heading">
+              {/* <h1>
+                Just <span>Search</span>
+              </h1> */}
+              <h1>Welcome</h1>
+              <h5 className="text-center">Please enter your details</h5>
             </div>
-            <div>
-              <input
-                type="number"
-                placeholder="Enter OTP"
-                onChange={(e) => setOtp(e.target.value)}
-              />
-              <button onClick={verifyOtp}>Verify OTP</button>
+            <div className="home-modal-body">
+              <div className="text-center">
+                <input
+                  type="text"
+                  placeholder="Your Mobile Number"
+                  onChange={(e) => setMobile(e.target.value)}
+                  maxLength={10}
+                />
+                <button className="mt-2" onClick={sendOtp}>
+                  Get OTP
+                </button>
+              </div>
+              <div>
+                <MuiOtpInput
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  length={6} // Adjust the length based on your requirement
+                  autoFocus
+                  sx={{ display: "flex", justifyContent: "center", gap: 1 }} // Styling for better visibility
+                />
+
+                {/* <input
+                  type="number"
+                  placeholder="Enter OTP"
+                  onChange={(e) => setOtp(e.target.value)}
+                /> */}
+                {/* <button onClick={verifyOtp}>Verify OTP</button> */}
+                <input className="my-3" type="text" placeholder="Enter Username" />
+                <FormControlLabel control={<Checkbox />} label="Remember Me" />
+                <div className="d-flex">
+                  <button className="mt-1 w-100 me-2">Submit</button>
+                  <button className="mt-1 w-100">Sign-Up with Google</button>
+                </div>
+                <div className="text-center">
+                <button className="mt-2 m-auto">Not Now</button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="home-modal-close">
-            <IoMdClose onClick={closeLoginModal} />
+            <div className="home-modal-close">
+              <IoMdClose onClick={closeLoginModal} />
+            </div>
           </div>
         </div>
-         </div>
       )}
 
       {currentUser && openModal && (

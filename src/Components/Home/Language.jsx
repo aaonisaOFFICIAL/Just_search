@@ -101,7 +101,7 @@ const Language = () => {
               ))}
             </select>
           </div>
-          <div className="col-lg-2 col-md-2 mb-2">
+          <div className="col-lg-1 col-md-2 mb-2">
             <button
               className="m-0"
               onClick={handleClick}
