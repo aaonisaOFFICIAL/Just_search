@@ -62,6 +62,7 @@ const BuissnessForm = () => {
     latitude: "",
     enquirynumber: "",
     enquiryemail: "",
+    locationLink: "",
   });
 
   //for next and prev step
@@ -124,6 +125,7 @@ const BuissnessForm = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
+    debugger;
     try {
       const imageUrls = [];
       // Upload images
@@ -174,8 +176,9 @@ const BuissnessForm = () => {
         productimages: productImages,
         specialist: formData?.specialist,
         homedelivery: homeDelivery,
-        longitude: userLocation?.longitude,
-        latitude: userLocation?.latitude,
+        longitude: userLocation?.longitude ? userLocation?.longitude  : "" ,
+        latitude: userLocation?.latitude ? userLocation?.latitude : "",
+        locationLink: formData?.locationLink,
         date: new Date(),
       };
       //add data of shop
@@ -185,9 +188,9 @@ const BuissnessForm = () => {
       //add shop to maps
       const addOnMap = collection(db, "shoplocation");
       await addDoc(addOnMap, {
-        shopname: formData?.businessName,
-        longitude: userLocation?.longitude,
-        latitude: userLocation?.latitude,
+        shopname: formData?.businessName ? formData?.businessName :"" ,
+        longitude: userLocation?.longitude ? userLocation?.longitude :"",
+        latitude: userLocation?.latitude ? serLocation?.latitude : "",
       });
       console.log("shop-location added");
       navigate("/");
@@ -477,7 +480,7 @@ const BuissnessForm = () => {
             <div></div>
           </div>
 
-          <h2>Add Contact Details</h2>
+          <h2>Add Address Details</h2>
 
           <div className="w-100">
             <input
@@ -515,7 +518,13 @@ const BuissnessForm = () => {
               value={formData.pincode}
               onChange={handleChange}
             />
-
+ <input
+        type="text"
+          name="locationLink"
+        value={formData.locationLink}
+        onChange={handleChange}
+        placeholder="Paste location link here"
+      />
             <div style={{width:"100%",flexDirection:"row"}} className="city">
               <select
                 value={selectedState}

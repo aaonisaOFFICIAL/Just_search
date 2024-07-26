@@ -459,7 +459,7 @@ setDistrict(districts);
             <div></div>
           </div>
 
-          <h2>Add Contact Details</h2>
+          <h2>Add Address Details</h2>
 
           <div>
             
