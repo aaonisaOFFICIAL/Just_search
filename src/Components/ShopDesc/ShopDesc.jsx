@@ -175,7 +175,7 @@ const ShopDesc = () => {
   
   let { shopDetails } = locations.state || {}; // Destructure safely
 
-  shopDetails=  JSON.parse(locations.state.shopDetails);
+  shopDetails=  JSON.parse(locations?.state?.shopDetails);
   console.log(shopDetails)
   // Ensure shopDetails is defined before accessing its properties
   const center = useMemo(() => [shopDetails?.latitude, shopDetails?.longitude], [shopDetails?.latitude, shopDetails?.longitude]);
@@ -380,7 +380,7 @@ const ShopDesc = () => {
               <Popup>{shopDetails?.name}</Popup>
             </Marker>
           </MapContainer> */}
-             <LoadScript googleMapsApiKey="AIzaSyAkyaO75L3EGoWpFvEE6VICQYGlArZXzL8"
+             <LoadScript googleMapsApiKey="AIzaSyArPjk4KhR-EfvAUhJM93VLNCFUUVQulrI"
             defer
             async
              >
