@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { MdOutlineLocalPhone } from "react-icons/md";
 
 //make changes after authenticating user
-const ShopCard = ({id,pincode,specialist, locationLink,name, area, building, city, landmark, state, street, days, categorie, opensat, closesat, mobile, subcategorie, imageone, imagetwo, imagethree, imagefour, homeDelivery,openam,closeam,latitude, email,longitude }) => {
+const ShopCard = ({id,pincode,specialist, locationLink,name, area, building, city, landmark, state, street, days, categorie, opensat, closesat, mobile, subcategorie, imageone, imagetwo, imagethree, imagefour, homeDelivery,openam,closeam,latitude, email,longitude ,businessName}) => {
 
   //context api for auth
   const { currentUser } = useContext(AuthContext)
@@ -111,17 +111,17 @@ const ShopCard = ({id,pincode,specialist, locationLink,name, area, building, cit
     console.log(latitude);
     console.log(longitude);
     console.log(name);
-    console.log(city,"bolona");
+    console.log(businessName,"bolona");
     const shopDetails = {
 
-      locationLink, pincode,id ,name, area,specialist, building, city, landmark, state, street, days, categorie, opensat, closesat, mobile, subcategorie, imageone, imagetwo, imagethree, imagefour, homeDelivery,openam,closeam,longitude,latitude,email
+      locationLink, pincode,id ,name, area,specialist, building, city, landmark, state, street, days, categorie, opensat, closesat, mobile, subcategorie, imageone, imagetwo, imagethree, imagefour, homeDelivery,openam,closeam,longitude,latitude,email,businessName
     };
     
     navigate(`/shop/${categorie}/${name}`, { state: { shopDetails }});
 
 
     console.log(shopDetails)
-        navigate(`/shop/${categorie}/${name}`, { state: { shopDetails: JSON.stringify(shopDetails) }});
+        navigate(`/shop/${categorie}/${name}`, { state: { shopDetails }});
   };
 
   //for images 
@@ -168,7 +168,7 @@ const ShopCard = ({id,pincode,specialist, locationLink,name, area, building, cit
        
       </div>
       <div className="card-data">
-        <h3>{name}</h3>
+        <h3>{businessName}</h3>
         <div className="card-subcategories">
         {subcategorie.map((value, index) => (
           index <= 2 && <p key={index}>{value}</p>

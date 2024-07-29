@@ -173,7 +173,7 @@ const ShopDesc = () => {
     const { currentUser } = useContext(AuthContext);
 
     let { shopDetails } = locations.state || {};
-    shopDetails = JSON.parse(locations?.state?.shopDetails);
+    // shopDetails = JSON.parse(locations?.state?.shopDetails);
 
     const center = useMemo(() => [shopDetails?.latitude, shopDetails?.longitude], [shopDetails?.latitude, shopDetails?.longitude]);
 

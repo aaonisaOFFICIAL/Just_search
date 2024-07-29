@@ -54,7 +54,6 @@ const UserSearch = () => {
     }, [userChoice]);
 
 
-    console.log(queryData, userChoice)
 
     const changeHandler = useCallback(e => {
         const res = e.target.value;
@@ -92,6 +91,7 @@ const UserSearch = () => {
                      <ShopCard
                      key={index}
                      name={value?.username || 'N/A'}
+                     businessName={value?.businessName || 'N/A'}
                      id={value?.id || 'N/A'}
                      area={value?.area || 'N/A'}
                      pincode={value?.pincode || 'N/A'}
