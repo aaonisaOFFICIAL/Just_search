@@ -27,12 +27,14 @@ import Checkbox from "@mui/material/Checkbox";
 import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
+  GoogleAuthProvider,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { auth, db } from "../../Config";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
 
 const HomeNavbar = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -43,7 +45,7 @@ const HomeNavbar = () => {
   const [notifications, setNotifications] = useState([]); // Array to hold notifications
 
   const { currentUser } = useContext(AuthContext);
-
+console.log(currentUser)
   const loginModal = () => {
     setOpenModal(!openModal);
   };
@@ -140,10 +142,35 @@ const HomeNavbar = () => {
     }
   };
 
+
+
+  const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const username = user.displayName;
+      const email = user.email;
+      const userId = user.uid;
+      const phoneNumber = user.phoneNumber || "";
+      console.log(user)
+
+      await setDoc(doc(db, "users", userId), {
+        phoneNumber: phoneNumber,
+        username: username,
+        email: email,
+      });
+      setOpenModal(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
         setOpenModal(false);
+  
       })
       .catch((error) => {
         console.error(error);
@@ -264,7 +291,7 @@ const HomeNavbar = () => {
       </div>
       <div id="recaptcha"></div>
 
-      {openModal && (
+      {!currentUser && openModal && (
         <div className="modal-overlay">
           <div className="home-modal">
             <div className="home-modal-heading">
@@ -305,7 +332,7 @@ const HomeNavbar = () => {
                 <FormControlLabel control={<Checkbox />} label="Remember Me" />
                 <div className="d-flex">
                   <button className="mt-1 w-100 me-2">Submit</button>
-                  <button className="mt-1 w-100">Sign-Up with Google</button>
+                  <button className="mt-1 w-100" onClick={signInWithGoogle}>Sign-Up with Google</button>
                 </div>
                 <div className="text-center">
                 <button className="mt-2 m-auto">Not Now</button>
