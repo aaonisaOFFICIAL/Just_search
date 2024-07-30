@@ -35,6 +35,7 @@ import { auth, db } from "../../Config";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
+import Swal from "sweetalert2";
 
 const HomeNavbar = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -43,7 +44,7 @@ const HomeNavbar = () => {
   const [user, setUser] = useState(null);
   const [notificationsVisible, setNotificationsVisible] = useState(false);
   const [notifications, setNotifications] = useState([]); // Array to hold notifications
-
+  const [username, setUsername] = useState("");
   const { currentUser } = useContext(AuthContext);
 console.log(currentUser)
   const loginModal = () => {
@@ -99,6 +100,7 @@ console.log(currentUser)
   };
 
   const verifyOtp = async () => {
+
     if (!otp) {
       Swal.fire({
         icon: "error",
@@ -379,7 +381,16 @@ console.log(currentUser)
                   onChange={(e) => setOtp(e.target.value)}
                 /> */}
                 {/* <button onClick={verifyOtp}>Verify OTP</button> */}
-                <input className="my-3" type="text" placeholder="Enter Username" />
+                {/* <input className="my-3" type="text" placeholder="Enter Username" /> */}
+                <input
+                    type="text"
+                    placeholder="Enter Username"
+                    className="my-3"
+                    id="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)} // Bind input to username state
+                    required
+                  />
                 <FormControlLabel control={<Checkbox />} label="Remember Me" />
                 <div className="d-flex">
                   <button className="mt-1 w-100 me-2" onClick={verifyOtp}>Submit</button>
