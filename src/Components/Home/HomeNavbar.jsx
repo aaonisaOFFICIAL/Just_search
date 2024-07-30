@@ -70,7 +70,11 @@ console.log(currentUser)
     setNotifications(notificationsList);
   };
 
+
+  
+
   const sendOtp = async () => {
+    debugger
     const mobileNumber = "+91" + mobile;
     try {
       const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
@@ -192,6 +196,15 @@ console.log(currentUser)
     }
   };
 
+
+
+  const handleChange = (newValue) => {
+    
+    setOtp(newValue);
+    if (newValue.length === 6) { // assuming the OTP is 6 digits long
+      sendOtp(newValue);
+    }
+  };
   // profile
   const [open, setOpen] = React.useState(false);
 
@@ -314,14 +327,20 @@ console.log(currentUser)
                 </button>
               </div>
               <div>
-                <MuiOtpInput
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                  length={6} // Adjust the length based on your requirement
-                  autoFocus
-                  sx={{ display: "flex", justifyContent: "center", gap: 1 }} // Styling for better visibility
-                />
+            
 
+              <MuiOtpInput
+  value={otp}
+  length={6}
+  onChange={(newValue) => {
+  
+    setOtp(newValue);
+    if (newValue.length === 6) { // assuming the OTP is 6 digits long
+      sendOtp(newValue);
+    }
+  }}
+  sx={{ display: "flex", justifyContent: "center", gap: 1 }}
+/>
                 {/* <input
                   type="number"
                   placeholder="Enter OTP"
