@@ -74,7 +74,14 @@ console.log(currentUser)
   
 
   const sendOtp = async () => {
-    debugger
+    if (!mobile) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Mobile number is required",
+      });
+      return;
+    }
     const mobileNumber = "+91" + mobile;
     try {
       const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
@@ -92,11 +99,36 @@ console.log(currentUser)
   };
 
   const verifyOtp = async () => {
+    if (!otp) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "OTP is required",
+      });
+      return;
+    }
+    if (!username) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Username is required",
+      });
+      return;
+    }
     try {
       await user.confirm(otp);
+      await setDoc(doc(db, "users", user.verificationId), {
+        mobile: mobile,
+        username: username,
+      });
       setOpenModal(false);
     } catch (err) {
       console.error(err);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Wrong OTP",
+      });
     }
   };
 
