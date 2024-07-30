@@ -89,7 +89,14 @@ const HomeNavbar = () => {
 
 
   const sendOtp = async () => {
-    debugger
+    if (!mobile) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Mobile number is required",
+      });
+      return;
+    }
     const mobileNumber = "+91" + mobile;
     try {
       const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
@@ -107,11 +114,36 @@ const HomeNavbar = () => {
   };
 
   const verifyOtp = async () => {
+    if (!otp) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "OTP is required",
+      });
+      return;
+    }
+    if (!username) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Username is required",
+      });
+      return;
+    }
     try {
       await user.confirm(otp);
+      await setDoc(doc(db, "users", user.verificationId), {
+        mobile: mobile,
+        username: username,
+      });
       setOpenModal(false);
     } catch (err) {
       console.error(err);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Wrong OTP",
+      });
     }
   };
 
@@ -386,7 +418,7 @@ const HomeNavbar = () => {
                 <input className="my-3" type="text" placeholder="Enter Username" />
                 <FormControlLabel control={<Checkbox />} label="Remember Me" />
                 <div className="d-flex">
-                  <button className="mt-1 w-100 me-2">Submit</button>
+                  <button className="mt-1 w-100 me-2" onClick={verifyOtp}>Submit</button>
                   <button className="mt-1 w-100" onClick={signInWithGoogle}>Sign-Up with Google</button>
                 </div>
                 <div className="text-center">
