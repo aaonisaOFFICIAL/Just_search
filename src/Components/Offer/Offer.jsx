@@ -64,10 +64,10 @@ const Offer = () => {
         offer,
         where("state", "==", selectedStateOption),
         where("categorie", "==", selectedCategoire),
-        where("approved","==",true)
+        where("approved", "==", true)
       );
       const querySnapshot = await getDocs(q);
-  
+
       const OfferInRange = querySnapshot.docs
         .map((doc) => {
           const data = doc.data();
@@ -80,27 +80,27 @@ const Offer = () => {
           twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
           return record.date > twentyFourHoursAgo;
         });
-  
+
       setOffer(OfferInRange);
-  
+
     } catch (err) {
       console.error(err.message);
     }
   };
-  
-  
+
+
 
   useEffect(() => {
     getCategorie();
   }, []);
-  
+
   useEffect(() => {
     getOfferData();
   }, [selectedCategoire])
 
   const navigate = useNavigate();
-  const navigateToDetailsPage = async(data) => {
-      
+  const navigateToDetailsPage = async (data) => {
+
     const fetchData = collection(db, "buissness-listing")
     const q = query(fetchData, where("businessName", "==", data.businessName))
     const querySnapshot = await getDocs(q)
@@ -111,7 +111,7 @@ const Offer = () => {
     const name = BusinessdataInRange[0].businessName;
     const shopDetails = {
       name: name,
-      area: BusinessdataInRange[0].area,  
+      area: BusinessdataInRange[0].area,
       building: BusinessdataInRange[0].building,
       city: BusinessdataInRange[0].district,
       landmark: BusinessdataInRange[0].landmark,
@@ -133,89 +133,91 @@ const Offer = () => {
     navigate(`/shop/${selectedCategoire}/${name}`, { state: { shopDetails } });
   };
 
-  
+
   return (
     <>
-    <OfferNavbar />
+      <OfferNavbar />
       <div className="offer">
-        <div className="search-offer">
-          <select onChange={(e) => setSelectedStateOption(e.target.value)}>
-            <option value="selected">State</option>
-            {states.map((data, index) => (
-              <option value={data} key={index}>
-                {data}
-              </option>
-            ))}
-          </select>
+        <div className="container my-5">
+          <div className="search-offer offer_search_section_hp">
+            <select className="form-select" onChange={(e) => setSelectedStateOption(e.target.value)}>
+              <option value="selected">State</option>
+              {states.map((data, index) => (
+                <option value={data} key={index}>
+                  {data}
+                </option>
+              ))}
+            </select>
 
-          <select onChange={(e) => setSelectedDistrict(e.target.value)}>
-            <option value="nostate">City</option>
-            {district.map((city) => (
-              <option value={city}>{city}</option>
-            ))}
-          </select>
+            <select className="form-select" onChange={(e) => setSelectedDistrict(e.target.value)}>
+              <option value="nostate">City</option>
+              {district.map((city) => (
+                <option value={city}>{city}</option>
+              ))}
+            </select>
 
-          <select onChange={(e) => setSelectedCategorie(e.target.value)}>
-            <option value="">Categorie</option>
-            {categorie.map((data, index) => (
-              <option value={data.categorie} key={index}>
-                {data.categorie}
-              </option>
-            ))}
-          </select>
-          <button>Search</button>
+            <select className="form-select" onChange={(e) => setSelectedCategorie(e.target.value)}>
+              <option value="">Categorie</option>
+              {categorie.map((data, index) => (
+                <option value={data.categorie} key={index}>
+                  {data.categorie}
+                </option>
+              ))}
+            </select>
+            <button>Search</button>
+          </div>
         </div>
 
-        
+
         {offer.length > 0 ? (
           <div className="offer-card" >
             {offer.map((data, index) => (
               <div className="offer-card-container" onClick={() => navigateToDetailsPage(data)}>
                 <div className="offer-card-images" key={index}>
-                <div className="card-image-data" key={index}>
-  {data.images[0] && (
-    <>
-      <img src={data.images[0]} alt="Offer Image" />
-    </>
-  )}
-</div>
-<div className="card-image-data" key={index}>
-  {data.images[1] && (
-    <>
-      <img src={data.images[1]} alt="Offer Image" />
-    </>
-  )}
-</div>
-<div className="card-image-data" key={index}>
-  {data.images[2] && (
-    <>
-      <img src={data.images[2]} alt="Offer Image" />
-    </>
-  )}
-</div>
-<div className="card-image-data" key={index}>
-  {data.images[3] && (
-    <>
-      <img src={data.images[3]} alt="Offer Image" />
-    </>
-  )}
-</div>
-<div className="card-image-data" key={index}>
-  {data.images[4] && (
-    <>
-      <img src={data.images[4]} alt="Offer Image" />
-    </>
-  )}
-</div>
+                  <div className="card-image-data" key={index}>
+                    {data.images[0] && (
+                      <>
+                        <img src={data.images[0]} alt="Offer Image" />
+                      </>
+                    )}
+                  </div>
+                  <div className="card-image-data" key={index}>
+                    {data.images[1] && (
+                      <>
+                        <img src={data.images[1]} alt="Offer Image" />
+                      </>
+                    )}
+                  </div>
+                  <div className="card-image-data" key={index}>
+                    {data.images[2] && (
+                      <>
+                        <img src={data.images[2]} alt="Offer Image" />
+                      </>
+                    )}
+                  </div>
+                  <div className="card-image-data" key={index}>
+                    {data.images[3] && (
+                      <>
+                        <img src={data.images[3]} alt="Offer Image" />
+                      </>
+                    )}
+                  </div>
+                  <div className="card-image-data" key={index}>
+                    {data.images[4] && (
+                      <>
+                        <img src={data.images[4]} alt="Offer Image" />
+                      </>
+                    )}
+                  </div>
                 </div>
                 <h2 className="offer-shop-name">{data.businessName}</h2>
               </div>
             ))}
           </div>
         ) : (
-          <>No Offer available</>
+          <div className="text-center">No Offer available</div>
         )}
-       
+
       </div>
     </>
   );

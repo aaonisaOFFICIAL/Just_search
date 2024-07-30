@@ -1,89 +1,101 @@
 .search-offer {
-    width: 100%;
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+
+  select {
+    width: 30%;
     padding: 5px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    
-
-    select {
-      width: 30%;
-      padding: 5px;
-      font-family: Poppins;
-      font-size: 17px;
-    }
-  
-    button {
-      padding: 5px 20px;
-      font-size: 17px;
-      font-family: Poppins;
-      background-color: #ff6c3d;
-      color: #fff;
-      border: 1px solid #ff6c3d;
-      cursor: pointer;
-      border-radius: 3px;
-    }
-  }
-  
-  .offer-card {
-    border-radius: 5px;
-    width: 70%;
-    margin: auto;
-    margin-top: 20px;
-    padding: 10px;
     font-family: Poppins;
+    font-size: 17px;
+  }
 
+  button {
+    padding: 5px 20px;
+    font-size: 17px;
+    font-family: Poppins;
+    background-color: #ff6c3d;
+    color: #fff;
+    border: 1px solid #ff6c3d;
+    cursor: pointer;
+    border-radius: 3px;
   }
-  
-  .offer-card-container {
-    border: 1px solid #000;
-    border-radius: 5px;  /* Added border-radius for card-like corners */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    margin-bottom: 10px;
+}
+
+.offer-card {
+  border-radius: 5px;
+  width: 70%;
+  margin: auto;
+  margin-top: 20px;
+  padding: 10px;
+  font-family: Poppins;
+
+}
+
+.offer-card-container {
+  border: 1px solid #000;
+  border-radius: 5px;
+  /* Added border-radius for card-like corners */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.offer-card-images {
+  display: flex;
+}
+
+.card-image-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 20%;
+  /* Adjusted width to create a proper card layout */
+  padding: 10px;
+  /* Added padding for spacing */
+
+  img {
+    height: 100px;
+    width: 100%;
+    object-fit: cover;
+    /* Added object-fit: cover for image aspect ratio */
   }
-  
-  .offer-card-images {
-    display: flex;
+}
+
+.offer-shop-name {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+@media (max-width: 900px) {
+  .search-offer {
+    gap: 5px;
+
+    button {
+      padding: 5px 10px;
+    }
   }
-  
+
+  .offer-card {
+    width: 100%;
+  }
+
   .card-image-data {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  
-    width: 20%;  /* Adjusted width to create a proper card layout */
-    padding: 10px;  /* Added padding for spacing */
-    
     img {
       height: 100px;
       width: 100%;
-      object-fit: cover;  /* Added object-fit: cover for image aspect ratio */
     }
   }
-  
-  .offer-shop-name {
-    margin-top: 10px;
-    margin-left: 20px;
+}
+
+@media (max-width: 768.98px) {
+  button{
+    width: auto;
+    margin-top: 0;
   }
-  
-  @media (max-width: 900px) {
-    .search-offer {
-      gap: 5px;
-  
-      button {
-        padding: 5px 10px;
-      }
-    }
-    .offer-card {
-      width: 100%;
-    }
-    .card-image-data {
-      img{
-        height: 100px;
-        width: 100%;
-      }
-    }
-  }
-  
+}
