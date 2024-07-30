@@ -33,9 +33,24 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../../Config";
 import { AuthContext } from "../../Context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
 import Swal from "sweetalert2";
+
+
+
+const items = [
+  { text: "User Details", icon: <PersonIcon />, route: "/UserDetails" },
+  { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/edit-business-profile" },
+  { text: "Get Premium", icon: <StarIcon />, route: "/get-premium" },
+  { text: "Help and Support", icon: <HelpIcon />, route: "/help-support" },
+  { text: "Feedback", icon: <FeedbackIcon />, route: "/feedback" },
+  { text: "Policy", icon: <PolicyIcon />, route: "/policy" },
+  { text: "Notifications", icon: <NotificationsIcon />, route: "/notifications" },
+  { text: "Favourite", icon: <FavoriteIcon />, route: "/favourite" },
+  { text: "Customer Service", icon: <SupportAgentIcon />, route: "/customer-service" },
+  { text: "Logout", icon: <LogoutIcon />, route: "/logout" },
+];
 
 const HomeNavbar = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -46,7 +61,7 @@ const HomeNavbar = () => {
   const [notifications, setNotifications] = useState([]); // Array to hold notifications
   const [username, setUsername] = useState("");
   const { currentUser } = useContext(AuthContext);
-console.log(currentUser)
+  console.log(currentUser)
   const loginModal = () => {
     setOpenModal(!openModal);
   };
@@ -72,7 +87,7 @@ console.log(currentUser)
   };
 
 
-  
+
 
   const sendOtp = async () => {
     if (!mobile) {
@@ -208,7 +223,7 @@ console.log(currentUser)
     signOut(auth)
       .then(() => {
         setOpenModal(false);
-  
+
       })
       .catch((error) => {
         console.error(error);
@@ -233,7 +248,7 @@ console.log(currentUser)
 
 
   const handleChange = (newValue) => {
-    
+
     setOtp(newValue);
     if (newValue.length === 6) { // assuming the OTP is 6 digits long
       sendOtp(newValue);
@@ -265,7 +280,7 @@ console.log(currentUser)
           />
         </Box>
       </Box>
-      <List>
+      {/* <List>
         {[
           { text: "User Details", icon: <PersonIcon /> },
           { text: "Edit Business Profile", icon: <BusinessIcon /> },
@@ -295,7 +310,28 @@ console.log(currentUser)
             </ListItemButton>
           </React.Fragment>
         ))}
-      </List>
+      </List> */}
+       <List>
+    {items.map((item) => (
+      <ListItemButton
+        component={Link}
+        to={item.route}
+        key={item.text}
+        sx={{
+          "&:hover": {
+            backgroundColor: "#ff6c3d1c",
+            color: "#ff6c3d",
+            "& .MuiListItemIcon-root": {
+              color: "#ff6c3d",
+            },
+          },
+        }}
+      >
+        <ListItemIcon>{item.icon}</ListItemIcon>
+        <ListItemText primary={item.text} />
+      </ListItemButton>
+    ))}
+  </List>
     </Box>
   );
   // end
@@ -361,20 +397,20 @@ console.log(currentUser)
                 </button>
               </div>
               <div>
-            
 
-              <MuiOtpInput
-  value={otp}
-  length={6}
-  onChange={(newValue) => {
-  
-    setOtp(newValue);
-    if (newValue.length === 6) { // assuming the OTP is 6 digits long
-      sendOtp(newValue);
-    }
-  }}
-  sx={{ display: "flex", justifyContent: "center", gap: 1 }}
-/>
+
+                <MuiOtpInput
+                  value={otp}
+                  length={6}
+                  onChange={(newValue) => {
+
+                    setOtp(newValue);
+                    if (newValue.length === 6) { // assuming the OTP is 6 digits long
+                      sendOtp(newValue);
+                    }
+                  }}
+                  sx={{ display: "flex", justifyContent: "center", gap: 1 }}
+                />
                 {/* <input
                   type="number"
                   placeholder="Enter OTP"
@@ -397,7 +433,7 @@ console.log(currentUser)
                   <button className="mt-1 w-100" onClick={signInWithGoogle}>Sign-Up with Google</button>
                 </div>
                 <div className="text-center">
-                <button className="mt-2 m-auto">Not Now</button>
+                  <button className="mt-2 m-auto">Not Now</button>
                 </div>
               </div>
             </div>
