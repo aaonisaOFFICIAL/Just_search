@@ -57,6 +57,12 @@ import BusinessEditForm from './Components/BuissnessListening/BusinessEditForm'
 import ShopImages from './Components/ShopDesc/ShowImages'
 import Aboutus from './Pages/Aboutus'
 import UserDetails from './Pages/UserDetails'
+import EditBusinessProfile from './Pages/EditBusinessProfile'
+import GetPremium from './Pages/GetPremium'
+import Customer from './Pages/Customer'
+import Terms from './Pages/Terms'
+import Policy from './Pages/Policy'
+import Hiring from './Pages/Hiring'
 
 const App = () => {
   const getState = () => {
@@ -85,6 +91,12 @@ const App = () => {
     <Route path='/images/:id' element={<ShopImages />} />
     <Route path='/payment' element={<ShopImages />} />
     <Route path='/Aboutus' element={<Aboutus />} />  
+    <Route path='/edit-business-profile' element={<EditBusinessProfile />} />  
+    <Route path='/get-premium' element={<GetPremium />} />  
+    <Route path='/customer-care' element={<Customer />} />  
+    <Route path='/terms-of-service' element={<Terms />} />  
+    <Route path='/privacy-policy' element={<Policy />} />  
+    <Route path='/we-are-hiring' element={<Hiring />} />  
     
     <Route path='/UserDetails' element={<UserDetails />} />  
    </Routes>

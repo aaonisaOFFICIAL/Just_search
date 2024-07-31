@@ -296,3 +296,15 @@
 
   }
 }
+
+
+.button-submit{
+  padding: 7px 10px;
+    border-radius: 5px;
+    background-color: #ff6c3d;
+    color: #fff;
+    border: 1px solid #ff6c3d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

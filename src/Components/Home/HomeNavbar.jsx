@@ -42,13 +42,14 @@ import Swal from "sweetalert2";
 const items = [
   { text: "User Details", icon: <PersonIcon />, route: "/UserDetails" },
   { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/edit-business-profile" },
+  { text: "Edit Hire/ Job Profile", icon: <StarIcon />, route: "/Edit-Hire" },
   { text: "Get Premium", icon: <StarIcon />, route: "/get-premium" },
   { text: "Help and Support", icon: <HelpIcon />, route: "/help-support" },
   { text: "Feedback", icon: <FeedbackIcon />, route: "/feedback" },
-  { text: "Policy", icon: <PolicyIcon />, route: "/policy" },
+  { text: "Policy", icon: <PolicyIcon />, route: "/privacy-policy" },
   { text: "Notifications", icon: <NotificationsIcon />, route: "/notifications" },
   { text: "Favourite", icon: <FavoriteIcon />, route: "/favourite" },
-  { text: "Customer Service", icon: <SupportAgentIcon />, route: "/customer-service" },
+  { text: "Customer Service", icon: <SupportAgentIcon />, route: "/customer-care" },
   { text: "Logout", icon: <LogoutIcon />, route: "/logout" },
 ];
 

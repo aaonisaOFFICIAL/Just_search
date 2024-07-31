@@ -16,7 +16,7 @@ const UserDetails = () => {
 
                         <div className='mb-4'>
                             <label for="fileToUpload">
-                                <div class="profile-pic" style={{ backgroundImage: `url(Profile_img)` }}>
+                                <div class="profile-pic" style={{ backgroundImage: `url(https://www.w3schools.com/howto/img_avatar.png)` }}>
                                     <span class="glyphicon glyphicon-camera"></span>
                                     <span>Change Image</span>
                                 </div>
