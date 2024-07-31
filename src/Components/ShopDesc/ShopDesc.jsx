@@ -1,159 +1,3 @@
-// import React, { useContext, useState, useEffect } from 'react';
-// import { useLocation } from 'react-router-dom';
-// import { CiLocationOn, CiClock2 } from 'react-icons/ci';
-// import { BsWhatsapp } from 'react-icons/bs';
-// import { FaHeart, FaRegHeart } from 'react-icons/fa6';
-// import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore';
-// import { db } from '../../Config';
-// import { AuthContext } from '../../Context/AuthContext';
-
-// const ShopDesc = () => {
-//   const { currentUser } = useContext(AuthContext);
-
-//   const location = useLocation();
-//   const { shopDetails } = location.state;
-
-
-//   // State variables for setting the favs
-//   const [fav, setFav] = useState(false);
-//   const [favDocId, setFavDocId] = useState(null);
-
-//   const checkFavorite = async () => {
-//     try {
-//       const favourite = collection(db, 'favourite');
-//       const querySnapshot = await getDocs(
-//         query(favourite, where('id', '==', shopDetails.id))
-//       );
-
-//       querySnapshot.forEach((doc) => {
-//         console.log(doc.data())
-//         if (doc.data().id === shopDetails.id) {
-//           setFavDocId(doc.id);
-//           setFav(true);
-//         }
-//       });
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
-
-//   useEffect(() => {
-//     // Check if the shop is already a favorite
-//     checkFavorite();
-//   }, [ shopDetails.name]);
-
-//   const chatHandler = () => {
-//     const url = `https://wa.me/91${shopDetails.mobile}`;
-//     window.open(url, '_blank');
-//   };
-
-//   const addToFav = async () => {
-//     try {
-//       console.log(shopDetails)
-//       const favourite = collection(db, 'favourite');
-//       const docRef = await addDoc(favourite, {
-//         fav: 'shop details',
-//         userId: currentUser.uid,
-//         id: shopDetails.id,
-//         name: shopDetails.name,
-//         area: shopDetails.area,
-//         building: shopDetails.building,
-//         city: shopDetails.city,
-//         landmark: shopDetails.landmark,
-//         state: shopDetails.state,
-//         street: shopDetails.street,
-//         days: shopDetails.days,
-//         categorie: shopDetails.categorie,
-//         opensat: shopDetails.opensat,
-//         closesat: shopDetails.closesat,
-//         mobile: shopDetails.mobile,
-//         subcategorie: shopDetails.subcategorie,
-//         imageone: shopDetails.imageone==undefined?'':shopDetails.imageone,
-//         imagetwo: shopDetails.imagetwo==undefined?'':shopDetails.imagetwo,
-//         imagethree: shopDetails.imagethree==undefined?'':shopDetails.imagethree,
-//         imagefour: shopDetails.imagefour==undefined?'':shopDetails.imagefour,
-//       });
-
-//       setFav(true);
-//       setFavDocId(docRef.id);
-
-//       console.log('Fav set perfectly');
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
-
-//   const removefromFav = async () => {
-//     try {
-//       const favourite = collection(db, 'favourite');
-
-//       if (favDocId) {
-//         await deleteDoc(doc(favourite, favDocId));
-//         setFav(false);
-//         setFavDocId(null);
-//         console.log('Fav removed perfectly');
-//       }
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
-
-//   return (
-//     <div className="shop-desc">
-//       <div className="shop-images">
-//         <img src={shopDetails.imageone} alt="" />
-//         <img src={shopDetails.imagetwo} alt="" />
-//         <img src={shopDetails.imagethree} alt="" />
-//         <img src={shopDetails.imagefour} alt="" />
-//       </div>
-
-//       <div className="shop-name">
-//         <h2>{shopDetails.name}</h2>
-//       </div>
-
-//       <div className="shop-address">
-//         <CiLocationOn style={{ fontSize: '20px' }} />
-//         <p>
-//           {shopDetails.building}, {shopDetails.street}, {shopDetails.landmark}, {shopDetails.area}, {shopDetails.city}, {shopDetails.state}
-//         </p>
-//       </div>
-
-//       <div className="shop-timing">
-//         <CiClock2 />
-//         {Array.isArray(shopDetails.days) && shopDetails.days.length > 0 ? (
-//           <p>
-//             {shopDetails.days[0]} - {shopDetails.days[shopDetails.days.length - 1]}: {shopDetails.opensat}AM - {shopDetails.closesat} PM
-//           </p>
-//         ) : (
-//           <p>No business days available</p>
-//         )}
-//       </div>
-
-//       <div className="shop-buttons">
-//         <button className="buttons-first">Call for more information</button>
-//         <button className="buttons-wp" onClick={chatHandler}>
-//           <BsWhatsapp style={{ color: '#1FAF38' }} />
-//           Chat
-//         </button>
-//         {fav ? (
-//           <button className="buttons-wp" onClick={removefromFav}>
-//             <FaHeart style={{ color: '#FF6C3D' }} />
-//             Remove from Favorites
-//           </button>
-//         ) : (
-//           <button className="buttons-wp" onClick={addToFav}>
-//             <FaRegHeart style={{ color: '#FF6C3D' }} />
-//             Add to Favorites
-//           </button>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ShopDesc;
-
-
 import HomeNavbar from '../Home/HomeNavbar';
 import React, { useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -173,7 +17,6 @@ const ShopDesc = () => {
     const { currentUser } = useContext(AuthContext);
 
     let { shopDetails } = locations.state || {};
-    // shopDetails = JSON.parse(locations?.state?.shopDetails);
 
     const center = useMemo(() => [shopDetails?.latitude, shopDetails?.longitude], [shopDetails?.latitude, shopDetails?.longitude]);
 
@@ -241,8 +84,9 @@ const ShopDesc = () => {
     }, [favDocId]);
 
     const openGoogleMap = useCallback(() => {
+        debugger
         if (!shopDetails?.latitude || !shopDetails?.longitude) return;
-        const url = `https://www.google.com/maps?q=${shopDetails.latitude},${shopDetails.longitude}`;
+        const url = `https://www.google.com/maps?q=${+shopDetails.latitude},${+shopDetails.longitude}`;
         window.open(url, "_blank");
     }, [shopDetails?.latitude, shopDetails?.longitude]);
 
@@ -256,14 +100,24 @@ const ShopDesc = () => {
     }
 
     const handleGetLocation = () => {
-        const [lat, lng] = parseLocationLink(shopDetails.locationLink);
-        setLocation({ lat, lng });
+
+        if (shopDetails?.locationLink) {
+            const [lat, lng] = parseLocationLink(shopDetails.locationLink);
+            setLocation({ lat, lng });
+        } else if (shopDetails?.latitude && shopDetails?.longitude) {
+            setLocation({ lat: parseFloat(shopDetails.latitude), lng: parseFloat(shopDetails.longitude) });
+        }
     };
 
     const parseLocationLink = (link) => {
-        const url = new URL(link);
-        const coords = url.pathname.split('@')[1].split(',');
-        return [parseFloat(coords[0]), parseFloat(coords[1])];
+        try {
+            const url = new URL(link);
+            const coords = url.pathname.split('@')[1].split(',');
+            return [parseFloat(coords[0]), parseFloat(coords[1])];
+        } catch (error) {
+            console.error("Invalid location link", error);
+            return [null, null];
+        }
     };
 
     const handleMarkerClick = () => {
@@ -271,9 +125,22 @@ const ShopDesc = () => {
     };
 
     const handleDirectionsClick = () => {
-        if (!location.lat || !location.lng) return;
-        const url = `https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`;
+        if (location.lat || location.lng) {
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`;
         window.open(url, "_blank");
+    
+    }else
+{
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${shopDetails.latitude},${shopDetails.longitude}`;
+    window.open(url, "_blank");
+}
+
+
+    };
+    
+
+    const isValidLatLng = (lat, lng) => {
+        return !isNaN(lat) && !isNaN(lng) && lat !== null && lng !== null;
     };
 
     return (
@@ -346,33 +213,28 @@ const ShopDesc = () => {
                     <p style={{ fontFamily: "Poppins", marginTop: "10px" }}>Email - {shopDetails?.email}</p>
                     <p style={{ fontFamily: "Poppins", marginTop: "10px" }}>Specialist In - {shopDetails?.specialist}</p>
                     <p style={{ fontFamily: "Poppins", marginTop: "10px" }}>Category - {shopDetails?.categorie}</p>
-                    <div style={{ fontFamily: "Poppins", marginTop: "10px" }}>
-                        <p>Sub Category -</p>
-                        <div>
-                            {shopDetails.subcategorie.map((data, index) => (
-                                <p key={index}>{data},</p>
-                            ))}
-                        </div>
+                    <div style={{ fontFamily: "Poppins", marginTop: "10px", display: "flex", alignItems: "center", gap: "4px" }}>
+                        <p style={{ fontSize: "20px" }}><CiLocationOn /></p>
+                        <p>{shopDetails?.area}</p>
                     </div>
                 </div>
-                <div style={{ width: "70%" }}>
+
+                <div style={{ width: "100%", height: "400px" }}>
                     <LoadScript googleMapsApiKey="AIzaSyArPjk4KhR-EfvAUhJM93VLNCFUUVQulrI">
-                        {location.lat && location.lng && (
+                        {isValidLatLng(location.lat, location.lng) && (
                             <GoogleMap
-                                mapContainerStyle={{ height: '400px', width: '100%' }}
                                 center={location}
                                 zoom={15}
+                                mapContainerStyle={{ width: "100%", height: "100%" }}
                             >
-                                <Marker
-                                    position={location}
-                                    onClick={handleMarkerClick}
-                                />
+                                <Marker position={location} onClick={handleMarkerClick} />
                                 {infoWindowOpen && (
                                     <InfoWindow
                                         position={location}
                                         onCloseClick={() => setInfoWindowOpen(false)}
                                     >
                                         <div>
+
                                             <button onClick={handleDirectionsClick}>Get Directions</button>
                                         </div>
                                     </InfoWindow>
@@ -387,8 +249,3 @@ const ShopDesc = () => {
 };
 
 export default ShopDesc;
-
-
-
-
-
