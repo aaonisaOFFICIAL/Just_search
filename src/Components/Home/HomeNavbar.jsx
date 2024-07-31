@@ -24,6 +24,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import logo from "../../Assests/anslogo.png"
 import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
@@ -394,9 +395,10 @@ const HomeNavbar = () => {
     <>
       <div className="home-navbar">
         <div className="home-nav-heading">
-          <h1>
+          <img src={logo} style={{width:"60px"}} alt="" />
+          {/* <h1>
             Just <span>Search</span>
-          </h1>
+          </h1> */}
         </div>
 
         <div className="home-nav-options">

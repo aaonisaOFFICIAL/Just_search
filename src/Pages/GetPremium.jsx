@@ -10,19 +10,19 @@ function GetPremium() {
         <div className="row">
           <div className="col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
             <div className="form-group">
-              <label>Full Name</label>
+              <label>Paid User</label>
               <input
                 type="text"
                 className="form-control "
                 placeholder="Enter Full Name"
               />
             </div>
-            <p className="text-danger" style={{ fontSize: "14px" }}>
+            {/* <p className="text-danger" style={{ fontSize: "14px" }}>
               {" "}
               *Full Name in Capital Letters
-            </p>
+            </p> */}
           </div>
-          <div className="col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
+          {/* <div className="col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
             <div className="form-group">
               <label>Business Name</label>
               <input
@@ -31,7 +31,7 @@ function GetPremium() {
                 placeholder="Enter Business Name"
               />
             </div>
-          </div>
+          </div> */}
           <div className="col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
             <div className="form-group">
               <label>Father’s Name</label>
@@ -73,10 +73,10 @@ function GetPremium() {
                 placeholder="Enter Contact Number"
               />
             </div>
-            <p className="text-danger" style={{ fontSize: "14px" }}>
+            {/* <p className="text-danger" style={{ fontSize: "14px" }}>
               {" "}
               *Number used to create Aao Ni Saa ID
-            </p>
+            </p> */}
           </div>
 
           <div className="col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
