@@ -1,5 +1,5 @@
 import React from "react";
-
+import logo from "../../Assests/anslogo.png"
 const Footer = () => {
   return (
     <div className="footer">
@@ -7,9 +7,10 @@ const Footer = () => {
 
       <div className="footer-data">
         <div className="data-row">
-          <h1>
+        <img src={logo} style={{width:"100px"}} alt="" />
+          {/* <h1>
             Just <span>Search</span>
-          </h1>
+          </h1> */}
         </div>
         <div className="data-row">
           <h4>Quick Links </h4>

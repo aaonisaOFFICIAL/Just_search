@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { IoMdClose, IoMdNotifications } from "react-icons/io";
 import { auth } from '../../Config';
 import { AuthContext } from '../../Context/AuthContext';
-
+import logo from "../../Assests/anslogo.png"
 const HomeMobileNavbar = () => {
   const { currentUser } = useContext(AuthContext)
 
@@ -52,7 +52,8 @@ const handleLogout = () => {
   return (
     <div className="home-mobile-navbar">
      <div className="home-mobile-heading">
-        <h1>Just <span>Search</span></h1>
+        {/* <h1>Just <span>Search</span></h1> */}
+        <img src={logo} style={{width:"60px"}} alt="" />
      </div>
 
      <div className="home-mobile-options">

@@ -298,13 +298,246 @@
 }
 
 
-.button-submit{
+.button-submit {
   padding: 7px 10px;
-    border-radius: 5px;
-    background-color: #ff6c3d;
-    color: #fff;
-    border: 1px solid #ff6c3d;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  border-radius: 5px;
+  background-color: #ff6c3d;
+  color: #fff;
+  border: 1px solid #ff6c3d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container h3,
+.container h4 {
+  color: #212529;
+}
+
+.container p {
+  color: #818181;
+}
+
+.container a {
+  color: #ff6c3d;
+}
+
+.container ul li b {
+  color: #212529;
+}
+
+.container ul li {
+  color: #818181;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.rating-score {
+  background-color: #4caf50;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.stars {
+  display: flex;
+}
+
+
+.Reviews_Ratings h2 {
+  font-size: 20px;
+}
+
+.rating-overview {
+  display: flex;
+  align-items: center;
+}
+
+.rating-score {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.rating-text {
+  font-size: 1.2em;
+  color: gray;
+}
+
+.rating-text h6 {
+  font-size: 1.5rem;
+  color: #000;
+}
+
+.rating-text p {
+  font-size: 1rem;
+  color: #888;
+  font-weight: 600;
+}
+
+.stars {
+  display: flex;
+  /* margin: 10px 0; */
+}
+
+.star {
+  font-size: 1.5em;
+  color: lightgray;
+  cursor: pointer;
+}
+
+.star.filled,
+.star:hover,
+.star:hover~.star {
+  color: orange;
+}
+
+.rating-trend {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.trend-item {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+}
+
+.trend-item .star {
+  margin-left: 5px;
+  color: orange;
+}
+
+.review-filters {
+  display: flex;
+  margin: 10px 0;
+}
+
+.filter-button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  border: 1px solid #ff6c3d;
+  border-radius: 5px;
+  background-color: #ff6c3d;
+  cursor: pointer;
+  color: #fff;
+}
+
+.filter-button:hover {
+  padding: 5px 10px;
+  margin-right: 10px;
+  border: 1px solid #ff6c3d;
+  border-radius: 5px;
+  background-color: #ff6c3d;
+  cursor: pointer;
+  color: #fff;
+}
+
+.user-review {
+  margin: 30px 0;
+  /* padding: 20px; */
+  /* border: 1px solid #eee; */
+  border-radius: 5px;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+}
+
+.review-header img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.review-header div {
+  flex-grow: 1;
+}
+
+.review-date {
+  color: gray;
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.review-rating {
+  display: flex;
+  margin: 10px 0;
+}
+
+.review-text {
+  margin: 10px 0;
+}
+
+.review-actions {
+  display: flex;
+  margin: 10px 0;
+}
+
+.action-button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  color: #000;
+}
+
+.action-button:hover {
+  padding: 5px 10px;
+  margin-right: 10px;
+  border: 1px solid #ff6c3d;
+  border-radius: 5px;
+  background-color: #ff6c3d;
+  cursor: pointer;
+  color: #fff;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  font-size: 1.5em;
+  color: lightgray;
+  cursor: pointer;
+}
+
+.rating input:checked~label {
+  color: orange;
+}
+
+.rating label:hover,
+.rating label:hover~label {
+  color: orange;
+}
+
+.star_right {
+  margin-right: 10px;
+}
+
+.star_right label {
+  margin-right: 10px;
 }

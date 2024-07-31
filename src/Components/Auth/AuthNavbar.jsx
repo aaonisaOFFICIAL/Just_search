@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import logo from "../../Assests/anslogo.png"
 const AuthNavbar = () => {
   const navigate = useNavigate()
 
@@ -11,7 +11,8 @@ const AuthNavbar = () => {
     <div className="auth-navbar">
       <div>
         <h2 onClick={navigateHandler} style={{cursor:"pointer"}}>
-          Just <span>Search</span>
+          {/* Just <span>Search</span> */}
+          <img src={logo} style={{width:"60px"}} alt="" />
         </h2>
         {/* <p style={{color:"#000",cursor:'pointer' }}onClick={()=>navigate('/')}>  <span style={{color:"#FF6C3D"}}>Home</span> </p> */}
         <h4>
