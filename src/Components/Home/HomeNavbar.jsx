@@ -115,7 +115,6 @@ const HomeNavbar = () => {
   };
 
   const verifyOtp = async () => {
-
     if (!otp) {
       Swal.fire({
         icon: "error",
@@ -133,10 +132,18 @@ const HomeNavbar = () => {
       return;
     }
     try {
-      await user.confirm(otp);
-      await setDoc(doc(db, "users", user.verificationId), {
-        mobile: mobile,
+      const result = await user.confirm(otp);
+      const uid = result.user.uid; // Get the UID from the authenticated user
+      await setDoc(doc(db, "users", uid), {
+        phoneNumber: mobile,
         username: username,
+        uid: uid, // Store the UID in the document
+        emial:email
+      });
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "User registered successfully",
       });
       setOpenModal(false);
     } catch (err) {
@@ -148,7 +155,8 @@ const HomeNavbar = () => {
       });
     }
   };
-
+  
+  
   const navigate = useNavigate();
 
   const navigateToJS = () => {
@@ -204,21 +212,29 @@ const HomeNavbar = () => {
       const user = result.user;
       const username = user.displayName;
       const email = user.email;
-      const userId = user.uid;
+      const uid = user.uid; // Get the UID from the authenticated user
       const phoneNumber = user.phoneNumber || "";
-      console.log(user)
-
-      await setDoc(doc(db, "users", userId), {
+  
+      await setDoc(doc(db, "users", uid), {
         phoneNumber: phoneNumber,
         username: username,
         email: email,
+        uid: uid // Store the UID in the document
       });
+     
       setOpenModal(false);
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Google sign-in failed",
+      });
     }
   };
-
+  
+  
+  
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
