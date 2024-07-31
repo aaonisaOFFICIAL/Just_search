@@ -34,7 +34,7 @@ import {
 import { auth, db } from "../../Config";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore";
 import Swal from "sweetalert2";
 
 
@@ -133,18 +133,38 @@ const HomeNavbar = () => {
     }
     try {
       const result = await user.confirm(otp);
-      const uid = result.user.uid; // Get the UID from the authenticated user
-      await setDoc(doc(db, "users", uid), {
+      const uid = result.user.uid;
+  
+      const userDocRef = doc(db, "users", uid);
+      const userSnapshot = await getDoc(userDocRef);
+  
+      let userData = {
         phoneNumber: mobile,
         username: username,
-        uid: uid, // Store the UID in the document
-        emial:email
-      });
-      Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: "User registered successfully",
-      });
+        uid: uid,
+        email: email,
+        paid: false,
+        TransactionID: "",
+        createdAt: serverTimestamp(), // Set default creation timestamp
+      };
+  
+      if (userSnapshot.exists()) {
+        // If document exists, don't update createdAt
+        const existingData = userSnapshot.data();
+        userData = {
+          ...existingData,
+          phoneNumber: mobile,
+          username: username,
+          email: email,
+        };
+      } else {
+        // If document doesn't exist, set createdAt to current timestamp
+        userData.createdAt = serverTimestamp();
+      }
+  
+      await setDoc(userDocRef, userData, { merge: true });
+  
+     
       setOpenModal(false);
     } catch (err) {
       console.error(err);
@@ -212,16 +232,33 @@ const HomeNavbar = () => {
       const user = result.user;
       const username = user.displayName;
       const email = user.email;
-      const uid = user.uid; // Get the UID from the authenticated user
+      const uid = user.uid;
       const phoneNumber = user.phoneNumber || "";
+      debugger
+      // Check if the TransactionID exists
+      const userDoc = doc(db, "users", uid);
+      const userSnapshot = await getDoc(userDoc);
+  
+      let paid = false; // Default value for paid
+      let transactionId = ""; // Default value for TransactionID
+      let createdAt = serverTimestamp(); // Default value for createdAt
+      if (userSnapshot.exists()) {
+        const userData = userSnapshot.data();
+        paid = userData.paid || false;
+        transactionId = userData.TransactionID || "";
+        createdAt = userData.createdAt || serverTimestamp();
+      }
   
       await setDoc(doc(db, "users", uid), {
         phoneNumber: phoneNumber,
         username: username,
         email: email,
-        uid: uid // Store the UID in the document
+        uid: uid,
+        paid: paid, // Save the paid status
+        TransactionID: transactionId, // Save the TransactionID
+        createdAt: createdAt, // Save the createdAt timestamp
       });
-     
+  
       setOpenModal(false);
     } catch (error) {
       console.error(error);
@@ -230,9 +267,9 @@ const HomeNavbar = () => {
         title: "Error",
         text: "Google sign-in failed",
       });
+
     }
   };
-  
   
   
   const handleLogout = () => {
