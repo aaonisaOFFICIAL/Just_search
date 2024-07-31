@@ -291,7 +291,7 @@ const ShopCard = ({
         </div>
       </div>
 
-      <div className="container d-done">
+      <div className="container d-none">
         <div className="Reviews_Ratings">
           <h2 className="mb-2" data-bs-toggle="modal" data-bs-target="#Reviews">
             Reviews & Ratings
