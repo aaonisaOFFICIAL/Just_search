@@ -40,19 +40,6 @@ import Swal from "sweetalert2";
 
 
 
-const items = [
-  { text: "User Details", icon: <PersonIcon />, route: "/UserDetails" },
-  { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/edit-business-profile" },
-  { text: "Edit Hire/ Job Profile", icon: <StarIcon />, route: "/Edit-Hire" },
-  { text: "Get Premium", icon: <StarIcon />, route: "/get-premium" },
-  { text: "Help and Support", icon: <HelpIcon />, route: "/help-and-support" },
-  { text: "Feedback", icon: <FeedbackIcon />, route: "/feedback" },
-  { text: "Policy", icon: <PolicyIcon />, route: "/privacy-policy" },
-  { text: "Notifications", icon: <NotificationsIcon />, route: "/notifications" },
-  { text: "Favourite", icon: <FavoriteIcon />, route: "/favourite" },
-  { text: "Customer Service", icon: <SupportAgentIcon />, route: "/customer-care" },
-  { text: "Logout", icon: <LogoutIcon />, action: handleLogout },
-];
 
 const HomeNavbar = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -419,7 +406,7 @@ const handleClick = (item) => {
     <>
       <div className="home-navbar">
         <div className="home-nav-heading">
-          <img src={logo} style={{width:"60px", cursor:"pointer"}} alt="logo" onClick={navigateToHome}/>
+          <img src={logo} style={{width:"60px"}} alt="" />
           {/* <h1>
             Just <span>Search</span>
           </h1> */}
