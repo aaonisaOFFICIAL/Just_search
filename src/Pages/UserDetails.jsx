@@ -32,7 +32,7 @@ const UserDetails = () => {
   const [selectedState, setSelectedState] = useState("");
   const [states, setStates] = useState([]);
   const [districts, setDistricts] = useState([]);
-  const { control, handleSubmit, setValue, formState: { errors } } = useForm({
+  const { control, handleSubmit, setValue, reset,formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -102,7 +102,7 @@ const UserDetails = () => {
         title: 'Success',
         text: 'User details saved successfully!',
       }).then(() => {
-        // Optionally redirect or reset form here
+       reset()
       });
   
     } catch (error) {
