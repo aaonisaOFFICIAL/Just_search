@@ -167,7 +167,7 @@ const handleClick = (item) => {
         phoneNumber: mobile,
         username: username,
         uid: uid,
-        email: email,
+        email: email ? email :  "",
         paid: false,
         TransactionID: "",
         createdAt: serverTimestamp(), // Set default creation timestamp
@@ -180,7 +180,7 @@ const handleClick = (item) => {
           ...existingData,
           phoneNumber: mobile,
           username: username,
-          email: email,
+          email: email ? email :  "",
         };
       } else {
         // If document doesn't exist, set createdAt to current timestamp
