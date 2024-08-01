@@ -51,7 +51,7 @@ const items = [
   { text: "Notifications", icon: <NotificationsIcon />, route: "/notifications" },
   { text: "Favourite", icon: <FavoriteIcon />, route: "/favourite" },
   { text: "Customer Service", icon: <SupportAgentIcon />, route: "/customer-care" },
-  { text: "Logout", icon: <LogoutIcon />, route: "/logout" },
+  { text: "Logout", icon: <LogoutIcon />, action: handleLogout },
 ];
 
 const HomeNavbar = () => {
@@ -63,7 +63,43 @@ const HomeNavbar = () => {
   const [notifications, setNotifications] = useState([]); // Array to hold notifications
   const [username, setUsername] = useState("");
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser)
+
+console.log(currentUser)
+  const handleLogout = () => {
+    
+    signOut(auth)
+      .then(() => {
+        setOpenModal(false);
+        toggleDrawer(false)
+navigate('/')
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+ const items = [
+  { text: "User Details", icon: <PersonIcon />, route: "/UserDetails" },
+  { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/edit-business-profile" },
+  { text: "Edit Hire/ Job Profile", icon: <StarIcon />, route: "/Edit-Hire" },
+  { text: "Get Premium", icon: <StarIcon />, route: "/get-premium" },
+  { text: "Help and Support", icon: <HelpIcon />, route: "/help-and-support" },
+  { text: "Feedback", icon: <FeedbackIcon />, route: "/feedback" },
+  { text: "Policy", icon: <PolicyIcon />, route: "/privacy-policy" },
+  { text: "Notifications", icon: <NotificationsIcon />, route: "/notifications" },
+  { text: "Favourite", icon: <FavoriteIcon />, route: "/favourite" },
+  { text: "Customer Service", icon: <SupportAgentIcon />, route: "/customer-care" },
+  { text: "Logout", icon: <LogoutIcon />, action: handleLogout },
+];
+const handleClick = (item) => {
+  
+  if (item.route) {
+    history.push(item.route);
+    toggleDrawer(false); 
+  } else if (item.action) {
+    item.action();
+  }
+};
   const loginModal = () => {
     setOpenModal(!openModal);
   };
@@ -203,9 +239,10 @@ const HomeNavbar = () => {
 
   const navigateToListing = async () => {
     if (!currentUser) {
-      // loginModal();
-      navigate("/business-listening");
+      loginModal();
+  
     } else {
+      navigate("/business-listening");
       const phoneNumber = currentUser.phoneNumber;
       const res = phoneNumber.replace("+91", "");
 
@@ -236,7 +273,7 @@ const HomeNavbar = () => {
       const email = user.email;
       const uid = user.uid;
       const phoneNumber = user.phoneNumber || "";
-      debugger
+      
       // Check if the TransactionID exists
       const userDoc = doc(db, "users", uid);
       const userSnapshot = await getDoc(userDoc);
@@ -274,16 +311,6 @@ const HomeNavbar = () => {
   };
   
   
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        setOpenModal(false);
-
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
   const navigateToOffer = () => {
     if (!currentUser) {
@@ -313,12 +340,19 @@ const HomeNavbar = () => {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
+    if(currentUser){
     setOpen(newOpen);
-  };
+  }else{
+    loginModal();
+  }
+
+
+}
+  ;
   const DrawerList = (
     <Box sx={{ width: 300, py: 2, px: 0 }} role="presentation">
       <Box sx={{ py: 0, px: 2 }}>
-        <CloseIcon className="CloseIcon mb-2" onClose={toggleDrawer(false)} />
+        <CloseIcon className="CloseIcon mb-2" onClick={toggleDrawer(false)} />
         <Box
           sx={{
             display: "flex",
@@ -335,39 +369,9 @@ const HomeNavbar = () => {
           />
         </Box>
       </Box>
-      {/* <List>
-        {[
-          { text: "User Details", icon: <PersonIcon /> },
-          { text: "Edit Business Profile", icon: <BusinessIcon /> },
-          { text: "Get Premium", icon: <StarIcon /> },
-          { text: "Help and Support", icon: <HelpIcon /> },
-          { text: "Feedback", icon: <FeedbackIcon /> },
-          { text: "Policy", icon: <PolicyIcon /> },
-          { text: "Notifications", icon: <NotificationsIcon /> },
-          { text: "Favourite", icon: <FavoriteIcon /> },
-          { text: "Customer Service", icon: <SupportAgentIcon /> },
-          { text: "Logout", icon: <LogoutIcon /> },
-        ].map((item) => (
-          <React.Fragment key={item.text}>
-            <ListItemButton
-              sx={{
-                "&:hover": {
-                  backgroundColor: "#ff6c3d1c",
-                  color: "#ff6c3d",
-                  "& .MuiListItemIcon-root": {
-                    color: "#ff6c3d",
-                  },
-                },
-              }}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </React.Fragment>
-        ))}
-      </List> */}
+   
        <List>
-    {items.map((item) => (
+    {/* {items.map((item) => (
       <ListItemButton
         component={Link}
         to={item.route}
@@ -385,7 +389,27 @@ const HomeNavbar = () => {
         <ListItemIcon>{item.icon}</ListItemIcon>
         <ListItemText primary={item.text} />
       </ListItemButton>
-    ))}
+    ))} */}
+       {items.map((item) => (
+        <ListItemButton
+          key={item.text}
+          component={item.route ? Link : 'div'}
+          to={item.route}
+          onClick={() => handleClick(item)}
+          sx={{
+            "&:hover": {
+              backgroundColor: "#ff6c3d1c",
+              color: "#ff6c3d",
+              "& .MuiListItemIcon-root": {
+                color: "#ff6c3d",
+              },
+            },
+          }}
+        >
+          <ListItemIcon>{item.icon}</ListItemIcon>
+          <ListItemText primary={item.text} />
+        </ListItemButton>
+      ))}
   </List>
     </Box>
   );
@@ -412,9 +436,10 @@ const HomeNavbar = () => {
           <a onClick={navigateToOffer}>Offer</a>
           {/* <p onClick={navigateToPayment}>Pricing</p> */}
           <a onClick={navigateToListing}>Listing</a>
-          <button onClick={loginModal}>
-            {currentUser ? currentUser.phoneNumber : "Login / Sign Up"}
-          </button>
+       {  !currentUser && <button onClick={loginModal}>
+            {/* {currentUser ? currentUser.phoneNumber : "Login / Sign Up"} */}
+            {currentUser ? " " : "Login / Sign Up"}
+          </button>}
 
           <a className="icon-bg" onClick={toggleNotifications}>
             <IoMdNotifications className="home-nav-notification" />
@@ -500,7 +525,7 @@ const HomeNavbar = () => {
         </div>
       )}
 
-      {currentUser && openModal && (
+      {/* {currentUser && openModal && (
         <div>
           <div className="modal-overlay">
             <div className="home-modal">
@@ -522,7 +547,7 @@ const HomeNavbar = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
 
       {notificationsVisible && (
         <div>
