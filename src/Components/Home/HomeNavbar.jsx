@@ -406,7 +406,7 @@ const handleClick = (item) => {
     <>
       <div className="home-navbar">
         <div className="home-nav-heading">
-          <img src={logo} style={{width:"60px"}} alt="" />
+          <img src={logo} style={{width:"60px", cursor:"pointer"}} onClick={navigateToHome} alt="" />
           {/* <h1>
             Just <span>Search</span>
           </h1> */}
