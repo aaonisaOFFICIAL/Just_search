@@ -53,7 +53,7 @@ const handleLogout = () => {
     <div className="home-mobile-navbar">
      <div className="home-mobile-heading">
         {/* <h1>Just <span>Search</span></h1> */}
-        <img src={logo} style={{width:"60px"}} alt="" />
+        <img src={logo} style={{width:"230px"}} alt="" />
      </div>
 
      <div className="home-mobile-options">

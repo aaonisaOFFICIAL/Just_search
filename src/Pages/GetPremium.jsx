@@ -181,8 +181,9 @@
 import React, { useState } from "react";
 import HomeNavbar from "../Components/Home/HomeNavbar";
 import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "../Config";
+import QrCode from "../../src/Assests/QrCodeScannerIcon.jpeg";
 
 function GetPremium() {
   const [formData, setFormData] = useState({
@@ -235,7 +236,7 @@ function GetPremium() {
   return (
     <div>
       <HomeNavbar />
-      <div className="AboutusHeader">Personal Details</div>
+      <div className="AboutusHeader">Get Premium</div>
       <div className="container my-4 User_Details_section">
         <form onSubmit={handleSubmit}>
           <div className="row">
@@ -292,7 +293,7 @@ function GetPremium() {
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
+            {/* <div className="col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
               <div className="form-group">
                 <label>Contact Number</label>
                 <input
@@ -304,7 +305,7 @@ function GetPremium() {
                   onChange={handleChange}
                 />
               </div>
-            </div>
+            </div> */}
             <div className="col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
               <div className="form-group">
                 <label>Qualification</label>
@@ -379,16 +380,45 @@ function GetPremium() {
                   placeholder="Enter Scanner"
                   name="scanner"
                 />
-                <span className="input-group-text" id="basic-addon2">
+                <span
+                  className="input-group-text"
+                  id="basic-addon2" style={{cursor:"pointer"}}
+                  data-bs-toggle="modal"
+                  data-bs-target="#QrCodeScannerIcon"
+                >
                   <QrCodeScannerIcon />
                 </span>
+              </div>
+              {/* QrCodeScannerIcon */}
+              <div
+                className="modal fade"
+                id="QrCodeScannerIcon"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog modal-dialog-centered">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                    <h5 className="modal-title" id="staticBackdropLabel">Scanner</h5>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div className="modal-body p-0">
+                      <img src={QrCode} alt="QrCode" className="img-fluid" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
               <div className="form-group">
                 <label>Digit UPI Transaction ID</label>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
                   placeholder="Enter 12 Digit UPI Transaction ID"
                   name="digitalUpiTransactionID"
@@ -413,7 +443,9 @@ function GetPremium() {
               </div>
             </div>
           </div>
-          <button className="btn btn_save_hp mt-4" type="submit">Submit</button>
+          <button className="btn btn_save_hp mt-4" type="submit">
+            Submit
+          </button>
         </form>
       </div>
     </div>

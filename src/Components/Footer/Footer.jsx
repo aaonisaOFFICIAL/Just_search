@@ -7,7 +7,7 @@ const Footer = () => {
 
       <div className="footer-data">
         <div className="data-row">
-        <img src={logo} style={{width:"100px"}} alt="" />
+        <img src={logo} style={{width:"230px"}} alt="" />
           {/* <h1>
             Just <span>Search</span>
           </h1> */}
