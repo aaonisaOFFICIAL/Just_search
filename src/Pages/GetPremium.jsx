@@ -178,11 +178,13 @@
 
 // export default GetPremium
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import HomeNavbar from "../Components/Home/HomeNavbar";
 import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "../Config";
+import { AuthContext } from "../Context/AuthContext";
+import Swal from "sweetalert2";
 import QrCode from "../../src/Assests/QrCodeScannerIcon.jpeg";
 
 function GetPremium() {
@@ -198,6 +200,8 @@ function GetPremium() {
     referCode: "",
     digitalUpiTransactionID: "",
   });
+  const { currentUser } = useContext(AuthContext);
+  const uid = currentUser.uid;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -206,16 +210,21 @@ function GetPremium() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+debugger
     // Add created_at field with current timestamp
     const dataWithTimestamp = {
       ...formData,
+      uid: currentUser.uid, // Include the uid here
       created_at: Timestamp.now(),
     };
 
     try {
       await addDoc(collection(db, "userPremium"), dataWithTimestamp);
-      alert("Data saved successfully!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'data saved!',
+      })
       setFormData({
         fullName: "",
         fatherName: "",

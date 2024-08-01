@@ -104,7 +104,7 @@ const Categories = () => {
         <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
           <Container className="category-container">
             <div className="category-header mb-3">
-              <CloseIcon className="CloseIcon" onClose={toggleDrawer(false)} />
+              <CloseIcon className="CloseIcon" onClick={toggleDrawer(false)} />
               <h2>Popular Categories</h2>
             </div>
             <div className="row">

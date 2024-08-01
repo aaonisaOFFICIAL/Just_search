@@ -53,10 +53,11 @@ const BuissnessForm2 = () => {
     opens: "",
     specialist: '',
     closes: "",
-    longitude: "",
-    latitude: "",
+    // longitude: "",
+    // latitude: "",
     enquirynumber:"",
-    enquiryemail:""
+    enquiryemail:"",
+    locationLink: "",
   });
 
   //for next and prev step
@@ -169,8 +170,9 @@ const BuissnessForm2 = () => {
         images: imageUrls, // Store image URLs as an array
         productimages: productImages,
         homedelivery: homeDelivery,
-        longitude: formData.longitude,
-        latitude: formData.latitude,
+        // longitude: formData.longitude,
+        // latitude: formData.latitude,
+        locationLink: formData?.locationLink,
         date : new Date()
       };
       //add data of shop
@@ -181,8 +183,8 @@ const BuissnessForm2 = () => {
       const addOnMap = collection(db, "shoplocation");
       await addDoc(addOnMap, {
         shopname: formData.businessName,
-        longitude: formData.longitude,
-        latitude: formData.latitude,
+        // longitude: formData.longitude,
+        // latitude: formData.latitude,
       });
       Swal.fire({
         icon: "success",
@@ -499,7 +501,7 @@ setDistrict(districts);
               onChange={handleChange}
             />
 
-            <input
+            {/* <input
               type="number"
               name="latitude"
               placeholder="latitude*"
@@ -513,8 +515,14 @@ setDistrict(districts);
               placeholder="longitude*"
               value={formData.longitude}
               onChange={handleChange}
-            />
-
+            /> */}
+ <input
+        type="text"
+          name="locationLink"
+        value={formData.locationLink}
+        onChange={handleChange}
+        placeholder="Paste location link here"
+      />
             
             <div className="city">
               <select value={selectedState}  onChange={(e) => {setSelectedState(e.target.value)
