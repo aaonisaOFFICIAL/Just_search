@@ -318,7 +318,7 @@ const HomeNavbar = () => {
   const DrawerList = (
     <Box sx={{ width: 300, py: 2, px: 0 }} role="presentation">
       <Box sx={{ py: 0, px: 2 }}>
-        <CloseIcon className="CloseIcon mb-2" onClose={toggleDrawer(false)} />
+        <CloseIcon className="CloseIcon mb-2" onClick={toggleDrawer(false)} />
         <Box
           sx={{
             display: "flex",
@@ -335,37 +335,7 @@ const HomeNavbar = () => {
           />
         </Box>
       </Box>
-      {/* <List>
-        {[
-          { text: "User Details", icon: <PersonIcon /> },
-          { text: "Edit Business Profile", icon: <BusinessIcon /> },
-          { text: "Get Premium", icon: <StarIcon /> },
-          { text: "Help and Support", icon: <HelpIcon /> },
-          { text: "Feedback", icon: <FeedbackIcon /> },
-          { text: "Policy", icon: <PolicyIcon /> },
-          { text: "Notifications", icon: <NotificationsIcon /> },
-          { text: "Favourite", icon: <FavoriteIcon /> },
-          { text: "Customer Service", icon: <SupportAgentIcon /> },
-          { text: "Logout", icon: <LogoutIcon /> },
-        ].map((item) => (
-          <React.Fragment key={item.text}>
-            <ListItemButton
-              sx={{
-                "&:hover": {
-                  backgroundColor: "#ff6c3d1c",
-                  color: "#ff6c3d",
-                  "& .MuiListItemIcon-root": {
-                    color: "#ff6c3d",
-                  },
-                },
-              }}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </React.Fragment>
-        ))}
-      </List> */}
+   
        <List>
     {items.map((item) => (
       <ListItemButton
