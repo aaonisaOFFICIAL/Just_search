@@ -63,6 +63,7 @@ import Customer from './Pages/Customer'
 import Terms from './Pages/Terms'
 import Policy from './Pages/Policy'
 import Hiring from './Pages/Hiring'
+import HelpandSupport from './Pages/HelpandSupport'
 
 const App = () => {
   const getState = () => {
@@ -97,6 +98,7 @@ const App = () => {
     <Route path='/terms-of-service' element={<Terms />} />  
     <Route path='/privacy-policy' element={<Policy />} />  
     <Route path='/we-are-hiring' element={<Hiring />} />  
+    <Route path='/help-and-support' element={<HelpandSupport />} />  
     
     <Route path='/UserDetails' element={<UserDetails />} />  
    </Routes>

@@ -45,7 +45,7 @@ const items = [
   { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/edit-business-profile" },
   { text: "Edit Hire/ Job Profile", icon: <StarIcon />, route: "/Edit-Hire" },
   { text: "Get Premium", icon: <StarIcon />, route: "/get-premium" },
-  { text: "Help and Support", icon: <HelpIcon />, route: "/help-support" },
+  { text: "Help and Support", icon: <HelpIcon />, route: "/help-and-support" },
   { text: "Feedback", icon: <FeedbackIcon />, route: "/feedback" },
   { text: "Policy", icon: <PolicyIcon />, route: "/privacy-policy" },
   { text: "Notifications", icon: <NotificationsIcon />, route: "/notifications" },
@@ -395,7 +395,7 @@ const HomeNavbar = () => {
     <>
       <div className="home-navbar">
         <div className="home-nav-heading">
-          <img src={logo} style={{width:"60px"}} alt="" />
+          <img src={logo} style={{width:"60px", cursor:"pointer"}} alt="logo" onClick={navigateToHome}/>
           {/* <h1>
             Just <span>Search</span>
           </h1> */}
