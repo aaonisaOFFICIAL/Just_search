@@ -52,20 +52,20 @@ const HomeNavbar = () => {
   const { currentUser } = useContext(AuthContext);
 
 console.log(currentUser)
-  const handleLogout = () => {
-    
-    signOut(auth)
-      .then(() => {
-        setOpenModal(false);
-        toggleDrawer(false)
-navigate('/')
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
- const items = [
+const handleLogout = () => {
+  signOut(auth)
+    .then(() => {
+      setOpenModal(false);
+      setOpen(false);
+      navigate('/');
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+const items = [
   { text: "User Details", icon: <PersonIcon />, route: "/UserDetails" },
   { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/edit-business-profile" },
   { text: "Edit Hire/ Job Profile", icon: <StarIcon />, route: "/Edit-Hire" },
@@ -78,11 +78,11 @@ navigate('/')
   { text: "Customer Service", icon: <SupportAgentIcon />, route: "/customer-care" },
   { text: "Logout", icon: <LogoutIcon />, action: handleLogout },
 ];
+
 const handleClick = (item) => {
-  
   if (item.route) {
-    history.push(item.route);
-    toggleDrawer(false); 
+    navigate(item.route);
+    setOpen(false); // Close the drawer after navigation
   } else if (item.action) {
     item.action();
   }
