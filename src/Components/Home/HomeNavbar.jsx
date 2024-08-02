@@ -406,7 +406,7 @@ const handleClick = (item) => {
     <>
       <div className="home-navbar">
         <div className="home-nav-heading">
-          <img src={logo} style={{width:"60px", cursor:"pointer"}} onClick={navigateToHome} alt="" />
+          <img src={logo} style={{width:"230px", cursor:"pointer"}} onClick={navigateToHome} alt="" />
           {/* <h1>
             Just <span>Search</span>
           </h1> */}
@@ -422,7 +422,7 @@ const handleClick = (item) => {
           </a>
           <a onClick={navigateToOffer}>Offer</a>
           {/* <p onClick={navigateToPayment}>Pricing</p> */}
-          <a onClick={navigateToListing}>Listing</a>
+          <a onClick={navigateToListing}>Business</a>
        {  !currentUser && <button onClick={loginModal}>
             {/* {currentUser ? currentUser.phoneNumber : "Login / Sign Up"} */}
             {currentUser ? " " : "Login / Sign Up"}
@@ -433,7 +433,7 @@ const handleClick = (item) => {
           </a>
 
           <a className="icon-bg" onClick={toggleDrawer(true)}>
-            <IoMdPerson className="home-nav-notification" />
+          <img  src="https://www.w3schools.com/howto/img_avatar.png" style={{width:"25px", borderRadius:"20px"}} alt="Avatar" />
           </a>
           <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
             {DrawerList}

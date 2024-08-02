@@ -12,7 +12,7 @@ const AuthNavbar = () => {
       <div>
         <h2 onClick={navigateHandler} style={{cursor:"pointer"}}>
           {/* Just <span>Search</span> */}
-          <img src={logo} style={{width:"60px"}} alt="" />
+          <img src={logo} style={{width:"230px"}} alt="" />
         </h2>
         {/* <p style={{color:"#000",cursor:'pointer' }}onClick={()=>navigate('/')}>  <span style={{color:"#FF6C3D"}}>Home</span> </p> */}
         <h4>
