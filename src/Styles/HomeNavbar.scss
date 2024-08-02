@@ -110,6 +110,9 @@
         // width: 100%;
         border-radius: 5px;
         margin: auto;
+        white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
       }
     }
   }
@@ -173,7 +176,7 @@
 }
 
 @media (max-width: 900px) {
-  .home-navbar {
+  .home-navbar .home-nav-options .d-none-moblie{
     display: none;
   }
 }

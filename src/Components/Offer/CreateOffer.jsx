@@ -5,6 +5,7 @@ import { AuthContext } from '../../Context/AuthContext';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import OfferNavbar from './OfferNavbar';
 import { useNavigate } from 'react-router-dom';
+import HomeNavbar from "../Home/HomeNavbar";
 
 const CreateOffer = () => {
   const { currentUser } = useContext(AuthContext)
@@ -143,8 +144,8 @@ const CreateOffer = () => {
  
   return (
     <>
-    <OfferNavbar />
-      <div className='create-offer'>
+    <HomeNavbar />
+      <div className='create-offer mt-5'>
       <h1>Create Offer</h1>
 
       <div className="date-category">
