@@ -157,7 +157,7 @@ const UserDetails = () => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} md={4}>
+            {/* <Grid item xs={12} md={4}>
               <Controller
                 name="middleName"
                 control={control}
@@ -170,7 +170,7 @@ const UserDetails = () => {
                   />
                 )}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} md={4}>
               <Controller
                 name="lastName"
@@ -187,7 +187,7 @@ const UserDetails = () => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} md={4}>
+            {/* <Grid item xs={12} md={4}>
               <Controller
                 name="email"
                 control={control}
@@ -203,7 +203,7 @@ const UserDetails = () => {
                   />
                 )}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} md={4}>
               <Controller
                 name="dob"
