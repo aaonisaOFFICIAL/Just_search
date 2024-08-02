@@ -18,7 +18,7 @@ const MobileFooter = () => {
 
     const navigateHandler = async(destination) => {
         if(currentUser){
-            if(destination==="business-listening"){
+            if(destination==="/business-listening"){
                 
                 const phoneNumber  = currentUser.phoneNumber;
             const res = phoneNumber.replace("+91",'');

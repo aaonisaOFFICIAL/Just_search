@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../Config";
 import { useNavigate } from "react-router-dom";
 import HomeNavbar from "../Home/HomeNavbar";
+import MobileFooter from "../MobileFooter/MobileFooter";
 
 const Offer = () => {
   const [states, setState] = useState([]);
@@ -139,7 +140,7 @@ const Offer = () => {
       <div className="offer-navbar-container-">
         <div className="offer-navbar mt-5">
           <h4>
-          Create Offer
+          Create Offer 
           </h4>
           <button onClick={navigateToCreate}>Create Offer</button>
         </div>
@@ -235,6 +236,9 @@ const Offer = () => {
         ) : (
           <div className="text-center">No Offer available</div>
         )}
+      </div>
+      <div className="home-page-mobilenav">
+        <MobileFooter />
       </div>
     </>
   );

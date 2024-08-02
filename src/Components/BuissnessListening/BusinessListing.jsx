@@ -5,7 +5,7 @@ import { db, storage } from "../../Config";
 import { MdCloudUpload } from "react-icons/md";
 import MultipleSelectCheckmarks from "./Checkbox";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import stateDistrictData from '../../../state_district.json';
+import stateDistrictData from "../../../state_district.json";
 import Swal from "sweetalert2";
 const BuissnessForm2 = () => {
   //for days
@@ -48,15 +48,15 @@ const BuissnessForm2 = () => {
     name: "",
     number: "",
     ownernumber: "",
-    refercode: '',
+    refercode: "",
     email: "",
     opens: "",
-    specialist: '',
+    specialist: "",
     closes: "",
     // longitude: "",
     // latitude: "",
-    enquirynumber:"",
-    enquiryemail:"",
+    enquirynumber: "",
+    enquiryemail: "",
     locationLink: "",
   });
 
@@ -120,7 +120,6 @@ const BuissnessForm2 = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-
     try {
       const imageUrls = [];
       // Upload images
@@ -163,8 +162,8 @@ const BuissnessForm2 = () => {
         daysopen: days,
         opensat: formData.opens,
         closesat: formData.closes,
-        openam:opentime,
-        closeam:closetime,
+        openam: opentime,
+        closeam: closetime,
         categorie: selectedCategorie,
         subcategorie: selectedSubCategorie,
         images: imageUrls, // Store image URLs as an array
@@ -173,7 +172,7 @@ const BuissnessForm2 = () => {
         // longitude: formData.longitude,
         // latitude: formData.latitude,
         locationLink: formData?.locationLink,
-        date : new Date()
+        date: new Date(),
       };
       //add data of shop
       await addDoc(listing, userData);
@@ -196,7 +195,7 @@ const BuissnessForm2 = () => {
         position: "top-end", // Position of the toast
         showCloseButton: true, // Show close button
       });
-     window.location.reload();
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -300,14 +299,13 @@ const BuissnessForm2 = () => {
   //   fetchDistricts();
   // }, [selectedState]);
   useEffect(() => {
-
-setState(Object.keys(stateDistrictData));
-}, []);
-const fetchDistricts = (state) => {
-// Fetch districts based on selected state from JSON data
-const districts = stateDistrictData[state];
-setDistrict(districts);
-}
+    setState(Object.keys(stateDistrictData));
+  }, []);
+  const fetchDistricts = (state) => {
+    // Fetch districts based on selected state from JSON data
+    const districts = stateDistrictData[state];
+    setDistrict(districts);
+  };
   useEffect(() => {
     getCategories();
     // getLocationHandler();
@@ -319,37 +317,34 @@ setDistrict(districts);
     }
   }, [selectedCategorie]);
 
-  console.log(formData.opens, formData.closes, opentime, closetime)
+  console.log(formData.opens, formData.closes, opentime, closetime);
 
   return (
-    <div className="listening-form">
+    <div className="listening-form" >
       {currentStep === 1 && (
         <div className="form-seven">
           <h2>
-          Employee Code<span style={{ color: "red" }}>*</span>
+            Employee Code<span style={{ color: "red" }}>*</span>
           </h2>
           <div>
             <input
-            maxLength={40}
+              maxLength={40}
               type="text"
               placeholder="Employee Code"
               className="specialist-input"
               name="refercode"
-                  value={formData.refercode}
-                  onChange={handleChange}
+              value={formData.refercode}
+              onChange={handleChange}
             />
           </div>
 
-
           <div className="control-btns">
-            <button disabled={
-                formData.refercode === ""
-              } onClick={nextStep}>Next</button>
+            <button disabled={formData.refercode === ""} onClick={nextStep}>
+              Next
+            </button>
           </div>
         </div>
       )}
-
-
 
       {currentStep === 2 && (
         <div className="form-one">
@@ -365,51 +360,54 @@ setDistrict(districts);
               onChange={handleChange}
             />
 
-          <div className="uploader">
-            {[...Array(6)].map((_, index) => (
-              <form key={index}>
-                <label htmlFor={`fileInput${index}`}>
-                  <input
-                    type="file"
-                    id={`fileInput${index}`}
-                    accept="image/*"
-                    className="input-field"
-                    hidden
-                    onChange={(event) => handleFileChange(event, index)}
-                  />
-
-                  {images[index] ? (
-                    <img
-                      src={images[index].objectURL}
-                      width={50}
-                      height={50}
-                      alt={images[index].file.name}
+            <div className="uploader">
+              {[...Array(6)].map((_, index) => (
+                <form key={index}>
+                  <label htmlFor={`fileInput${index}`}>
+                    <input
+                      type="file"
+                      id={`fileInput${index}`}
+                      accept="image/*"
+                      className="input-field"
+                      hidden
+                      onChange={(event) => handleFileChange(event, index)}
                     />
-                  ) : (
-                    <>
-                      <MdCloudUpload color="#1475cf" size={30} />
-                      <p>{index < 1 ? 'Banner Image' : 'Browse Files to upload'}</p>
-                    </>
-                  )}
-                </label>
-              </form>
-            ))}
-          </div>
 
+                    {images[index] ? (
+                      <img
+                        src={images[index].objectURL}
+                        width={50}
+                        height={50}
+                        alt={images[index].file.name}
+                      />
+                    ) : (
+                      <>
+                        <MdCloudUpload color="#1475cf" size={30} />
+                        <p>
+                          {index < 1
+                            ? "Banner Image"
+                            : "Browse Files to upload"}
+                        </p>
+                      </>
+                    )}
+                  </label>
+                </form>
+              ))}
+            </div>
 
-          <select onChange={(e) => setSelectedCategorie(e.target.value)}>
-            <option value="Select">Select Categorie</option>
-            {categorie.map((value) => (
-              <option value={value.categorie}>{value.categorie}</option>
-            ))}
-          </select>
+            <select onChange={(e) => setSelectedCategorie(e.target.value)}>
+              <option value="Select">Select Categorie</option>
+              {categorie.map((value) => (
+                <option value={value.categorie}>{value.categorie}</option>
+              ))}
+            </select>
 
             <MultipleSelectCheckmarks
               categorie={selectedCategorie}
               onSubCategoryChange={handleSubCategoryChange}
             />
 
-        <input
+            <input
               type="text"
               placeholder="Contact Person Name*"
               name="name"
@@ -446,7 +444,7 @@ setDistrict(districts);
               onClick={nextStep}
               disabled={
                 formData.businessName === "" ||
-                formData.name === "" || 
+                formData.name === "" ||
                 formData.number === ""
               }
             >
@@ -464,8 +462,7 @@ setDistrict(districts);
           <h2>Add Address Details</h2>
 
           <div>
-            
-          <input
+            <input
               type="text"
               name="blockBuilding"
               placeholder="Block Number / Building Name*"
@@ -516,18 +513,22 @@ setDistrict(districts);
               value={formData.longitude}
               onChange={handleChange}
             /> */}
- <input
-        type="text"
-          name="locationLink"
-        value={formData.locationLink}
-        onChange={handleChange}
-        placeholder="Paste location link here"
-      />
-            
+            <input
+              type="text"
+              name="locationLink"
+              value={formData.locationLink}
+              onChange={handleChange}
+              placeholder="Paste location link here"
+            />
+
             <div className="city">
-              <select value={selectedState}  onChange={(e) => {setSelectedState(e.target.value)
-                fetchDistricts(e.target.value)}
-              }>
+              <select
+                value={selectedState}
+                onChange={(e) => {
+                  setSelectedState(e.target.value);
+                  fetchDistricts(e.target.value);
+                }}
+              >
                 <option value="">Select State</option>
                 {state.map((data, index) => (
                   <option value={data} key={index}>
@@ -536,8 +537,10 @@ setDistrict(districts);
                 ))}
               </select>
 
-
-              <select value={selectedDistrict}  onChange={(e) => setSelectedDistrict(e.target.value)}>
+              <select
+                value={selectedDistrict}
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+              >
                 <option value="">Select City</option>
                 {district.map((data, index) => (
                   <option value={data} key={index}>
@@ -551,7 +554,7 @@ setDistrict(districts);
             <button
               onClick={nextStep}
               disabled={
-              formData.pincode === "" ||
+                formData.pincode === "" ||
                 formData.blockBuilding === "" ||
                 formData.streetColony === "" ||
                 formData.area === "" ||
@@ -559,7 +562,7 @@ setDistrict(districts);
                 formData.city === "" ||
                 formData.state === "" ||
                 formData.longitude == "" ||
-                formData.latitude   == "" 
+                formData.latitude == ""
               }
             >
               Next
@@ -648,7 +651,6 @@ setDistrict(districts);
                   onChange={(e) => setClosetime(e.target.value)}
                   value={closetime}
                 >
-                  
                   <option value="AM">AM</option>
                   <option value="PM">PM</option>
                 </select>
@@ -690,13 +692,13 @@ setDistrict(districts);
           </div>
           <div>
             <input
-            maxLength={40}
+              maxLength={40}
               type="text"
               placeholder="Specialist in"
               className="specialist-input"
               name="specialist"
-                  value={formData.specialist}
-                  onChange={handleChange}
+              value={formData.specialist}
+              onChange={handleChange}
             />
           </div>
 
@@ -740,23 +742,39 @@ setDistrict(districts);
         </div>
       )}
 
-
       {currentStep === 6 && (
         <div className="form-six">
           <div className="progress-bar">
             <div></div>
           </div>
 
-            <div className="enquiry">
-              <h2>For any enquiry</h2>
-              <input type="text" placeholder="Whatsapp Number" style={{padding:"5px 15px", marginRight:"5px"}} onChange={handleChange} name="enquirynumber" value={formData.enquirynumber}/>
-              <input type="email" placeholder="Email" style={{padding:"5px 15px"}} onChange={handleChange} name="enquiryemail" value={formData.enquiryemail}/>
-            </div>
+          <div className="enquiry">
+            <h2>For any enquiry</h2>
+            <input
+              type="text"
+              placeholder="Whatsapp Number"
+              style={{ padding: "5px 15px", marginRight: "5px" }}
+              onChange={handleChange}
+              name="enquirynumber"
+              value={formData.enquirynumber}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              style={{ padding: "5px 15px" }}
+              onChange={handleChange}
+              name="enquiryemail"
+              value={formData.enquiryemail}
+            />
+          </div>
           <div className="form-six-buttons">
             <button onClick={prevStep}>Previous</button>
-            <button onClick={handleSubmit}  disabled={
-                formData.enquirynumber === ""
-              }>Save and Continue</button>
+            <button
+              onClick={handleSubmit}
+              disabled={formData.enquirynumber === ""}
+            >
+              Save and Continue
+            </button>
           </div>
         </div>
       )}
