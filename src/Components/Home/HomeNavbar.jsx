@@ -138,6 +138,30 @@ const handleLogout = () => {
     setNotifications(notificationsList);
   };
 
+  // const sendOtp = async () => {
+  //   if (!mobile) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Error",
+  //       text: "Mobile number is required",
+  //     });
+  //     return;
+  //   }
+  //   const mobileNumber = "+91" + mobile;
+  //   try {
+  //     const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
+  //       size: "invisible",
+  //     });
+  //     const confirmation = await signInWithPhoneNumber(
+  //       auth,
+  //       mobileNumber,
+  //       recaptcha
+  //     );
+  //     setUser(confirmation);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
   const sendOtp = async () => {
     if (!mobile) {
       Swal.fire({
@@ -149,29 +173,99 @@ const handleLogout = () => {
     }
     const mobileNumber = "+91" + mobile;
     try {
-      const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
-        size: "invisible",
-      });
+      if (!window.recaptchaVerifier) {
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
+          size: "invisible",
+        });
+      }
       const confirmation = await signInWithPhoneNumber(
         auth,
         mobileNumber,
-        recaptcha
+        window.recaptchaVerifier
       );
       setUser(confirmation);
     } catch (err) {
       console.error(err);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: err.message,
+      });
     }
   };
+  
+  // const verifyOtp = async () => {
+  //   debugger;
+  //   // if (!otp) {
+  //   //   Swal.fire({
+  //   //     icon: "error",
+  //   //     title: "Error",
+  //   //     text: "OTP is required",
+  //   //   });
+  //   //   return;
+  //   // }
+  //   if (!username) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Error",
+  //       text: "Username is required",
+  //     });
+  //     return;
+  //   }
+  //   try {
+  //     const result = await user.confirm(otp);
+  //     const uid = result.user.uid;
+
+  //     const userDocRef = doc(db, "users", uid);
+  //     const userSnapshot = await getDoc(userDocRef);
+
+  //     let userData = {
+  //       phoneNumber: mobile,
+  //       username: username,
+  //       uid: uid,
+  //       email: email ? email : "",
+  //       paid: false,
+  //       TransactionID: "",
+  //       createdAt: serverTimestamp(), // Set default creation timestamp
+  //     };
+
+  //     if (userSnapshot.exists()) {
+  //       // If document exists, don't update createdAt
+  //       const existingData = userSnapshot.data();
+  //       userData = {
+  //         ...existingData,
+  //         phoneNumber: mobile,
+  //         username: username,
+  //         email: email ? email : "",
+  //       };
+  //     } else {
+  //       // If document doesn't exist, set createdAt to current timestamp
+  //       userData.createdAt = serverTimestamp();
+  //     }
+
+  //     await setDoc(userDocRef, userData, { merge: true });
+  //     setOtp('')
+     
+  //     setOpenModal(false);
+  //   } catch (err) {
+  //     console.error(err);
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Error",
+  //       text: "Wrong OTP",
+  //     });
+  //   }
+  // };
 
   const verifyOtp = async () => {
-    // if (!otp) {
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: "Error",
-    //     text: "OTP is required",
-    //   });
-    //   return;
-    // }
+    if (!otp) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "OTP is required",
+      });
+      return;
+    }
     if (!username) {
       Swal.fire({
         icon: "error",
@@ -180,23 +274,29 @@ const handleLogout = () => {
       });
       return;
     }
+  
+    let email = ""; // Ensure email is defined
+    if (currentUser && currentUser.email) {
+      email = currentUser.email;
+    }
+  
     try {
       const result = await user.confirm(otp);
       const uid = result.user.uid;
-
+  
       const userDocRef = doc(db, "users", uid);
       const userSnapshot = await getDoc(userDocRef);
-
+  
       let userData = {
         phoneNumber: mobile,
         username: username,
         uid: uid,
-        email: email ? email : "",
+        email: email ? email  : " ",
         paid: false,
         TransactionID: "",
         createdAt: serverTimestamp(), // Set default creation timestamp
       };
-
+  
       if (userSnapshot.exists()) {
         // If document exists, don't update createdAt
         const existingData = userSnapshot.data();
@@ -204,19 +304,18 @@ const handleLogout = () => {
           ...existingData,
           phoneNumber: mobile,
           username: username,
-          email: email ? email : "",
+          email: email,
         };
       } else {
         // If document doesn't exist, set createdAt to current timestamp
         userData.createdAt = serverTimestamp();
       }
-
+  
       await setDoc(userDocRef, userData, { merge: true });
-      setOtp('')
-     
+      setOtp("");
       setOpenModal(false);
     } catch (err) {
-      console.error(err);
+      console.error("Error during OTP verification:", err);
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -224,6 +323,7 @@ const handleLogout = () => {
       });
     }
   };
+  
 
   const navigate = useNavigate();
 
