@@ -17,7 +17,7 @@ const CategoriesimgAds = () => {
   useEffect(() => {
     const updateSlidePercentage = () => {
       if (window.innerWidth <= 766) {
-        setCenterSlidePercentage(100); // Show 1 image per view on mobile
+        setCenterSlidePercentage(50); // Show 1 image per view on mobile
       } else {
         setCenterSlidePercentage(25); // Show 4 images per view on larger screens
       }
@@ -48,7 +48,7 @@ const CategoriesimgAds = () => {
               <img className='Carousel_img_one'
                 src={src}
                 alt={`Image ${index + 1}`}
-                style={{ height: "300px" }}
+               
               />
             </div>
           ))}
