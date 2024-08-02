@@ -69,7 +69,7 @@ const BuissnessForm = () => {
     enquiryemail: "",
     locationLink: "",
   });
-
+ 
   //for next and prev step
   const nextStep = () => {
     setCurrentStep((prev) => prev + 1);
@@ -133,7 +133,7 @@ const BuissnessForm = () => {
 
   const handleSubmit = async () => {
 
-debugger;
+
  
 
 
@@ -256,8 +256,8 @@ debugger;
             closes: businessData.closesat,
             opentime: businessData.openam,
             closetime: businessData.closeam,
-            // selectedCategorie: businessData.categorie,
-            // selectedSubCategorie: '',
+            selectedCategorie: businessData.categorie,
+            selectedSubCategorie: '',
             specialist: businessData.specialist,
             homeDelivery: businessData.homedelivery,
             userLocation: {
@@ -420,9 +420,9 @@ const handleFormSubmit = async () => {
       console.error(err);
     }
   };
-  console.log(selectedCategorie,"-------------------------------------------------------------",categorie,"----3232343243243243242432----->")
+
   const getSubCategories = async () => {
-debugger
+
     try {
       const subcategoriesCollection = collection(db, "categories");
       const q = query(
@@ -522,6 +522,8 @@ debugger
   //     getSubCategories();
   //   }
   // }, [selectedCategorie]);
+
+  console.log(selectedCategorie,'----selectedCategorie-->')
   useEffect(() => {
     
     if (firstEffectComplete && formData.selectedCategorie || selectedCategorie ) {
@@ -529,7 +531,7 @@ debugger
     }
   }, [selectedCategorie, firstEffectComplete]);
 
-  console.log(formData.opens, formData.closes, opentime, closetime);
+  console.log(subcategorie[0]?.subCategorie ,"\[]w\][d]e'd]e");
 
   return (
     <div className="listening-form">
@@ -577,7 +579,7 @@ debugger
                   style={{ width: "100%", height: "50px" }}
                   onChange={(e) => setSelectedCategorie(e.target.value)}
                   value={formData?.selectedCategorie}
-                  // disabled={isUpdating}
+                  disabled={isUpdating}
                 >
                   <option value="Select">Select Categorie</option>
                   {categorie.map((value, index) => (
@@ -588,7 +590,7 @@ debugger
               <Grid item xs={12} sm={6} md={6}>
                 <MultipleSelectCheckmarks
                   style={{ width: "100%" }}
-                  categorie={selectedCategorie}
+                  categorie={selectedCategorie || formData.selectedCategorie}
                   onSubCategoryChange={handleSubCategoryChange}
      
                 />
