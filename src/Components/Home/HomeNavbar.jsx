@@ -435,7 +435,7 @@ const handleClick = (item) => {
           </a>
 
           <a className="icon-bg" onClick={toggleDrawer(true)}>
-            <IoMdPerson className="home-nav-notification" />
+          <img  src="https://www.w3schools.com/howto/img_avatar.png" style={{width:"25px", borderRadius:"20px"}} alt="Avatar" />
           </a>
           <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
             {DrawerList}

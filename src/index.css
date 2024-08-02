@@ -255,46 +255,8 @@
   background-color: #ffdfd5;
 }
 
-@media (max-width: 900px) {
-  .Carousel_img_box {
-    width: 100%;
-    height: 300px;
-  }
-
-
-}
-
-@media (max-width: 700px) {
-  .Carousel_img_box {
-    width: 100%;
-    height: 200px;
-  }
-
-
-}
-
-@media (max-width: 768.98px) {
-  .offer_search_section_hp {
-    padding: 15px;
-    border-radius: 8px;
-    background-color: #ffdfd5;
-  }
-
-  .search-offer.offer_search_section_hp {
-    flex-direction: column;
-  }
-
-  .search-offer.offer_search_section_hp select {
-    width: 100%;
-    border-color: #808080;
-  }
-}
-
-@media (max-width: 700px) {
-  .home-modal {
-    width: 90%;
-
-  }
+.Carousel_img_one {
+  height: 300px;
 }
 
 
@@ -408,6 +370,7 @@
 .Start-Review .star:hover~.star {
   color: orange;
 }
+
 .star.filled,
 .star:hover,
 .star:hover~.star {
@@ -457,7 +420,7 @@
 
 .user-review {
   margin: 30px 0;
- padding-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 .review-header {
@@ -690,7 +653,7 @@
 
 .category-info {
   padding: 10px;
-  background-color: #ff7f00;
+  background-color: #ff7f00a6;
 }
 
 .category-info h5 {
@@ -704,7 +667,7 @@
   padding: 5px 20px;
   border: none;
   background-color: white;
-  color: #ff7f00;
+  color: #000;
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
@@ -717,29 +680,122 @@
 
 .card {
   margin-bottom: 20px;
-}
-.card img {
   border-radius: 8px;
+}
+
+.card img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   height: 200px;
   object-fit: cover;
 }
+
 .card-body {
   padding: 15px;
 }
+
 .category-btn {
   background-color: #e0e0e0;
   color: black;
   font-size: 0.8em;
   border: none;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 5px 10px;
   margin: 5px;
   cursor: default;
 }
+
 .location {
   font-size: 0.9em;
   color: gray;
 }
+
 .location i {
   margin-right: 5px;
+}
+
+.Popular_Categories .justify-content-between .col-lg-2 {
+  flex: 1 0 auto
+}
+
+/* .Carousel_img_translate3d .carousel .slider-wrapper .slider {
+  transform: translate3d(0%, 0px, 0px) !important;
+} */
+
+
+
+@media (max-width: 900px) {
+  .Carousel_img_box {
+    width: 100%;
+    height: 300px;
+  }
+
+
+}
+
+@media (max-width: 700px) {
+  .Carousel_img_box {
+    width: 100%;
+    height: 200px;
+  }
+
+
+}
+
+@media (max-width: 768.98px) {
+  .offer_search_section_hp {
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #ffdfd5;
+  }
+
+  .search-offer.offer_search_section_hp {
+    flex-direction: column;
+  }
+
+  .search-offer.offer_search_section_hp select {
+    width: 100%;
+    border-color: #808080;
+  }
+
+  .notification-panel {
+    width: 280px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: -10px;
+    z-index: 99990;
+  }
+
+  .notification-content p {
+    margin: 0;
+    font-size: 12px;
+  }
+
+  .Carousel_img_one {
+    height: 200px;
+  }
+}
+
+@media (max-width: 700px) {
+  .home-modal {
+    width: 90%;
+
+  }
+}
+
+@media (max-width: 500px) {
+  .Carousel_img_one {
+    height: 150px;
+    object-fit: fill;
+  }
+
+  .card img {
+    height: 150px;
+    object-fit: fill;
+  }
+  .moblie-bottom{
+    margin-bottom: 50px;
+  }
 }
