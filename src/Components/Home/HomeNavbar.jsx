@@ -65,6 +65,7 @@ const handleLogout = () => {
     .then(() => {
       setOtp('');
       setUsername('');
+      setMobile('')
       setOpenModal(false);
       setOpen(false);
       navigate('/');
@@ -119,6 +120,9 @@ const handleLogout = () => {
   };
 
   const closeLoginModal = () => {
+    setOtp("");
+    setUsername('');
+    setMobile('')
     setOpenModal(false);
   };
 
@@ -258,7 +262,9 @@ const handleLogout = () => {
   // };
 
   const verifyOtp = async () => {
+    console.log(otp)
     if (!otp) {
+      
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -281,7 +287,7 @@ const handleLogout = () => {
     }
   
     try {
-      const result = await user.confirm(otp);
+      const result = await user?.confirm(otp);
       const uid = result.user.uid;
   
       const userDocRef = doc(db, "users", uid);
@@ -313,6 +319,8 @@ const handleLogout = () => {
   
       await setDoc(userDocRef, userData, { merge: true });
       setOtp("");
+      setMobile('')
+      setUsername('');
       setOpenModal(false);
     } catch (err) {
       console.error("Error during OTP verification:", err);
