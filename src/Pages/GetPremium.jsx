@@ -210,7 +210,7 @@ function GetPremium() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-debugger
+
     // Add created_at field with current timestamp
     const dataWithTimestamp = {
       ...formData,

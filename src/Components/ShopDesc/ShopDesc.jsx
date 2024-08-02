@@ -116,7 +116,7 @@ const ShopDesc = () => {
   }, [favDocId]);
 
   const openGoogleMap = useCallback(() => {
-    debugger;
+
     if (!shopDetails?.latitude || !shopDetails?.longitude) return;
     const url = `https://www.google.com/maps?q=${+shopDetails.latitude},${+shopDetails.longitude}`;
     window.open(url, "_blank");

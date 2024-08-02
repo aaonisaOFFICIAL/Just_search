@@ -56,6 +56,8 @@ console.log(currentUser)
 const handleLogout = () => {
   signOut(auth)
     .then(() => {
+      setOtp('');
+      setUsername('');
       setOpenModal(false);
       setOpen(false);
       navigate('/');
