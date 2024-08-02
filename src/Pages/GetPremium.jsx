@@ -391,7 +391,7 @@ debugger
                 <span className="input-group-text" id="basic-addon2">
                   <QrCodeScannerIcon />
                 </span>
-              </div>
+              </div>5
             </div>
             <div className="col-xl-4 col-lg-4 col-md-6 col-12 mb-3">
               <div className="form-group">
