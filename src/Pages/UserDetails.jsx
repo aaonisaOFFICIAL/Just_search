@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useForm, Controller, useFormContext } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from "../Config";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -90,11 +90,25 @@ const UserDetails = () => {
           return;
         }
       }
+  
       const user = currentUser;
       const userid = user.uid;
-      // Save the user data along with the image URL to Firestore
-      const userCollectionRef = collection(db, 'userDetail');
-      await setDoc(doc(userCollectionRef , user.uid), { ...data, imageUrl: uploadedImageUrl ,userid});
+      const userDocRef = doc(db, 'userDetail', user.uid);
+      const userDoc = await getDoc(userDocRef);
+  
+      // Determine if it's an update or a new document
+      const isUpdate = userDoc.exists();
+      const createdAt = isUpdate ? userDoc.data().createdAt : Timestamp.now();
+      const updatedAt = Timestamp.now(); // Get the current timestamp
+  
+      // Save the user data along with the image URL and timestamps to Firestore
+      await setDoc(userDocRef, { 
+        ...data, 
+        imageUrl: uploadedImageUrl, 
+        userid, 
+        createdAt, // Keep the original created timestamp
+        updatedAt  // Update the timestamp for each modification
+      });
       console.log("User details saved to Firestore.");
   
       Swal.fire({
@@ -102,7 +116,7 @@ const UserDetails = () => {
         title: 'Success',
         text: 'User details saved successfully!',
       }).then(() => {
-       reset()
+        reset();
       });
   
     } catch (error) {

@@ -86,7 +86,8 @@ const handleClick = (item) => {
   } else if (item.action) {
     item.action();
   }
-};
+};  
+
   const loginModal = () => {
     setOpenModal(!openModal);
   };
@@ -422,7 +423,7 @@ const handleClick = (item) => {
           </a>
           <a onClick={navigateToOffer}>Offer</a>
           {/* <p onClick={navigateToPayment}>Pricing</p> */}
-          <a onClick={navigateToListing}>Listing</a>
+          <a onClick={navigateToListing}>Business</a>
        {  !currentUser && <button onClick={loginModal}>
             {/* {currentUser ? currentUser.phoneNumber : "Login / Sign Up"} */}
             {currentUser ? " " : "Login / Sign Up"}

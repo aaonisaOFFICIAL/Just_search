@@ -190,7 +190,7 @@ const BuissnessForm2 = () => {
         icon: "success",
         title: "Posted Successfully!",
         showConfirmButton: false,
-        timer: 20000, // Automatically close after 2 seconds
+        timer: 2000, // Automatically close after 2 seconds
         timerProgressBar: true, // Show progress bar
         toast: true, // Display as toast (notification)
         position: "top-end", // Position of the toast

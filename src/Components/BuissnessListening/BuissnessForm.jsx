@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db, storage } from "../../Config";
@@ -8,6 +8,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import stateDistrictData from "../../../state_district.json";
 import { Grid } from "@mui/material";
+import Swal from "sweetalert2";
 const BuissnessForm = () => {
   //for days
   const [days, setDays] = useState([]);
@@ -41,8 +42,12 @@ const BuissnessForm = () => {
   console.log(selectedState, "selectedState");
   console.log(district, "district");
   const [selectedImages, setSelectedImages] = useState(Array(20).fill(null));
-
+  const [isUpdating, setIsUpdating] = useState(false);
   // Introduce formData state to manage form fields
+  const [existingImageUrls, setExistingImageUrls] = useState([]);
+  const [existingProductImages, setExistingProductImages] = useState([]);
+  const [listingId, setListingId] = useState(null);
+  const [firstEffectComplete, setFirstEffectComplete] = useState(false);
   const [formData, setFormData] = useState({
     businessName: "",
     pincode: "",
@@ -124,8 +129,14 @@ const BuissnessForm = () => {
 
   const navigate = useNavigate();
 
+
+
   const handleSubmit = async () => {
-    debugger;
+
+debugger;
+ 
+
+
     try {
       const imageUrls = [];
       // Upload images
@@ -153,44 +164,57 @@ const BuissnessForm = () => {
       // Shop listing data
       const listing = collection(db, "buissness-listing");
       const userData = {
-        businessName: formData?.businessName,
+        uid : currentUser.uid ? currentUser.uid : "",
+        businessName: formData?.businessName ? formData?.businessName : "",
         pincode: formData?.pincode,
         building: formData?.blockBuilding,
         street: formData?.streetColony,
         area: formData?.area,
         landmark: formData?.landmark,
-        district: selectedDistrict,
-        state: selectedState,
+        district: selectedDistrict ? selectedDistrict : " ",
+        state: selectedState ? selectedState : '',
+        enquirynumber:formData.enquirynumber,
         username: formData?.name,
-        mobilenumber: phoneNumber,
-        email: formData.email,
-        daysopen: days,
-        opensat: formData.opens,
-        refercode: formData.refercode,
-        closesat: formData.closes,
-        openam: opentime,
-        closeam: closetime,
-        categorie: selectedCategorie,
-        subcategorie: selectedSubCategorie,
-        images: imageUrls, // Store image URLs as an array
-        productimages: productImages,
-        specialist: formData?.specialist,
-        homedelivery: homeDelivery,
+        mobilenumber: phoneNumber ? phoneNumber : " ",
+        ownernumber:formData?.ownernumber,
+        email: formData?.email,
+        daysopen: days ? days : " ",
+        opensat: formData?.opens,
+        refercode: formData?.refercode ? formData.refercode : '',
+        closesat: formData?.closes,
+        openam: opentime ? opentime : " ",
+        closeam: closetime ? closetime : ' ',
+        categorie: selectedCategorie ? selectedCategorie : " ",
+        subcategorie: selectedSubCategorie ? selectedSubCategorie : "",
+        images: imageUrls ? imageUrls : ' ', // Store image URLs as an array
+        productimages: productImages ?  productImages : "",
+        specialist: formData?.specialist ? formData?.specialist : "",
+        homedelivery: homeDelivery ? homeDelivery : " ",
         longitude: userLocation?.longitude ? userLocation?.longitude  : "" ,
         latitude: userLocation?.latitude ? userLocation?.latitude : "",
-        locationLink: formData?.locationLink,
+        locationLink: formData?.locationLink ? formData?.locationLink : '',
         date: new Date(),
+        created_at : Timestamp.now()
       };
       //add data of shop
       await addDoc(listing, userData);
-      console.log("shop-listed");
-
+      Swal.fire({
+        icon: "success",
+        title: "Shop Listed!",
+        showConfirmButton: false,
+        timer: 2000, // Automatically close after 2 seconds
+        timerProgressBar: true, // Show progress bar
+        toast: true, // Display as toast (notification)
+        position: "top-end", // Position of the toast
+        showCloseButton: true, // Show close button
+      });
+      navigate("/");
       //add shop to maps
       const addOnMap = collection(db, "shoplocation");
       await addDoc(addOnMap, {
         shopname: formData?.businessName ? formData?.businessName :"" ,
         longitude: userLocation?.longitude ? userLocation?.longitude :"",
-        latitude: userLocation?.latitude ? serLocation?.latitude : "",
+        latitude: userLocation?.latitude ? userLocation?.latitude : "",
       });
       console.log("shop-location added");
       navigate("/");
@@ -198,6 +222,175 @@ const BuissnessForm = () => {
       console.error(err);
     }
   };
+
+
+  console.log(formData,"fetchData();fetchData();fetchData();fetchData();")
+
+ 
+  useEffect(() => {
+    
+    if (currentUser && currentUser.uid) {
+    const fetchData = async () => {
+      
+  
+        const businessData = await fetchBusinessListing(currentUser?.uid);
+        console.log(businessData,'businessDatabusinessDatabusinessDatabusinessData')
+        if (businessData) {
+          setFormData({
+            businessName: businessData.businessName,
+            pincode: businessData.pincode,
+            blockBuilding: businessData.building,
+            streetColony: businessData.street,
+            area: businessData.area,
+            landmark: businessData.landmark,
+            district: businessData.district,
+            state: businessData.state,
+            enquirynumber:businessData.enquirynumber,
+            ownernumber:businessData?.ownernumber,
+            name: businessData.username,
+            phoneNumber: businessData?.phoneNumber,
+            email: businessData?.email,
+            days: businessData.daysopen,
+            opens: businessData.opensat,
+            refercode: businessData.refercode,
+            closes: businessData.closesat,
+            opentime: businessData.openam,
+            closetime: businessData.closeam,
+            // selectedCategorie: businessData.categorie,
+            // selectedSubCategorie: '',
+            specialist: businessData.specialist,
+            homeDelivery: businessData.homedelivery,
+            userLocation: {
+              longitude: businessData.longitude,
+              latitude: businessData.latitude,
+            },
+            locationLink: businessData.locationLink,
+            
+          });
+        
+          setIsUpdating(true);
+          setExistingImageUrls(businessData.images);
+        setExistingProductImages(businessData.productimages);
+          setListingId(businessData.id);
+        } else {
+          setIsUpdating(false);
+        }
+        setFirstEffectComplete(true);
+      }
+      fetchData();
+    };
+    
+  }, [currentUser]);
+  
+  const fetchBusinessListing = async (uid) => {
+    
+    if (!uid){
+      Swal.fire({
+        icon: "error",
+        title: "uid not defined!",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        toast: true,
+        position: "top-end",
+        showCloseButton: true,
+      });
+    };
+    const listingRef = collection(db, 'buissness-listing');
+    const q = query(listingRef, where('uid', '==', uid));
+    const querySnapshot = await getDocs(q);
+    let businessData = null;
+    querySnapshot.forEach((doc) => {
+      businessData = { id: doc.id, ...doc.data() };
+    });
+    return businessData;
+  };
+
+
+const handleUpdate = async () => {
+
+  try {
+    const imageUrls = existingImageUrls;
+    // Upload new images
+    for (let i = 0; i < images.length; i++) {
+      const storageRef = ref(storage, `listing-image/${images[i].file.name}`);
+      await uploadBytes(storageRef, images[i].file);
+      const imageURL = await getDownloadURL(storageRef);
+      imageUrls.push(imageURL);
+    }
+
+    const productImages = existingProductImages;
+    for (let i = 0; i < selectedImages.length; i++) {
+      if (selectedImages[i]?.file) {
+        const storageRef = ref(
+          storage,
+          `product-image/${selectedImages[i].file.name}`
+        );
+        await uploadBytes(storageRef, selectedImages[i].file);
+        const imageUrl = await getDownloadURL(storageRef);
+        productImages.push(imageUrl);
+      }
+    }
+
+    // Shop listing data
+    const listingRef = doc(db, "buissness-listing", listingId);
+    const userData = {
+      pincode: formData.pincode,
+      building: formData.blockBuilding,
+      street: formData.streetColony,
+      area: formData.area,
+      landmark: formData.landmark,
+      district: selectedDistrict ? selectedDistrict : " ",
+      state: selectedState ? selectedState : '',
+      username: formData.name,
+      mobilenumber: phoneNumber ? phoneNumber : " ",
+      enquirynumber:formData?.enquirynumber,
+      ownernumber:formData?.ownernumber,
+      email: formData?.email,
+      daysopen: days ? days : " ",
+      opensat: formData.opens,
+      refercode: formData.refercode ? formData.refercode : '',
+      closesat: formData.closes,
+      openam: opentime ? opentime : " ",
+      closeam: closetime ? closetime : ' ',
+      subcategorie: selectedSubCategorie ? selectedSubCategorie : "",
+      images: imageUrls.length > 0 ? imageUrls : existingImageUrls,
+      productimages: productImages.length > 0 ? productImages : existingProductImages,
+      specialist: formData.specialist ? formData.specialist : "",
+      homedelivery: homeDelivery ? homeDelivery : " ",
+      longitude: userLocation?.longitude ? userLocation?.longitude  : "" ,
+      latitude: userLocation?.latitude ? userLocation?.latitude : "",
+      locationLink: formData.locationLink ? formData.locationLink : '',
+      updated_at : Timestamp.now()
+    };
+
+    // Update data of shop
+    await updateDoc(listingRef, userData);
+    Swal.fire({
+      icon: "success",
+      title: "Shop Updated!",
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      toast: true,
+      position: "top-end",
+      showCloseButton: true,
+    });
+    navigate("/");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const handleFormSubmit = async () => {
+  if (isUpdating) {
+    await handleUpdate();
+  } else {
+    await handleSubmit();
+  }
+};
+
+
 
   const handleToogle = (value) => {
     setHomeDelivery(value);
@@ -213,6 +406,7 @@ const BuissnessForm = () => {
     });
   };
   const getCategories = async () => {
+  
     try {
       const categorie = collection(db, "categories");
       const q = query(categorie);
@@ -226,13 +420,14 @@ const BuissnessForm = () => {
       console.error(err);
     }
   };
-
+  console.log(selectedCategorie,"-------------------------------------------------------------",categorie,"----3232343243243243242432----->")
   const getSubCategories = async () => {
+debugger
     try {
       const subcategoriesCollection = collection(db, "categories");
       const q = query(
         subcategoriesCollection,
-        where("categorie", "==", selectedCategorie)
+        where("categorie", "==", selectedCategorie || formData.selectedCategorie)
       );
       const querySnapshot = await getDocs(q);
       const subcategoriesData = querySnapshot.docs.map((doc) => {
@@ -267,10 +462,14 @@ const BuissnessForm = () => {
     }
   };
 
+  console.log(currentUser,"=========}}}")
+
   useEffect(() => {
-    const phoneNumber = currentUser.phoneNumber;
-    const res = phoneNumber?.replace("+91", "");
-    setPhoneNumber(res);
+    const phoneNumber = currentUser?.phoneNumber;
+    // const res = phoneNumber?.replace("+91", "");
+    const res = phoneNumber
+    setPhoneNumber(res); 
+    console.log(phoneNumber)
     setState(Object.keys(stateDistrictData));
   }, []);
   const fetchDistricts = (state) => {
@@ -278,7 +477,7 @@ const BuissnessForm = () => {
     const districts = stateDistrictData[state];
     setDistrict(districts);
   };
-  // useEffect(() => {
+
   //   const fetchDistricts = async () => {
   //     try {
 
@@ -317,17 +516,24 @@ const BuissnessForm = () => {
     getLocationHandler();
   }, []);
 
+  // useEffect(() => {
+  //   
+  //   if (selectedCategorie) {
+  //     getSubCategories();
+  //   }
+  // }, [selectedCategorie]);
   useEffect(() => {
-    if (selectedCategorie) {
+    
+    if (firstEffectComplete && formData.selectedCategorie || selectedCategorie ) {
       getSubCategories();
     }
-  }, [selectedCategorie]);
+  }, [selectedCategorie, firstEffectComplete]);
 
   console.log(formData.opens, formData.closes, opentime, closetime);
 
   return (
     <div className="listening-form">
-      {currentStep === 1 && (
+      {/* {currentStep === 1 && (
         <div className="form-seven">
           <h2>
             Refer Code<span style={{ color: "red" }}>*</span>
@@ -347,9 +553,9 @@ const BuissnessForm = () => {
             <button className="w-100" onClick={nextStep}>Next</button>
           </div>
         </div>
-      )}
+      )} */}
 
-      {currentStep === 2 && (
+      {currentStep === 1 && (
         <div className="form-one w-100" style={{ marginTop: "30px" }}>
           <div className="field">
             <h3>Enter Your Business Details</h3>
@@ -361,18 +567,21 @@ const BuissnessForm = () => {
                   type="text"
                   name="businessName"
                   placeholder="Business Name*"
-                  value={formData.businessName}
+                  value={formData?.businessName}
                   onChange={handleChange}
+                  disabled={isUpdating}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={6}>
                 <select
                   style={{ width: "100%", height: "50px" }}
                   onChange={(e) => setSelectedCategorie(e.target.value)}
+                  value={formData?.selectedCategorie}
+                  // disabled={isUpdating}
                 >
                   <option value="Select">Select Categorie</option>
-                  {categorie.map((value) => (
-                    <option value={value.categorie}>{value.categorie}</option>
+                  {categorie.map((value, index) => (
+    <option key={index} value={value.categorie}>{value.categorie}</option>
                   ))}
                 </select>
               </Grid>
@@ -381,6 +590,7 @@ const BuissnessForm = () => {
                   style={{ width: "100%" }}
                   categorie={selectedCategorie}
                   onSubCategoryChange={handleSubCategoryChange}
+     
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={6}>
@@ -401,7 +611,7 @@ const BuissnessForm = () => {
                   name="number"
                   style={{ width: "100%" }}
                   maxLength={10}
-                  value={formData.phoneNumber}
+                  value={phoneNumber}
                   onChange={handleChange}
                 />
               </Grid>
@@ -474,7 +684,7 @@ const BuissnessForm = () => {
           </div>
         </div>
       )}
-      {currentStep === 3 && (
+      {currentStep === 2 && (
         <div className="form-two">
           <div className="progress-bar">
             <div></div>
@@ -575,7 +785,7 @@ const BuissnessForm = () => {
         </div>
       )}
 
-      {currentStep === 4 && (
+      {currentStep === 3 && (
         <div className="form-three">
           <div className="progress-bar">
             <div></div>
@@ -601,20 +811,7 @@ const BuissnessForm = () => {
             </div>
 
             <div>
-              {/* <input
-                type="text"
-                placeholder="Opens At*"
-                name="opens"
-                value={formData.opens}
-                onChange={handleChange}
-              /> */}
-              {/* <input
-                type="text"
-                placeholder="Closes At*"
-                name="closes"
-                value={formData.closes}
-                onChange={handleChange}
-              /> */}
+   
               <div className="timing">
                 <select
                   name="opens"
@@ -673,7 +870,7 @@ const BuissnessForm = () => {
         </div>
       )}
 
-      {currentStep === 5 && (
+      {currentStep === 4 && (
         <div className="form-seven">
           <h2>
             More about buissness<span style={{ color: "red" }}>*</span>
@@ -747,7 +944,7 @@ const BuissnessForm = () => {
         </div>
       )}
 
-      {currentStep === 6 && (
+      {currentStep === 5 && (
         <div className="form-six">
           <div className="progress-bar">
             <div></div>
@@ -775,11 +972,14 @@ const BuissnessForm = () => {
           <div style={{width:"100%",flexDirection:"row", justifyContent:"space-between"}} className="form-six-buttons">
             <button onClick={prevStep}>Previous</button>
             <button
-              onClick={handleSubmit}
+              onClick={handleFormSubmit}
               disabled={formData.enquirynumber === ""}
             >
-              Save and Continue
+              
+              {isUpdating ? "Update Business" : "Submit Business"}
             </button>
+
+       
           </div>
         </div>
       )}
