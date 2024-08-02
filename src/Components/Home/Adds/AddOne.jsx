@@ -13,20 +13,21 @@ const images = [
 const AddOne = () => {
   return (
     <div>
-      <Box sx={{ width: "100%", margin: "auto",}}>
-        <Carousel autoPlay infiniteLoop>
-          {images.map((image, index) => (
-            <Box
-              key={index}
-              component="img"
-             
-            className="Carousel_img_box"
-              src={image}
-              alt={`Slide ${index + 1}`}
-            />
-          ))}
-        </Carousel>
-      </Box>
+      <div className="moblie-bottom">
+        <Box sx={{ width: "100%", margin: "auto" }}>
+          <Carousel autoPlay infiniteLoop>
+            {images.map((image, index) => (
+              <Box
+                key={index}
+                component="img"
+                className="Carousel_img_box"
+                src={image}
+                alt={`Slide ${index + 1}`}
+              />
+            ))}
+          </Carousel>
+        </Box>
+      </div>
     </div>
   );
 };

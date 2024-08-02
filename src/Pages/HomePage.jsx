@@ -25,7 +25,7 @@ const HomePage = () => {
       <PopularCategories />
       <CategoriesimgAds />
       <Newlylisted />
-      <AddOne />
+      <AddOne  />
       {/* <AddOne />
     <AddOne /> */}
       {/* <MapComponent /> */}
