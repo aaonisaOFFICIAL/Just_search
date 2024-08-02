@@ -67,7 +67,8 @@ const handleLogout = () => {
 
 const items = [
   { text: "User Details", icon: <PersonIcon />, route: "/UserDetails" },
-  { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/edit-business-profile" },
+  // { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/edit-business-profile" },
+  { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/business-listening" },
   { text: "Edit Hire/ Job Profile", icon: <StarIcon />, route: "/Edit-Hire" },
   { text: "Get Premium", icon: <StarIcon />, route: "/get-premium" },
   { text: "Help and Support", icon: <HelpIcon />, route: "/help-and-support" },
