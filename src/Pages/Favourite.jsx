@@ -16,7 +16,7 @@ const Favourite = () => {
   return (
     <>
     <HomeNavbar />
-    <HomeMobileNavbar />
+    {/* <HomeMobileNavbar /> */}
     <div className="favourite">
         <div className='active-tab'>
         <button onClick={() => handleTabClick(1)} className={activeTab === 1 ? "active" : ""}>Just Search Favs</button>

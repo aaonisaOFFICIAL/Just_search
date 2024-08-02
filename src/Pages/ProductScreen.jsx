@@ -53,7 +53,7 @@ const ProductScreen = () => {
           city={city}
           onCityChange={handleCityChange}
         />
-        <DealsMobileNavbar />
+        {/* <DealsMobileNavbar /> */}
         {/* <DealsCategorieNavbar state={selectedState} city={city} handleData={handleGetData} /> */}
       </div>
       {/* <div className='product-screen'>
@@ -75,9 +75,9 @@ const ProductScreen = () => {
           ))}
         </div>
       </div> */}
-      <div className='product-screen-footer'>
+      {/* <div className='product-screen-footer'>
         <DealsFooter />
-      </div>
+      </div> */}
     </div>
   );
 };

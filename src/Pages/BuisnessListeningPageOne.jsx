@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Grid, Container } from "@mui/material";
 import BuissnessSvg from "../Components/BuissnessListening/BuissnessSvg";
 import BuissnessForm from "../Components/BuissnessListening/BuissnessForm";
-import AuthNavbar from "../Components/Auth/AuthNavbar";
+import AuthNavbar from "../Components/Home/HomeNavbar";
+import MobileFooter from "../Components/MobileFooter/MobileFooter";
 
 const BuisnessListeningPageOne = () => {
   return (
@@ -14,6 +15,9 @@ const BuisnessListeningPageOne = () => {
           <BuissnessForm />
         </div>
       </Container>
+      <div className="home-page-mobilenav">
+        <MobileFooter />
+      </div>
     </>
   );
 };

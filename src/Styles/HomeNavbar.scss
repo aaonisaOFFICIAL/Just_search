@@ -111,8 +111,8 @@
         border-radius: 5px;
         margin: auto;
         white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -174,9 +174,20 @@
     }
   }
 }
-
+.login_btn_moblie {
+  display: none !important;
+}
+.login_btn_web {
+  display: block;
+}
 @media (max-width: 900px) {
-  .home-navbar .home-nav-options .d-none-moblie{
+  .home-navbar .home-nav-options .d-none-moblie {
+    display: none;
+  }
+  .login_btn_moblie {
+    display: block !important;
+  }
+  .login_btn_web {
     display: none;
   }
 }

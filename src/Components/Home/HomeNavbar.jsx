@@ -24,7 +24,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import logo from "../../Assests/anslogo.png"
+import logo from "../../Assests/anslogo.png";
+import LoginIcon from "@mui/icons-material/Login";
 import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
@@ -35,11 +36,17 @@ import {
 import { auth, db } from "../../Config";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import Swal from "sweetalert2";
-
-
-
 
 const HomeNavbar = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -51,7 +58,7 @@ const HomeNavbar = () => {
   const [username, setUsername] = useState("");
   const { currentUser } = useContext(AuthContext);
 
-console.log(currentUser)
+  console.log(currentUser);
 
 const handleLogout = () => {
   signOut(auth)
@@ -67,29 +74,45 @@ const handleLogout = () => {
     });
 };
 
-const items = [
-  { text: "User Details", icon: <PersonIcon />, route: "/UserDetails" },
-  // { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/edit-business-profile" },
-  { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/business-listening" },
-  { text: "Edit Hire/ Job Profile", icon: <StarIcon />, route: "/Edit-Hire" },
-  { text: "Get Premium", icon: <StarIcon />, route: "/get-premium" },
-  { text: "Help and Support", icon: <HelpIcon />, route: "/help-and-support" },
-  { text: "Feedback", icon: <FeedbackIcon />, route: "/feedback" },
-  { text: "Policy", icon: <PolicyIcon />, route: "/privacy-policy" },
-  { text: "Notifications", icon: <NotificationsIcon />, route: "/notifications" },
-  { text: "Favourite", icon: <FavoriteIcon />, route: "/favourite" },
-  { text: "Customer Service", icon: <SupportAgentIcon />, route: "/customer-care" },
-  { text: "Logout", icon: <LogoutIcon />, action: handleLogout },
-];
+  const items = [
+    { text: "User Details", icon: <PersonIcon />, route: "/UserDetails" },
+    // { text: "Edit Business Profile", icon: <BusinessIcon />, route: "/edit-business-profile" },
+    {
+      text: "Edit Business Profile",
+      icon: <BusinessIcon />,
+      route: "/business-listening",
+    },
+    { text: "Edit Hire/ Job Profile", icon: <StarIcon />, route: "/Edit-Hire" },
+    { text: "Get Premium", icon: <StarIcon />, route: "/get-premium" },
+    {
+      text: "Help and Support",
+      icon: <HelpIcon />,
+      route: "/help-and-support",
+    },
+    { text: "Feedback", icon: <FeedbackIcon />, route: "/feedback" },
+    { text: "Policy", icon: <PolicyIcon />, route: "/privacy-policy" },
+    {
+      text: "Notifications",
+      icon: <NotificationsIcon />,
+      route: "/notifications",
+    },
+    { text: "Favourite", icon: <FavoriteIcon />, route: "/favourite" },
+    {
+      text: "Customer Service",
+      icon: <SupportAgentIcon />,
+      route: "/customer-care",
+    },
+    { text: "Logout", icon: <LogoutIcon />, action: handleLogout },
+  ];
 
-const handleClick = (item) => {
-  if (item.route) {
-    navigate(item.route);
-    setOpen(false); // Close the drawer after navigation
-  } else if (item.action) {
-    item.action();
-  }
-};  
+  const handleClick = (item) => {
+    if (item.route) {
+      navigate(item.route);
+      setOpen(false); // Close the drawer after navigation
+    } else if (item.action) {
+      item.action();
+    }
+  };
 
   const loginModal = () => {
     setOpenModal(!openModal);
@@ -114,9 +137,6 @@ const handleClick = (item) => {
     const notificationsList = querySnapshot.docs.map((doc) => doc.data());
     setNotifications(notificationsList);
   };
-
-
-
 
   const sendOtp = async () => {
     if (!mobile) {
@@ -163,20 +183,20 @@ const handleClick = (item) => {
     try {
       const result = await user.confirm(otp);
       const uid = result.user.uid;
-  
+
       const userDocRef = doc(db, "users", uid);
       const userSnapshot = await getDoc(userDocRef);
-  
+
       let userData = {
         phoneNumber: mobile,
         username: username,
         uid: uid,
-        email: email ? email :  "",
+        email: email ? email : "",
         paid: false,
         TransactionID: "",
         createdAt: serverTimestamp(), // Set default creation timestamp
       };
-  
+
       if (userSnapshot.exists()) {
         // If document exists, don't update createdAt
         const existingData = userSnapshot.data();
@@ -184,13 +204,13 @@ const handleClick = (item) => {
           ...existingData,
           phoneNumber: mobile,
           username: username,
-          email: email ? email :  "",
+          email: email ? email : "",
         };
       } else {
         // If document doesn't exist, set createdAt to current timestamp
         userData.createdAt = serverTimestamp();
       }
-  
+
       await setDoc(userDocRef, userData, { merge: true });
       setOtp('')
      
@@ -204,8 +224,7 @@ const handleClick = (item) => {
       });
     }
   };
-  
-  
+
   const navigate = useNavigate();
 
   const navigateToJS = () => {
@@ -231,7 +250,6 @@ const handleClick = (item) => {
   const navigateToListing = async () => {
     if (!currentUser) {
       loginModal();
-  
     } else {
       navigate("/business-listening");
       const phoneNumber = currentUser.phoneNumber;
@@ -253,8 +271,6 @@ const handleClick = (item) => {
     }
   };
 
-
-
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
@@ -264,11 +280,11 @@ const handleClick = (item) => {
       const email = user.email;
       const uid = user.uid;
       const phoneNumber = user.phoneNumber || "";
-      
+
       // Check if the TransactionID exists
       const userDoc = doc(db, "users", uid);
       const userSnapshot = await getDoc(userDoc);
-  
+
       let paid = false; // Default value for paid
       let transactionId = ""; // Default value for TransactionID
       let createdAt = serverTimestamp(); // Default value for createdAt
@@ -278,7 +294,7 @@ const handleClick = (item) => {
         transactionId = userData.TransactionID || "";
         createdAt = userData.createdAt || serverTimestamp();
       }
-  
+
       await setDoc(doc(db, "users", uid), {
         phoneNumber: phoneNumber,
         username: username,
@@ -288,7 +304,7 @@ const handleClick = (item) => {
         TransactionID: transactionId, // Save the TransactionID
         createdAt: createdAt, // Save the createdAt timestamp
       });
-  
+
       setOpenModal(false);
     } catch (error) {
       console.error(error);
@@ -297,11 +313,8 @@ const handleClick = (item) => {
         title: "Error",
         text: "Google sign-in failed",
       });
-
     }
   };
-  
-  
 
   const navigateToOffer = () => {
     if (!currentUser) {
@@ -318,12 +331,10 @@ const handleClick = (item) => {
     }
   };
 
-
-
   const handleChange = (newValue) => {
-
     setOtp(newValue);
-    if (newValue.length === 6) { // assuming the OTP is 6 digits long
+    if (newValue.length === 6) {
+      // assuming the OTP is 6 digits long
       sendOtp(newValue);
     }
   };
@@ -331,15 +342,12 @@ const handleClick = (item) => {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
-    if(currentUser){
-    setOpen(newOpen);
-  }else{
-    loginModal();
-  }
-
-
-}
-  ;
+    if (currentUser) {
+      setOpen(newOpen);
+    } else {
+      loginModal();
+    }
+  };
   const DrawerList = (
     <Box sx={{ width: 300, py: 2, px: 0 }} role="presentation">
       <Box sx={{ py: 0, px: 2 }}>
@@ -360,9 +368,9 @@ const handleClick = (item) => {
           />
         </Box>
       </Box>
-   
-       <List>
-    {/* {items.map((item) => (
+
+      <List>
+        {/* {items.map((item) => (
       <ListItemButton
         component={Link}
         to={item.route}
@@ -381,27 +389,27 @@ const handleClick = (item) => {
         <ListItemText primary={item.text} />
       </ListItemButton>
     ))} */}
-       {items.map((item) => (
-        <ListItemButton
-          key={item.text}
-          component={item.route ? Link : 'div'}
-          to={item.route}
-          onClick={() => handleClick(item)}
-          sx={{
-            "&:hover": {
-              backgroundColor: "#ff6c3d1c",
-              color: "#ff6c3d",
-              "& .MuiListItemIcon-root": {
+        {items.map((item) => (
+          <ListItemButton
+            key={item.text}
+            component={item.route ? Link : "div"}
+            to={item.route}
+            onClick={() => handleClick(item)}
+            sx={{
+              "&:hover": {
+                backgroundColor: "#ff6c3d1c",
                 color: "#ff6c3d",
+                "& .MuiListItemIcon-root": {
+                  color: "#ff6c3d",
+                },
               },
-            },
-          }}
-        >
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
-        </ListItemButton>
-      ))}
-  </List>
+            }}
+          >
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        ))}
+      </List>
     </Box>
   );
   // end
@@ -410,7 +418,12 @@ const handleClick = (item) => {
     <>
       <div className="home-navbar">
         <div className="home-nav-heading">
-          <img className="logo-navbar-kj" src={logo}  onClick={navigateToHome} alt="" />
+          <img
+            className="logo-navbar-kj"
+            src={logo}
+            onClick={navigateToHome}
+            alt=""
+          />
           {/* <h1>
             Just <span>Search</span>
           </h1> */}
@@ -420,24 +433,43 @@ const handleClick = (item) => {
           <a className="active d-none-moblie" onClick={navigateToHome}>
             Home
           </a>
-          <a className="d-none-moblie" onClick={navigateToFav}>Favorite</a>
+          <a className="d-none-moblie" onClick={navigateToFav}>
+            Favorite
+          </a>
           <a className="d-none-moblie" onClick={navigateToJS}>
             <span>Hire</span>
           </a>
-          <a className="d-none-moblie" onClick={navigateToOffer}>Offer</a>
+          <a className="d-none-moblie" onClick={navigateToOffer}>
+            Offer
+          </a>
           {/* <p onClick={navigateToPayment}>Pricing</p> */}
-          <a className="d-none-moblie" onClick={navigateToListing}>Business</a>
-       {  !currentUser && <button onClick={loginModal}>
-            {/* {currentUser ? currentUser.phoneNumber : "Login / Sign Up"} */}
-            {currentUser ? " " : "Login / Sign Up"}
-          </button>}
+          <a className="d-none-moblie" onClick={navigateToListing}>
+            Business
+          </a>
+          {!currentUser && (
+            <div>
+              <button className="login_btn_web" onClick={loginModal}>
+                {/* {currentUser ? currentUser.phoneNumber : "Login / Sign Up"} */}
+                <div >
+                  {currentUser ? " " : "Login / Sign Up"}
+                </div>
+              </button>
+              <div onClick={loginModal} className=" icon-bg login_btn_moblie">
+                <LoginIcon />
+              </div>
+            </div>
+          )}
 
-          <a className="icon-bg d-none-moblie" onClick={toggleNotifications}>
+          <a className="icon-bg" onClick={toggleNotifications}>
             <IoMdNotifications className="home-nav-notification" />
           </a>
 
           <a className="icon-bg" onClick={toggleDrawer(true)}>
-          <img  src="https://www.w3schools.com/howto/img_avatar.png" style={{width:"25px", borderRadius:"20px"}} alt="Avatar" />
+            <img
+              src="https://www.w3schools.com/howto/img_avatar.png"
+              style={{ width: "25px", borderRadius: "20px" }}
+              alt="Avatar"
+            />
           </a>
           <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
             {DrawerList}
@@ -469,15 +501,13 @@ const handleClick = (item) => {
                 </button>
               </div>
               <div>
-
-
                 <MuiOtpInput
                   value={otp}
                   length={6}
                   onChange={(newValue) => {
-
                     setOtp(newValue);
-                    if (newValue.length === 6) { // assuming the OTP is 6 digits long
+                    if (newValue.length === 6) {
+                      // assuming the OTP is 6 digits long
                       sendOtp(newValue);
                     }
                   }}
@@ -491,18 +521,22 @@ const handleClick = (item) => {
                 {/* <button onClick={verifyOtp}>Verify OTP</button> */}
                 {/* <input className="my-3" type="text" placeholder="Enter Username" /> */}
                 <input
-                    type="text"
-                    placeholder="Enter Username"
-                    className="my-3"
-                    id="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)} // Bind input to username state
-                    required
-                  />
+                  type="text"
+                  placeholder="Enter Username"
+                  className="my-3"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)} // Bind input to username state
+                  required
+                />
                 <FormControlLabel control={<Checkbox />} label="Remember Me" />
                 <div className="d-flex">
-                  <button className="mt-1 w-100 me-2" onClick={verifyOtp}>Submit</button>
-                  <button className="mt-1 w-100" onClick={signInWithGoogle}>Sign-Up with Google</button>
+                  <button className="mt-1 w-100 me-2" onClick={verifyOtp}>
+                    Submit
+                  </button>
+                  <button className="mt-1 w-100" onClick={signInWithGoogle}>
+                    Sign-Up with Google
+                  </button>
                 </div>
                 <div className="text-center">
                   <button className="mt-2 m-auto">Not Now</button>
@@ -551,7 +585,7 @@ const handleClick = (item) => {
               </div>
               <div className="notification-content">
                 <p>
-                  <strong>Dominador Manuel</strong> and{" "}
+                  <strong>Dominador Manuel</strong> and
                   <strong>100 other people</strong> reacted to your comment
                   "Tell your partner that...
                 </p>
@@ -565,7 +599,7 @@ const handleClick = (item) => {
               </div>
               <div className="notification-content">
                 <p>
-                  <strong>Angela Ighot</strong> tagged you and{" "}
+                  <strong>Angela Ighot</strong> tagged you and
                   <strong>9 others</strong> in a post.
                 </p>
                 <span className="time">Aug 18 10:30am</span>
@@ -577,7 +611,7 @@ const handleClick = (item) => {
               </div>
               <div className="notification-content">
                 <p>
-                  New listings were added that match your search alert{" "}
+                  New listings were added that match your search alert
                   <strong>house for rent</strong>
                 </p>
                 <span className="time">Aug 15 08:10pm</span>
@@ -590,8 +624,8 @@ const handleClick = (item) => {
               </div>
               <div className="notification-content">
                 <p>
-                  Reminder: <strong>Jerry Cuares</strong> invited you to like{" "}
-                  <strong>Cuares Surveying Services</strong>.{" "}
+                  Reminder: <strong>Jerry Cuares</strong> invited you to like
+                  <strong>Cuares Surveying Services</strong>.
                   <a href="#">Accept</a> or <a href="#">Decline</a>
                 </p>
                 <span className="time">Aug 14 11:50pm</span>
@@ -604,7 +638,7 @@ const handleClick = (item) => {
               </div>
               <div className="notification-content">
                 <p>
-                  <strong>Dyanne Aceron</strong> reacted to your post{" "}
+                  <strong>Dyanne Aceron</strong> reacted to your post
                   <strong>King of the Bed</strong>
                 </p>
                 <span className="time">Aug 10 05:30am</span>
