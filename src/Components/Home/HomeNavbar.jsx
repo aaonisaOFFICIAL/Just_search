@@ -142,14 +142,14 @@ const handleClick = (item) => {
   };
 
   const verifyOtp = async () => {
-    if (!otp) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "OTP is required",
-      });
-      return;
-    }
+    // if (!otp) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Error",
+    //     text: "OTP is required",
+    //   });
+    //   return;
+    // }
     if (!username) {
       Swal.fire({
         icon: "error",
@@ -190,7 +190,7 @@ const handleClick = (item) => {
       }
   
       await setDoc(userDocRef, userData, { merge: true });
-  
+      setOtp('')
      
       setOpenModal(false);
     } catch (err) {
