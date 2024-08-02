@@ -2,7 +2,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../Config";
 import { useNavigate } from "react-router-dom";
-import OfferNavbar from "./OfferNavbar";
+import HomeNavbar from "../Home/HomeNavbar";
 
 const Offer = () => {
   const [states, setState] = useState([]);
@@ -82,13 +82,10 @@ const Offer = () => {
         });
 
       setOffer(OfferInRange);
-
     } catch (err) {
       console.error(err.message);
     }
   };
-
-
 
   useEffect(() => {
     getCategorie();
@@ -96,18 +93,17 @@ const Offer = () => {
 
   useEffect(() => {
     getOfferData();
-  }, [selectedCategoire])
+  }, [selectedCategoire]);
 
   const navigate = useNavigate();
   const navigateToDetailsPage = async (data) => {
-
-    const fetchData = collection(db, "buissness-listing")
-    const q = query(fetchData, where("businessName", "==", data.businessName))
-    const querySnapshot = await getDocs(q)
+    const fetchData = collection(db, "buissness-listing");
+    const q = query(fetchData, where("businessName", "==", data.businessName));
+    const querySnapshot = await getDocs(q);
     const BusinessdataInRange = querySnapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() };
     });
-    console.log(BusinessdataInRange)
+    console.log(BusinessdataInRange);
     const name = BusinessdataInRange[0].businessName;
     const shopDetails = {
       name: name,
@@ -117,8 +113,7 @@ const Offer = () => {
       landmark: BusinessdataInRange[0].landmark,
       state: BusinessdataInRange[0].state,
       street: BusinessdataInRange[0].street,
-      days: BusinessdataInRange[0].daysopen
-      ,
+      days: BusinessdataInRange[0].daysopen,
       categorie: BusinessdataInRange[0].categorie,
       opensat: BusinessdataInRange[0].opensat,
       closesat: BusinessdataInRange[0].closesat,
@@ -133,14 +128,29 @@ const Offer = () => {
     navigate(`/shop/${selectedCategoire}/${name}`, { state: { shopDetails } });
   };
 
+  // const navigate = useNavigate()
 
+  const navigateToCreate = () => {
+    navigate("/create-offer");
+  };
   return (
     <>
-      <OfferNavbar />
+      <HomeNavbar />
+      <div className="offer-navbar-container-">
+        <div className="offer-navbar mt-5">
+          <h4>
+          Create Offer
+          </h4>
+          <button onClick={navigateToCreate}>Create Offer</button>
+        </div>
+      </div>
       <div className="offer">
         <div className="container my-5">
           <div className="search-offer offer_search_section_hp">
-            <select className="form-select" onChange={(e) => setSelectedStateOption(e.target.value)}>
+            <select
+              className="form-select"
+              onChange={(e) => setSelectedStateOption(e.target.value)}
+            >
               <option value="selected">State</option>
               {states.map((data, index) => (
                 <option value={data} key={index}>
@@ -149,14 +159,20 @@ const Offer = () => {
               ))}
             </select>
 
-            <select className="form-select" onChange={(e) => setSelectedDistrict(e.target.value)}>
+            <select
+              className="form-select"
+              onChange={(e) => setSelectedDistrict(e.target.value)}
+            >
               <option value="nostate">City</option>
               {district.map((city) => (
                 <option value={city}>{city}</option>
               ))}
             </select>
 
-            <select className="form-select" onChange={(e) => setSelectedCategorie(e.target.value)}>
+            <select
+              className="form-select"
+              onChange={(e) => setSelectedCategorie(e.target.value)}
+            >
               <option value="">Categorie</option>
               {categorie.map((data, index) => (
                 <option value={data.categorie} key={index}>
@@ -168,11 +184,13 @@ const Offer = () => {
           </div>
         </div>
 
-
         {offer.length > 0 ? (
-          <div className="offer-card" >
+          <div className="offer-card">
             {offer.map((data, index) => (
-              <div className="offer-card-container" onClick={() => navigateToDetailsPage(data)}>
+              <div
+                className="offer-card-container"
+                onClick={() => navigateToDetailsPage(data)}
+              >
                 <div className="offer-card-images" key={index}>
                   <div className="card-image-data" key={index}>
                     {data.images[0] && (
@@ -217,7 +235,6 @@ const Offer = () => {
         ) : (
           <div className="text-center">No Offer available</div>
         )}
-
       </div>
     </>
   );

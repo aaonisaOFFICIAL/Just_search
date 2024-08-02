@@ -257,7 +257,7 @@ const ShopCard = ({
             <div className="rating-text">3,599 Rating</div>
           </div>
           <div className="card-subcategories">
-            {subcategorie.map(
+            {subcategorie?.map(
               (value, index) => index <= 2 && <p key={index}>{value}</p>
             )}
             <p>Show More...</p>

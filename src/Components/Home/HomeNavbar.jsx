@@ -408,29 +408,29 @@ const handleClick = (item) => {
     <>
       <div className="home-navbar">
         <div className="home-nav-heading">
-          <img src={logo} style={{width:"230px", cursor:"pointer"}} onClick={navigateToHome} alt="" />
+          <img className="logo-navbar-kj" src={logo}  onClick={navigateToHome} alt="" />
           {/* <h1>
             Just <span>Search</span>
           </h1> */}
         </div>
 
         <div className="home-nav-options">
-          <a className="active" onClick={navigateToHome}>
+          <a className="active d-none-moblie" onClick={navigateToHome}>
             Home
           </a>
-          <a onClick={navigateToFav}>Favorite</a>
-          <a onClick={navigateToJS}>
+          <a className="d-none-moblie" onClick={navigateToFav}>Favorite</a>
+          <a className="d-none-moblie" onClick={navigateToJS}>
             <span>Hire</span>
           </a>
-          <a onClick={navigateToOffer}>Offer</a>
+          <a className="d-none-moblie" onClick={navigateToOffer}>Offer</a>
           {/* <p onClick={navigateToPayment}>Pricing</p> */}
-          <a onClick={navigateToListing}>Business</a>
+          <a className="d-none-moblie" onClick={navigateToListing}>Business</a>
        {  !currentUser && <button onClick={loginModal}>
             {/* {currentUser ? currentUser.phoneNumber : "Login / Sign Up"} */}
             {currentUser ? " " : "Login / Sign Up"}
           </button>}
 
-          <a className="icon-bg" onClick={toggleNotifications}>
+          <a className="icon-bg d-none-moblie" onClick={toggleNotifications}>
             <IoMdNotifications className="home-nav-notification" />
           </a>
 

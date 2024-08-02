@@ -87,7 +87,7 @@ const MobileFooter = () => {
         </div>
         <div onClick={() => navigateHandler("product-screen")}>
             <FaHandshakeSimple className='icon'/>
-            <p>Deals</p>
+            <p>Hire</p>
         </div>
         <div onClick={() => navigateHandler("offer")}>
             <BiSolidOffer className='icon'/>
@@ -95,7 +95,7 @@ const MobileFooter = () => {
         </div>
         <div onClick={() => navigateHandler("business-listening")}>
             <FaShop className='icon'/>
-            <p>Listing</p>
+            <p>Business</p>
         </div>
          
         {/* {opneModal && (

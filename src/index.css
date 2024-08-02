@@ -722,7 +722,10 @@
   transform: translate3d(0%, 0px, 0px) !important;
 } */
 
-
+.logo-navbar-kj {
+  width: 230px;
+  cursor: pointer;
+}
 
 @media (max-width: 900px) {
   .Carousel_img_box {
@@ -792,10 +795,18 @@
   }
 
   .card img {
-    height: 150px;
+    height: 140px;
     object-fit: fill;
   }
-  .moblie-bottom{
+
+  .moblie-bottom {
     margin-bottom: 50px;
+  }
+  .logo-navbar-kj {
+    width: 150px;
+    cursor: pointer;
+  }
+  .shop-container .card-data .card-subcategories{
+    flex-wrap: wrap;
   }
 }

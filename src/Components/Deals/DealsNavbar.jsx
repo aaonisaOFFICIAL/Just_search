@@ -6,6 +6,7 @@
   import { auth } from '../../Config';
   import { RecaptchaVerifier, signInWithPhoneNumber, signOut } from 'firebase/auth';
   import './DealsNavbar.css';
+  import HomeNavbar from '../Home/HomeNavbar';
 
 
   const DealsNavbar = ({ selectedState, onStateChange, city, onCityChange, onCategoryChange, onSubCategoryChange }) => {
@@ -98,40 +99,7 @@
     
     return (
       <>
-        <div className="deals-navbar-main">
-          <div className="nav-heading">
-            <h1>
-              Just <span>Deals</span>
-            </h1>
-          </div>
-
-          <div className="nav-search">
-          {/* <select onChange={(e) => handleStateChange(e.target.value)} value={selectedState}>
-            <option value='selected'>Select State</option>
-            {states.map((data, index) => (
-              <option value={data} key={index}>{data}</option>
-            ))}
-          </select>
-
-          <select onChange={(e) => handleCityChange(e.target.value)} value={city}>
-            <option value="nostate">Select City</option>
-            {district.map((city, index) => (
-              <option value={city} key={index}>{city}</option>
-            ))}
-          </select> */}
-        </div>
-
-        <p style={{color:"#000",cursor:'pointer'}}onClick={()=>navigate('/')}>  <span style={{color:"#FF6C3D"}}>Home</span> </p>
-          <div className="nav-sell__btn">
-          
-         
-            <button onClick={navigateToPostAd}>Sell Something</button>
-          </div>
-
-          <div className="nav-sell-avatar" onClick={loginModal}>
-            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" />
-          </div>
-        </div>
+       <HomeNavbar />
         {opneModal  && (
           <div className="home-modal">
               <div className="home-modal-heading">

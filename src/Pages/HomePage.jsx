@@ -18,7 +18,7 @@ const HomePage = () => {
   return (
     <div className="home-page-mobile">
       <HomeNavbar />
-      <HomeMobileNavbar />
+      {/* <HomeMobileNavbar /> */}
       <Categoriesimg />
       <Language />
       <Categories />
