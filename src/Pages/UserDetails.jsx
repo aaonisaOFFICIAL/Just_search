@@ -61,7 +61,7 @@ const UserDetails = () => {
           setSelectedState(userData.state || '');
           setDistricts(stateDistrictData[userData.state] || []);
           setSelectedCity(userData.city || '');
-          setValue("city", userData.city || ''); // Ensure the city value is set correctly
+          setValue("city", userData.city || ''); 
         }
       }
     };
@@ -267,8 +267,8 @@ const UserDetails = () => {
                         <MenuItem value="">Select Status</MenuItem>
                         <MenuItem value="Single">Single</MenuItem>
                         <MenuItem value="Married">Married</MenuItem>
-                        <MenuItem value="Widow">Widow</MenuItem>
-                        <MenuItem value="Divorced">Divorced</MenuItem>
+                        {/* <MenuItem value="Widow">Widow</MenuItem>
+                        <MenuItem value="Divorced">Divorced</MenuItem> */}
                       </Select>
                       {errors.maritalStatus && <p style={{ color: 'red' }}>{errors.maritalStatus.message}</p>}
                     </FormControl>
@@ -380,7 +380,7 @@ const UserDetails = () => {
                         error={!!errors.occupation}
                       >
                         <MenuItem value="">Select Occupation</MenuItem>
-                        <MenuItem value="Employed">Employed</MenuItem>
+                        {/* <MenuItem value="Employed">Employed</MenuItem>
                         <MenuItem value="Unemployed">Unemployed</MenuItem>
                         <MenuItem value="Farmer">Farmer</MenuItem>
                         <MenuItem value="Media">Media</MenuItem>
@@ -394,7 +394,7 @@ const UserDetails = () => {
                         <MenuItem value="House wife">House wife</MenuItem>
                         <MenuItem value="Retired">Retired</MenuItem>
                         <MenuItem value="Student">Student</MenuItem>
-                        <MenuItem value="Clerk">Clerk</MenuItem>
+                        <MenuItem value="Clerk">Clerk</MenuItem> */}
                       </Select>
                       {errors.occupation && <p style={{ color: 'red' }}>{errors.occupation.message}</p>}
                     </FormControl>
