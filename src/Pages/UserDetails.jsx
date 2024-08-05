@@ -14,17 +14,32 @@ import { AuthContext } from "../Context/AuthContext";
 
 // Validation schema
 const schema = yup.object().shape({
-  firstName: yup.string().required('First Name is required'),
-  lastName: yup.string(),
-  dob: yup.date().required('Date of Birth is required').typeError('Invalid Date of Birth'),
+  firstName: yup
+    .string()
+    .matches(/^[A-Za-z]+$/, "First Name should contain only alphabets")
+    .required('First Name is required'),
+  lastName: yup
+    .string()
+    .matches(/^[A-Za-z]*$/, "Last Name should contain only alphabets") // Allow empty string or alphabets
+    .nullable(),
+  dob: yup
+    .date()
+    .required('Date of Birth is required')
+    .typeError('Invalid Date of Birth'),
   title: yup.string(),
-  email: yup.string().email('Invalid email'),
+  email: yup
+    .string()
+    .email('Invalid email'),
   maritalStatus: yup.string(),
   area: yup.string(),
   state: yup.string(),
   city: yup.string(),
-  pincode: yup.number(),
-  occupation: yup.string(),
+  pincode: yup
+  .string()
+  .matches(/^[0-9]{6}$/, "Pincode must be exactly 6 digits")
+  .nullable()
+  .transform((value, originalValue) => originalValue === "" ? null : value),
+occupation: yup.string(),
 });
 
 const UserDetails = () => {
@@ -229,6 +244,7 @@ const UserDetails = () => {
                       fullWidth
                       error={!!errors.lastName}
                       helperText={errors.lastName?.message}
+                      inputProps={{ pattern: "^[A-Za-z]*$" }} // Allow empty or alphabets only
                     />
                   )}
                 />
@@ -267,8 +283,8 @@ const UserDetails = () => {
                         <MenuItem value="">Select Status</MenuItem>
                         <MenuItem value="Single">Single</MenuItem>
                         <MenuItem value="Married">Married</MenuItem>
-                        {/* <MenuItem value="Widow">Widow</MenuItem>
-                        <MenuItem value="Divorced">Divorced</MenuItem> */}
+                        <MenuItem value="Widow">Widow</MenuItem>
+                        <MenuItem value="Divorced">Divorced</MenuItem>
                       </Select>
                       {errors.maritalStatus && <p style={{ color: 'red' }}>{errors.maritalStatus.message}</p>}
                     </FormControl>
@@ -287,6 +303,7 @@ const UserDetails = () => {
                       fullWidth
                       error={!!errors.area}
                       helperText={errors.area?.message}
+                      inputProps={{ pattern: "^[A-Za-z]+$" }}
                     />
                   )}
                 />
@@ -359,9 +376,9 @@ const UserDetails = () => {
                       {...field}
                       label="Pincode"
                       fullWidth
-                      type="number"
                       error={!!errors.pincode}
                       helperText={errors.pincode?.message}
+                      inputProps={{ pattern: "^[0-9]{6}$", maxLength: 6 }}
                     />
                   )}
                 />
@@ -380,7 +397,7 @@ const UserDetails = () => {
                         error={!!errors.occupation}
                       >
                         <MenuItem value="">Select Occupation</MenuItem>
-                        {/* <MenuItem value="Employed">Employed</MenuItem>
+                        <MenuItem value="Employed">Employed</MenuItem>
                         <MenuItem value="Unemployed">Unemployed</MenuItem>
                         <MenuItem value="Farmer">Farmer</MenuItem>
                         <MenuItem value="Media">Media</MenuItem>
@@ -394,7 +411,7 @@ const UserDetails = () => {
                         <MenuItem value="House wife">House wife</MenuItem>
                         <MenuItem value="Retired">Retired</MenuItem>
                         <MenuItem value="Student">Student</MenuItem>
-                        <MenuItem value="Clerk">Clerk</MenuItem> */}
+                        <MenuItem value="Clerk">Clerk</MenuItem>
                       </Select>
                       {errors.occupation && <p style={{ color: 'red' }}>{errors.occupation.message}</p>}
                     </FormControl>
