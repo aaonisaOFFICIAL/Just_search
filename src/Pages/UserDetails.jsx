@@ -16,7 +16,7 @@ import { AuthContext } from "../Context/AuthContext";
 const schema = yup.object().shape({
   firstName: yup.string().required('First Name is required'),
   lastName: yup.string(),
-  dob: yup.date().required('Date of Birth is required'),
+  dob: yup.date().required('Date of Birth is required').typeError('Invalid Date of Birth'),
   title: yup.string(),
   email: yup.string().email('Invalid email'),
   maritalStatus: yup.string(),
@@ -53,6 +53,27 @@ const UserDetails = () => {
     }
   }, [selectedState, setValue]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      if (currentUser) {
+        const userDocRef = doc(db, 'userDetail', currentUser.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          console.log(userData,"ppppppoopat")
+          reset({
+            ...userData,
+            dob: userData.dob ? userData.dob.toDate().toISOString().substr(0, 10) : ''
+          });
+          setImageUrl(userData.imageUrl || '');
+          setSelectedState(userData.state || '');
+        }
+      }
+    };
+
+    fetchData();
+  }, [currentUser, reset]);
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -66,7 +87,7 @@ const UserDetails = () => {
   const onSubmit = async (data) => {
     try {
       let uploadedImageUrl = '';
-  
+
       if (image) {
         console.log("Starting image upload:", image.name);
         const storage = getStorage(); // Ensure Firebase Storage is initialized
@@ -90,33 +111,34 @@ const UserDetails = () => {
           return;
         }
       }
-  
+
       const user = currentUser;
       const userid = user.uid;
       const userDocRef = doc(db, 'userDetail', user.uid);
       const userDoc = await getDoc(userDocRef);
-  
+
       // Determine if it's an update or a new document
       const isUpdate = userDoc.exists();
       const createdAt = isUpdate ? userDoc.data().createdAt : Timestamp.now();
       const updatedAt = Timestamp.now(); // Get the current timestamp
-  
+
       // Save the user data along with the image URL and timestamps to Firestore
       await setDoc(userDocRef, { 
         ...data, 
+        dob: new Date(data.dob),
         imageUrl: uploadedImageUrl, 
         userid, 
         createdAt, // Keep the original created timestamp
         updatedAt  // Update the timestamp for each modification
       });
       console.log("User details saved to Firestore.");
-  
+
       Swal.fire({
         icon: 'success',
         title: 'Success',
         text: 'User details saved successfully!',
       })
-  
+
     } catch (error) {
       console.error("Error saving data:", error);
       Swal.fire({
@@ -305,8 +327,8 @@ const UserDetails = () => {
                         error={!!errors.city}
                       >
                         <MenuItem value="">Select City</MenuItem>
-                        {districts.map((district, index) => (
-                          <MenuItem key={index} value={district}>{district}</MenuItem>
+                        {districts.map((city, index) => (
+                          <MenuItem key={index} value={city}>{city}</MenuItem>
                         ))}
                       </Select>
                       {errors.city && <p style={{ color: 'red' }}>{errors.city.message}</p>}
