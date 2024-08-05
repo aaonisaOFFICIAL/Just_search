@@ -1,29 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useForm, Controller, useFormContext } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { collection, doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from "../Config";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import stateDistrictData from "../../state_district.json"; // Adjust path as per your file location
+import stateDistrictData from "../../state_district.json"; // Adjust path as needed
 import { Container, Grid, Button, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import HomeNavbar from "../Components/Home/HomeNavbar";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { AuthContext } from "../Context/AuthContext";
 
+// Validation schema
 const schema = yup.object().shape({
   firstName: yup.string().required('First Name is required'),
-  middleName: yup.string(),
-  lastName: yup.string().required('Last Name is required'),
-  email: yup.string().email('Invalid email').required('Email is required'),
+  lastName: yup.string(),
   dob: yup.date().required('Date of Birth is required'),
-  maritalStatus: yup.string().required('Marital Status is required'),
-  area: yup.string().required('Area is required'),
-  state: yup.string().required('State is required'),
-  city: yup.string().required('City is required'),
-  pincode: yup.number().typeError('Pincode must be a number').required('Pincode is required'),
-  occupation: yup.string().required('Occupation is required'),
+  title: yup.string(),
+  email: yup.string().email('Invalid email'),
+  maritalStatus: yup.string(),
+  area: yup.string(),
+  state: yup.string(),
+  city: yup.string(),
+  pincode: yup.number(),
+  occupation: yup.string(),
 });
 
 const UserDetails = () => {
@@ -32,13 +33,12 @@ const UserDetails = () => {
   const [selectedState, setSelectedState] = useState("");
   const [states, setStates] = useState([]);
   const [districts, setDistricts] = useState([]);
-  const { control, handleSubmit, setValue, reset,formState: { errors } } = useForm({
+  const { control, handleSubmit, setValue, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
   const { currentUser } = useContext(AuthContext);
-
-  console.log(currentUser)
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Set initial states from JSON data
@@ -115,9 +115,7 @@ const UserDetails = () => {
         icon: 'success',
         title: 'Success',
         text: 'User details saved successfully!',
-      }).then(() => {
-        reset();
-      });
+      })
   
     } catch (error) {
       console.error("Error saving data:", error);
@@ -128,7 +126,6 @@ const UserDetails = () => {
       });
     }
   };
-  
 
   return (
     <div>
@@ -155,215 +152,225 @@ const UserDetails = () => {
                 </div>
               </label>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="firstName"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="First Name"
-                    fullWidth
-                    error={!!errors.firstName}
-                    helperText={errors.firstName?.message}
-                  />
-                )}
-              />
-            </Grid>
-            {/* <Grid item xs={12} md={4}>
-              <Controller
-                name="middleName"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Middle Name"
-                    fullWidth
-                  />
-                )}
-              />
-            </Grid> */}
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="lastName"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Last Name"
-                    fullWidth
-                    error={!!errors.lastName}
-                    helperText={errors.lastName?.message}
-                  />
-                )}
-              />
-            </Grid>
-            {/* <Grid item xs={12} md={4}>
-              <Controller
-                name="email"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Email ID"
-                    fullWidth
-                    type="email"
-                    error={!!errors.email}
-                    helperText={errors.email?.message}
-                  />
-                )}
-              />
-            </Grid> */}
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="dob"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Date Of Birth"
-                    fullWidth
-                    type="date"
-                    InputLabelProps={{ shrink: true }}
-                    error={!!errors.dob}
-                    helperText={errors.dob?.message}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="maritalStatus"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <FormControl fullWidth>
-                    <InputLabel>Marital Status</InputLabel>
-                    <Select
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="title"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <FormControl fullWidth>
+                      <InputLabel>Title</InputLabel>
+                      <Select
+                        {...field}
+                        label="Title"
+                        error={!!errors.title}
+                      >
+                        <MenuItem value="">Select Title</MenuItem>
+                        <MenuItem value="Mr">Mr</MenuItem>
+                        <MenuItem value="Mrs">Mrs</MenuItem>
+                        <MenuItem value="Ms">Ms</MenuItem>
+                      </Select>
+                      {errors.title && <p style={{ color: 'red' }}>{errors.title.message}</p>}
+                    </FormControl>
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="firstName"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <TextField
                       {...field}
-                      label="Marital Status"
-                      error={!!errors.maritalStatus}
-                    >
-                      <MenuItem value="Single">Single</MenuItem>
-                      <MenuItem value="Married">Married</MenuItem>
-                    </Select>
-                    {errors.maritalStatus && <p style={{ color: 'red' }}>{errors.maritalStatus.message}</p>}
-                  </FormControl>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="area"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Area"
-                    fullWidth
-                    error={!!errors.area}
-                    helperText={errors.area?.message}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="state"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <FormControl fullWidth>
-                    <InputLabel>State</InputLabel>
-                    <Select
+                      label="First Name"
+                      fullWidth
+                      error={!!errors.firstName}
+                      helperText={errors.firstName?.message}
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="lastName"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <TextField
                       {...field}
-                      label="State"
-                      onChange={(e) => {
-                        const selectedState = e.target.value;
-                        setSelectedState(selectedState);
-                        setValue("state", selectedState);
-                      }}
-                      error={!!errors.state}
-                    >
-                      <MenuItem value="">Select State</MenuItem>
-                      {states.map((state, index) => (
-                        <MenuItem value={state} key={index}>
-                          {state}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    {errors.state && <p style={{ color: 'red' }}>{errors.state.message}</p>}
-                  </FormControl>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="city"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <FormControl fullWidth>
-                    <InputLabel>City</InputLabel>
-                    <Select
+                      label="Last Name"
+                      fullWidth
+                      error={!!errors.lastName}
+                      helperText={errors.lastName?.message}
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="dob"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <TextField
                       {...field}
-                      label="City"
-                      onChange={(e) => setValue("city", e.target.value)}
-                      error={!!errors.city}
-                    >
-                      <MenuItem value="">Select City</MenuItem>
-                      {districts.map((district, index) => (
-                        <MenuItem value={district} key={index}>
-                          {district}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    {errors.city && <p style={{ color: 'red' }}>{errors.city.message}</p>}
-                  </FormControl>
-                )}
-              />
+                      label="Date Of Birth"
+                      fullWidth
+                      type="date"
+                      InputLabelProps={{ shrink: true }}
+                      error={!!errors.dob}
+                      helperText={errors.dob?.message}
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="maritalStatus"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <FormControl fullWidth>
+                      <InputLabel>Marital Status</InputLabel>
+                      <Select
+                        {...field}
+                        label="Marital Status"
+                        error={!!errors.maritalStatus}
+                      >
+                        <MenuItem value="">Select Status</MenuItem>
+                        <MenuItem value="Single">Single</MenuItem>
+                        <MenuItem value="Married">Married</MenuItem>
+                      </Select>
+                      {errors.maritalStatus && <p style={{ color: 'red' }}>{errors.maritalStatus.message}</p>}
+                    </FormControl>
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="area"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Area"
+                      fullWidth
+                      error={!!errors.area}
+                      helperText={errors.area?.message}
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="state"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <FormControl fullWidth>
+                      <InputLabel>State</InputLabel>
+                      <Select
+                        {...field}
+                        label="State"
+                        error={!!errors.state}
+                        onChange={(e) => {
+                          setValue("state", e.target.value);
+                          setSelectedState(e.target.value);
+                        }}
+                      >
+                        <MenuItem value="">Select State</MenuItem>
+                        {states.map((state, index) => (
+                          <MenuItem key={index} value={state}>{state}</MenuItem>
+                        ))}
+                      </Select>
+                      {errors.state && <p style={{ color: 'red' }}>{errors.state.message}</p>}
+                    </FormControl>
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="city"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <FormControl fullWidth>
+                      <InputLabel>City</InputLabel>
+                      <Select
+                        {...field}
+                        label="City"
+                        error={!!errors.city}
+                      >
+                        <MenuItem value="">Select City</MenuItem>
+                        {districts.map((district, index) => (
+                          <MenuItem key={index} value={district}>{district}</MenuItem>
+                        ))}
+                      </Select>
+                      {errors.city && <p style={{ color: 'red' }}>{errors.city.message}</p>}
+                    </FormControl>
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="pincode"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Pincode"
+                      fullWidth
+                      type="number"
+                      error={!!errors.pincode}
+                      helperText={errors.pincode?.message}
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Controller
+                  name="occupation"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <FormControl fullWidth>
+                      <InputLabel>Occupation</InputLabel>
+                      <Select
+                        {...field}
+                        label="Occupation"
+                        error={!!errors.occupation}
+                      >
+                        <MenuItem value="">Select Occupation</MenuItem>
+                        <MenuItem value="Employed">Employed</MenuItem>
+                        <MenuItem value="Unemployed">Unemployed</MenuItem>
+                        <MenuItem value="Farmer">Farmer</MenuItem>
+                        <MenuItem value="Media">Media</MenuItem>
+                        <MenuItem value="Business Man">Business Man</MenuItem>
+                        <MenuItem value="Sports">Sports</MenuItem>
+                        <MenuItem value="Armed forces">Armed forces</MenuItem>
+                        <MenuItem value="Government Service">Government Service</MenuItem>
+                        <MenuItem value="CA">CA</MenuItem>
+                        <MenuItem value="Doctor">Doctor</MenuItem>
+                        <MenuItem value="Lawyer">Lawyer</MenuItem>
+                        <MenuItem value="House wife">House wife</MenuItem>
+                        <MenuItem value="Retired">Retired</MenuItem>
+                        <MenuItem value="Student">Student</MenuItem>
+                        <MenuItem value="Clerk">Clerk</MenuItem>
+                      </Select>
+                      {errors.occupation && <p style={{ color: 'red' }}>{errors.occupation.message}</p>}
+                    </FormControl>
+                  )}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="pincode"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Pincode"
-                    fullWidth
-                    type="number"
-                    error={!!errors.pincode}
-                    helperText={errors.pincode?.message}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Controller
-                name="occupation"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Occupation"
-                    fullWidth
-                    error={!!errors.occupation}
-                    helperText={errors.occupation?.message}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={12}>
-              <Button variant="contained" color="primary" type="submit">Submit</Button>
+            <Grid item xs={12}>
+              <Button type="submit" variant="contained" color="primary">
+                Submit
+              </Button>
             </Grid>
           </Grid>
         </form>
