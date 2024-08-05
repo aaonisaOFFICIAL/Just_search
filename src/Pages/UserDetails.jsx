@@ -267,6 +267,8 @@ const UserDetails = () => {
                         <MenuItem value="">Select Status</MenuItem>
                         <MenuItem value="Single">Single</MenuItem>
                         <MenuItem value="Married">Married</MenuItem>
+                        <MenuItem value="Widow">Widow</MenuItem>
+                        <MenuItem value="Divorced">Divorced</MenuItem>
                       </Select>
                       {errors.maritalStatus && <p style={{ color: 'red' }}>{errors.maritalStatus.message}</p>}
                     </FormControl>
