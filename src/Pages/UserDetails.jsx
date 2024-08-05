@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { collection, doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
+import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from "../Config";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -31,6 +31,7 @@ const UserDetails = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [selectedState, setSelectedState] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
   const [states, setStates] = useState([]);
   const [districts, setDistricts] = useState([]);
   const { control, handleSubmit, setValue, reset, formState: { errors } } = useForm({
@@ -46,33 +47,35 @@ const UserDetails = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedState) {
-      const newDistricts = stateDistrictData[selectedState];
-      setDistricts(newDistricts || []);
-      setValue("city", ""); // Reset city field when state changes
-    }
-  }, [selectedState, setValue]);
-
-  useEffect(() => {
     const fetchData = async () => {
       if (currentUser) {
         const userDocRef = doc(db, 'userDetail', currentUser.uid);
         const userDoc = await getDoc(userDocRef);
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          console.log(userData,"ppppppoopat")
           reset({
             ...userData,
             dob: userData.dob ? userData.dob.toDate().toISOString().substr(0, 10) : ''
           });
           setImageUrl(userData.imageUrl || '');
           setSelectedState(userData.state || '');
+          setDistricts(stateDistrictData[userData.state] || []);
+          setSelectedCity(userData.city || '');
+          setValue("city", userData.city || ''); // Ensure the city value is set correctly
         }
       }
     };
 
     fetchData();
-  }, [currentUser, reset]);
+  }, [currentUser, reset, setValue]);
+
+  useEffect(() => {
+    if (selectedState) {
+      const newDistricts = stateDistrictData[selectedState];
+      setDistricts(newDistricts || []);
+      setValue("city", selectedCity); // Reset city field when state changes
+    }
+  }, [selectedState, selectedCity, setValue]);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -299,8 +302,12 @@ const UserDetails = () => {
                         label="State"
                         error={!!errors.state}
                         onChange={(e) => {
-                          setValue("state", e.target.value);
-                          setSelectedState(e.target.value);
+                          const stateValue = e.target.value;
+                          setValue("state", stateValue);
+                          setSelectedState(stateValue);
+                          setDistricts(stateDistrictData[stateValue] || []);
+                          setSelectedCity(""); // Reset selected city when state changes
+                          setValue("city", ""); // Reset city value when state changes
                         }}
                       >
                         <MenuItem value="">Select State</MenuItem>
@@ -325,10 +332,14 @@ const UserDetails = () => {
                         {...field}
                         label="City"
                         error={!!errors.city}
+                        onChange={(e) => {
+                          setValue("city", e.target.value);
+                          setSelectedCity(e.target.value);
+                        }}
                       >
                         <MenuItem value="">Select City</MenuItem>
-                        {districts.map((city, index) => (
-                          <MenuItem key={index} value={city}>{city}</MenuItem>
+                        {districts.map((district, index) => (
+                          <MenuItem key={index} value={district}>{district}</MenuItem>
                         ))}
                       </Select>
                       {errors.city && <p style={{ color: 'red' }}>{errors.city.message}</p>}
