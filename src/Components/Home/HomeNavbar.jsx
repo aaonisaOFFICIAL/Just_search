@@ -166,37 +166,6 @@ const handleLogout = () => {
   //     console.error(err);
   //   }
   // };
-  // const sendOtp = async () => {
-  //   if (!mobile) {
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Error",
-  //       text: "Mobile number is required",
-  //     });
-  //     return;
-  //   }
-  //   const mobileNumber = "+91" + mobile;
-  //   try {
-  //     if (!window.recaptchaVerifier) {
-  //       window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
-  //         size: "invisible",
-  //       });
-  //     }
-  //     const confirmation = await signInWithPhoneNumber(
-  //       auth,
-  //       mobileNumber,
-  //       window.recaptchaVerifier
-  //     );
-  //     setUser(confirmation);
-  //   } catch (err) {
-  //     console.error(err);
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Error",
-  //       text: err.message,
-  //     });
-  //   }
-  // };
   const sendOtp = async () => {
     if (!mobile) {
       Swal.fire({
@@ -209,22 +178,19 @@ const handleLogout = () => {
     const mobileNumber = "+91" + mobile;
     try {
       if (!window.recaptchaVerifier) {
-        window.recaptchaVerifier = new RecaptchaVerifier('recaptcha', {
-          'size': 'invisible',
-          'callback': (response) => {
-            // reCAPTCHA solved, allow sendOtp
-          }
-        }, auth);
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
+          size: "invisible",
+        });
       }
-      const confirmation = await signInWithPhoneNumber(auth, mobileNumber, window.recaptchaVerifier);
+      const confirmation = await signInWithPhoneNumber(
+        auth,
+        mobileNumber,
+        window.recaptchaVerifier
+      );
       setUser(confirmation);
     } catch (err) {
       console.error(err);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: err.message,
-      });
+ 
     }
   };
   
@@ -291,10 +257,10 @@ const handleLogout = () => {
   //   }
   // };
 
-
   const verifyOtp = async () => {
     console.log(otp)
     if (!otp) {
+      
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -317,7 +283,7 @@ const handleLogout = () => {
     }
   
     try {
-      const result = await user.confirm(otp);
+      const result = await user?.confirm(otp);
       const uid = result.user.uid;
   
       const userDocRef = doc(db, "users", uid);
@@ -327,7 +293,7 @@ const handleLogout = () => {
         phoneNumber: mobile,
         username: username,
         uid: uid,
-        email: email ? email : " ",
+        email: email ? email  : " ",
         paid: false,
         TransactionID: "",
         createdAt: serverTimestamp(), // Set default creation timestamp
@@ -349,89 +315,14 @@ const handleLogout = () => {
   
       await setDoc(userDocRef, userData, { merge: true });
       setOtp("");
-      setMobile('');
+      setMobile('')
       setUsername('');
       setOpenModal(false);
     } catch (err) {
       console.error("Error during OTP verification:", err);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Wrong OTP",
-      });
+      
     }
   };
-  
-  // const verifyOtp = async () => {
-  //   console.log(otp)
-  //   if (!otp) {
-      
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Error",
-  //       text: "OTP is required",
-  //     });
-  //     return;
-  //   }
-  //   if (!username) {
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Error",
-  //       text: "Username is required",
-  //     });
-  //     return;
-  //   }
-  
-  //   let email = ""; // Ensure email is defined
-  //   if (currentUser && currentUser.email) {
-  //     email = currentUser.email;
-  //   }
-  
-  //   try {
-  //     const result = await user?.confirm(otp);
-  //     const uid = result.user.uid;
-  
-  //     const userDocRef = doc(db, "users", uid);
-  //     const userSnapshot = await getDoc(userDocRef);
-  
-  //     let userData = {
-  //       phoneNumber: mobile,
-  //       username: username,
-  //       uid: uid,
-  //       email: email ? email  : " ",
-  //       paid: false,
-  //       TransactionID: "",
-  //       createdAt: serverTimestamp(), // Set default creation timestamp
-  //     };
-  
-  //     if (userSnapshot.exists()) {
-  //       // If document exists, don't update createdAt
-  //       const existingData = userSnapshot.data();
-  //       userData = {
-  //         ...existingData,
-  //         phoneNumber: mobile,
-  //         username: username,
-  //         email: email,
-  //       };
-  //     } else {
-  //       // If document doesn't exist, set createdAt to current timestamp
-  //       userData.createdAt = serverTimestamp();
-  //     }
-  
-  //     await setDoc(userDocRef, userData, { merge: true });
-  //     setOtp("");
-  //     setMobile('')
-  //     setUsername('');
-  //     setOpenModal(false);
-  //   } catch (err) {
-  //     console.error("Error during OTP verification:", err);
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Error",
-  //       text: "Wrong OTP",
-  //     });
-  //   }
-  // };
   
 
   const navigate = useNavigate();
@@ -710,7 +601,7 @@ const handleLogout = () => {
                 </button>
               </div>
               <div>
-                {/* <MuiOtpInput
+                <MuiOtpInput
                   value={otp}
                   length={6}
                   onChange={(newValue) => {
@@ -721,20 +612,7 @@ const handleLogout = () => {
                     }
                   }}
                   sx={{ display: "flex", justifyContent: "center", gap: 1 }}
-                /> */}
-
-<MuiOtpInput
-  value={otp}
-  length={6}
-  onChange={(newValue) => {
-    setOtp(newValue);
-    if (newValue.length === 6) {
-      verifyOtp();
-    }
-  }}
-  sx={{ display: "flex", justifyContent: "center", gap: 1 }}
-/>
-
+                />
                 {/* <input
                   type="number"
                   placeholder="Enter OTP"
