@@ -456,11 +456,13 @@ const HomeNavbar = () => {
           }}
         >
           <Typography variant="h6" className="fw-bold">
-            JS-6555
-            {/* {!currentUser.displayName ? '': currentUser.displayName} */}
+            {/* JS-6555 */}
+            {currentUser && currentUser.displayName && currentUser.displayName}
           </Typography>
           <Avatar
-            src="https://www.w3schools.com/howto/img_avatar.png"
+            src={currentUser ? currentUser.photoURL ? currentUser.photoURL:'https://www.w3schools.com/howto/img_avatar.png' :'https://www.w3schools.com/howto/img_avatar.png'}
+
+            // src={`${"https://www.w3schools.com/howto/img_avatar.png"}`|| ${}}
             alt="Profile Image"
           />
         </Box>
@@ -561,7 +563,7 @@ const HomeNavbar = () => {
 
           <a className="icon-bg" onClick={toggleDrawer(true)}>
             <img
-              src="https://www.w3schools.com/howto/img_avatar.png"
+              src={currentUser ? currentUser.photoURL ? currentUser.photoURL:'https://www.w3schools.com/howto/img_avatar.png' :'https://www.w3schools.com/howto/img_avatar.png'}
               style={{ width: "25px", borderRadius: "20px" }}
               alt="Avatar"
             />
