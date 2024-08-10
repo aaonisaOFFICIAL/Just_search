@@ -60,20 +60,20 @@ const HomeNavbar = () => {
 
   console.log(currentUser);
 
-const handleLogout = () => {
-  signOut(auth)
-    .then(() => {
-      setOtp('');
-      setUsername('');
-      setMobile('')
-      setOpenModal(false);
-      setOpen(false);
-      navigate('/');
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        setOtp("");
+        setUsername("");
+        setMobile("");
+        setOpenModal(false);
+        setOpen(false);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const items = [
     { text: "User Details", icon: <PersonIcon />, route: "/UserDetails" },
@@ -121,8 +121,8 @@ const handleLogout = () => {
 
   const closeLoginModal = () => {
     setOtp("");
-    setUsername('');
-    setMobile('')
+    setUsername("");
+    setMobile("");
     setOpenModal(false);
   };
 
@@ -190,10 +190,9 @@ const handleLogout = () => {
       setUser(confirmation);
     } catch (err) {
       console.error(err);
- 
     }
   };
-  
+
   // const verifyOtp = async () => {
   //   debugger;
   //   // if (!otp) {
@@ -245,7 +244,7 @@ const handleLogout = () => {
 
   //     await setDoc(userDocRef, userData, { merge: true });
   //     setOtp('')
-     
+
   //     setOpenModal(false);
   //   } catch (err) {
   //     console.error(err);
@@ -258,9 +257,8 @@ const handleLogout = () => {
   // };
 
   const verifyOtp = async () => {
-    console.log(otp)
+    console.log(otp);
     if (!otp) {
-      
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -276,29 +274,29 @@ const handleLogout = () => {
       });
       return;
     }
-  
+
     let email = ""; // Ensure email is defined
     if (currentUser && currentUser.email) {
       email = currentUser.email;
     }
-  
+
     try {
       const result = await user?.confirm(otp);
       const uid = result.user.uid;
-  
+
       const userDocRef = doc(db, "users", uid);
       const userSnapshot = await getDoc(userDocRef);
-  
+
       let userData = {
         phoneNumber: mobile,
         username: username,
         uid: uid,
-        email: email ? email  : " ",
+        email: email ? email : " ",
         paid: false,
         TransactionID: "",
         createdAt: serverTimestamp(), // Set default creation timestamp
       };
-  
+
       if (userSnapshot.exists()) {
         // If document exists, don't update createdAt
         const existingData = userSnapshot.data();
@@ -312,18 +310,16 @@ const handleLogout = () => {
         // If document doesn't exist, set createdAt to current timestamp
         userData.createdAt = serverTimestamp();
       }
-  
+
       await setDoc(userDocRef, userData, { merge: true });
       setOtp("");
-      setMobile('')
-      setUsername('');
+      setMobile("");
+      setUsername("");
       setOpenModal(false);
     } catch (err) {
       console.error("Error during OTP verification:", err);
-      
     }
   };
-  
 
   const navigate = useNavigate();
 
@@ -460,7 +456,7 @@ const handleLogout = () => {
           }}
         >
           <Typography variant="h6" className="fw-bold">
-            JS-6393
+            {!currentUser.displayName ? '': currentUser.displayName}
           </Typography>
           <Avatar
             src="https://www.w3schools.com/howto/img_avatar.png"
@@ -550,9 +546,7 @@ const handleLogout = () => {
             <div>
               <button className="login_btn_web" onClick={loginModal}>
                 {/* {currentUser ? currentUser.phoneNumber : "Login / Sign Up"} */}
-                <div >
-                  {currentUser ? " " : "Login / Sign Up"}
-                </div>
+                <div>{currentUser ? " " : "Login / Sign Up"}</div>
               </button>
               <div onClick={loginModal} className=" icon-bg login_btn_moblie">
                 <LoginIcon />
