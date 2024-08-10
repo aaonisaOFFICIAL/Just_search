@@ -456,7 +456,8 @@ const HomeNavbar = () => {
           }}
         >
           <Typography variant="h6" className="fw-bold">
-            {!currentUser.displayName ? '': currentUser.displayName}
+            JS-6555
+            {/* {!currentUser.displayName ? '': currentUser.displayName} */}
           </Typography>
           <Avatar
             src="https://www.w3schools.com/howto/img_avatar.png"
