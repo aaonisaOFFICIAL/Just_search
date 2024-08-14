@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import { IoMdNotifications, IoMdClose, IoMdPerson } from "react-icons/io";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -45,6 +45,7 @@ import {
   serverTimestamp,
   setDoc,
   where,
+  Timestamp
 } from "firebase/firestore";
 import Swal from "sweetalert2";
 
@@ -55,11 +56,37 @@ const HomeNavbar = () => {
   const [user, setUser] = useState(null);
   const [notificationsVisible, setNotificationsVisible] = useState(false);
   const [notifications, setNotifications] = useState([]); // Array to hold notifications
+  const [imageUrl, setImageUrl] = useState('');
   const [username, setUsername] = useState("");
+  const [userFirstName,setUserFirstName] = useState('')
   const { currentUser } = useContext(AuthContext);
 
   console.log(currentUser);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (currentUser) {
+        const userDocRef = doc(db, 'userDetail', currentUser.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          console.log("userData123",userData)
+          // reset({
+          //   ...userData,
+          //   dob: userData.dob ? userData.dob.toDate().toISOString().substr(0, 10) : ''
+          // });
+          setImageUrl(userData?.imageUrl || 'https://www.w3schools.com/howto/img_avatar.png');
+          setUserFirstName(userData.firstName || "jsaao ni saa")
+          // setSelectedState(userData.state || '');
+          // setDistricts(stateDistrictData[userData.state] || []);
+          // setSelectedCity(userData.city || '');
+          // setValue("city", userData.city || ''); 
+        }
+      }
+    };
 
+    fetchData();
+  }, [currentUser]);
+console.log("currentUser1234",currentUser)
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
@@ -456,13 +483,11 @@ const HomeNavbar = () => {
           }}
         >
           <Typography variant="h6" className="fw-bold">
-            {/* JS-6555 */}
-            {currentUser && currentUser.displayName && currentUser.displayName}
+           {/* {userFirstName} */}
+           {userFirstName? userFirstName :"JS-6555"}
           </Typography>
           <Avatar
-            src={currentUser ? currentUser.photoURL ? currentUser.photoURL:'https://www.w3schools.com/howto/img_avatar.png' :'https://www.w3schools.com/howto/img_avatar.png'}
-
-            // src={`${"https://www.w3schools.com/howto/img_avatar.png"}`|| ${}}
+            src={imageUrl ? imageUrl : 'https://www.w3schools.com/howto/img_avatar.png'}
             alt="Profile Image"
           />
         </Box>
@@ -563,8 +588,13 @@ const HomeNavbar = () => {
 
           <a className="icon-bg" onClick={toggleDrawer(true)}>
             <img
-              src={currentUser ? currentUser.photoURL ? currentUser.photoURL:'https://www.w3schools.com/howto/img_avatar.png' :'https://www.w3schools.com/howto/img_avatar.png'}
-              style={{ width: "25px", borderRadius: "20px" }}
+        
+        src={imageUrl ? imageUrl : 'https://www.w3schools.com/howto/img_avatar.png'}
+              style={{ 
+                width: "100%",
+                height:"100%",
+                borderRadius:"50%"
+                 }}
               alt="Avatar"
             />
           </a>

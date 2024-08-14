@@ -70,7 +70,10 @@ const UserDetails = () => {
           const userData = userDoc.data();
           reset({
             ...userData,
-            dob: userData.dob ? userData.dob.toDate().toISOString().substr(0, 10) : ''
+            dob: userData.dob ? userData.dob.toDate()
+            .toISOString()
+            .substr(0, 10) 
+            : ''
           });
           setImageUrl(userData.imageUrl || '');
           setSelectedState(userData.state || '');
@@ -143,6 +146,7 @@ const UserDetails = () => {
       // Save the user data along with the image URL and timestamps to Firestore
       await setDoc(userDocRef, { 
         ...data, 
+        // dob: new Date(data.dob),
         dob: new Date(data.dob),
         imageUrl: uploadedImageUrl, 
         userid, 
@@ -162,10 +166,11 @@ const UserDetails = () => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Failed to save user details.',
+        text: 'Failed to save user details',
       });
     }
   };
+  console.log("onSubmit123",onSubmit)
 
   return (
     <div>
@@ -192,8 +197,8 @@ const UserDetails = () => {
                 </div>
               </label>
             </Grid>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={4}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={3}>
                 <Controller
                   name="title"
                   control={control}
@@ -205,6 +210,7 @@ const UserDetails = () => {
                         {...field}
                         label="Title"
                         error={!!errors.title}
+                        // sx={{width:"60%"}}
                       >
                         <MenuItem value="">Select Title</MenuItem>
                         <MenuItem value="Mr">Mr</MenuItem>
