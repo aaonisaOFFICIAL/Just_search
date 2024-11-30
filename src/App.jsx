@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-//page imports
+// Page imports
 import LoginPage from './Pages/LoginPage'
 import OtpPage from './Pages/OtpPage'
 import Navbar from './Components/Navbar/Navbar'
@@ -24,7 +24,12 @@ import UserSearch from './Components/UserSearch/UserSearch'
 import Offer from './Components/Offer/Offer'
 import CreateOffer from './Components/Offer/CreateOffer'
 
-//styles
+// Policies and Contact Pages
+import CancellationRefundPolicy from './Pages/Policies/CancellationRefundPolicy'
+import ShippingDeliveryPolicy from './Pages/Policies/ShippingDeliveryPolicy'
+import ContactUs from './Pages/Policies/ContactUs'
+
+// Styles
 import "./Styles/Auth.scss"
 import "./Styles/Navbar.scss"
 import "./Styles/BuisnessListening.scss"
@@ -71,42 +76,46 @@ const App = () => {
   }
   return (
     <>
-  {/* <Navbar /> */}
-   <Routes>
-    <Route path='/login' element={<LoginPage />} />
-    <Route path='/otp' element={<OtpPage />} />
-    <Route path='/' element={<HomePage />} />
-    <Route path='/business-listening' element={<BuisnessListeningPageOne />} />
-    <Route path='/:category' element={<Shop />} />
-    <Route path='/shop/:category/:name' element={<ShopDesc />} />
-    <Route path='/product-screen' element={<ProductScreen />} />
-    <Route path='/favourite' element={<Favourite />} />
-    <Route path='/product-page' element={<ViewDealsPage />} />
-    <Route path='/post-ad' element={<PostAd />} />
-    <Route path='/my-postings' element={<UserPostings />} />
-    <Route path='/query/:state/:city/:categorie' element={<UserSearch />} />
-    <Route path='/offer' element={<Offer />} />
-    <Route path='/create-offer' element={<CreateOffer />} />
-    <Route path='/only/for/admin' element={<BuisnessListeningPageTwo />} />
-    <Route path="/edit/:id" element={<BusinessEditForm />} />
-    <Route path='/images/:id' element={<ShopImages />} />
-    <Route path='/payment' element={<ShopImages />} />
-    <Route path='/Aboutus' element={<Aboutus />} />  
-    <Route path='/edit-business-profile' element={<EditBusinessProfile />} />  
-    <Route path='/get-premium' element={<GetPremium />} />  
-    <Route path='/customer-care' element={<Customer />} />  
-    <Route path='/terms-of-service' element={<Terms />} />  
-    <Route path='/privacy-policy' element={<Policy />} />  
-    <Route path='/we-are-hiring' element={<Hiring />} />  
-    <Route path='/help-and-support' element={<HelpandSupport />} />  
-    
-    <Route path='/UserDetails' element={<UserDetails />} />  
-   </Routes>
-   {/* <HomeMobileNavbar /> */}
-   {/* <DealsMobileNavbar /> */}
-   {/* <Footer /> */}
-   {/* <MobileFooter /> */}
-   {/* <DealsFooter /> */}
+      {/* <Navbar /> */}
+      <Routes>
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/otp' element={<OtpPage />} />
+        <Route path='/' element={<HomePage />} />
+        <Route path='/business-listening' element={<BuisnessListeningPageOne />} />
+        <Route path='/:category' element={<Shop />} />
+        <Route path='/shop/:category/:name' element={<ShopDesc />} />
+        <Route path='/product-screen' element={<ProductScreen />} />
+        <Route path='/favourite' element={<Favourite />} />
+        <Route path='/product-page' element={<ViewDealsPage />} />
+        <Route path='/post-ad' element={<PostAd />} />
+        <Route path='/my-postings' element={<UserPostings />} />
+        <Route path='/query/:state/:city/:categorie' element={<UserSearch />} />
+        <Route path='/offer' element={<Offer />} />
+        <Route path='/create-offer' element={<CreateOffer />} />
+        <Route path='/only/for/admin' element={<BuisnessListeningPageTwo />} />
+        <Route path="/edit/:id" element={<BusinessEditForm />} />
+        <Route path='/images/:id' element={<ShopImages />} />
+        <Route path='/payment' element={<ShopImages />} />
+        <Route path='/Aboutus' element={<Aboutus />} />  
+        <Route path='/edit-business-profile' element={<EditBusinessProfile />} />  
+        <Route path='/get-premium' element={<GetPremium />} />  
+        <Route path='/customer-care' element={<Customer />} />  
+        <Route path='/terms-of-service' element={<Terms />} />  
+        <Route path='/privacy-policy' element={<Policy />} />  
+        <Route path='/we-are-hiring' element={<Hiring />} />  
+        <Route path='/help-and-support' element={<HelpandSupport />} />  
+        <Route path='/UserDetails' element={<UserDetails />} />  
+        
+        {/* New Pages */}
+        <Route path='/cancellation-and-refund-policy' element={<CancellationRefundPolicy />} />
+        <Route path='/shipping-and-delivery-policy' element={<ShippingDeliveryPolicy />} />
+        <Route path='/contact-us' element={<ContactUs />} />
+      </Routes>
+      {/* <HomeMobileNavbar /> */}
+      {/* <DealsMobileNavbar /> */}
+      {/* <Footer /> */}
+      {/* <MobileFooter /> */}
+      {/* <DealsFooter /> */}
     </>
   )
 }
