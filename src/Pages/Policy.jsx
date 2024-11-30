@@ -46,7 +46,7 @@ function Policy() {
         <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on our website and updating the "Effective Date" at the top of this page. Your continued use of our services after any changes take effect will constitute your acceptance of the revised policy.</p>
         <h4>8. Contact Us</h4>
         <p>If you have any questions or concerns about this Privacy Policy, please contact us at:</p>
-        <p>Email: <a href="mailto:support@justsearch.com">support@justsearch.com</a></p>
+        <p>Email: <a href="mailto:justsearch.help@gmail.com">justsearch.help@gmail.com</a></p>
 
         {/* Cancellation and Refund Policy */}
         <h3>Cancellation and Refund Policy</h3>
